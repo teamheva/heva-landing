@@ -311,22 +311,24 @@ export default function Hero() {
         className="relative border-t border-[#e5e7eb] bg-white/80 backdrop-blur-sm"
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-5">
-          {/* Mobile: left-aligned column. Desktop: centered row */}
-          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-center sm:items-center gap-y-3 gap-x-8 sm:gap-x-12">
-            {stats.map((stat, i) => (
-              <div key={stat.label} className="flex items-baseline gap-2.5">
-                <span
-                  className="text-xl sm:text-2xl font-bold text-[#0f1117] tracking-tight"
-                  style={{ fontFamily: "var(--font-dm-serif), serif" }}
-                >
-                  {stat.value}
-                </span>
-                <span className="text-xs text-[#9ca3af] font-medium">{stat.label}</span>
-                {i < stats.length - 1 && (
-                  <span className="hidden sm:inline ml-4 sm:ml-8 text-[#d1d5db] select-none">·</span>
-                )}
-              </div>
-            ))}
+          {/* Centered block, left-aligned list inside */}
+          <div className="flex justify-center">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-y-3 gap-x-10 sm:gap-x-14">
+              {stats.map((stat, i) => (
+                <div key={stat.label} className="flex items-baseline gap-2.5">
+                  <span
+                    className="text-xl sm:text-2xl font-bold text-[#0f1117] tracking-tight"
+                    style={{ fontFamily: "var(--font-dm-serif), serif" }}
+                  >
+                    {stat.value}
+                  </span>
+                  <span className="text-xs text-[#9ca3af] font-medium">{stat.label}</span>
+                  {i < stats.length - 1 && (
+                    <span className="hidden sm:inline ml-6 sm:ml-10 text-[#d1d5db] select-none">·</span>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </motion.div>

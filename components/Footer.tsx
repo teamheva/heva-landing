@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
 function LinkedInIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
@@ -60,18 +58,6 @@ export default function Footer() {
 
           {/* Brand — spans 5 cols */}
           <div className="lg:col-span-5 flex flex-col">
-            <a href="/" aria-label="Heva avaleht" className="mb-3 block" style={{ marginLeft: "-10px" }}>
-              <div className="relative h-[50px] w-[190px]">
-                <Image
-                  src="/logo-white.png"
-                  alt="Heva"
-                  fill
-                  className="object-contain object-left"
-                  priority
-                />
-              </div>
-            </a>
-
             <p className="text-[15px] text-gray-400 leading-relaxed max-w-[280px] mb-6">
               Teeme kaubavedude tellimise Eestis sama lihtsaks kui takso kutsumise.
               Kiire, läbipaistev ja usaldusväärne.
