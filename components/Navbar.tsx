@@ -55,12 +55,12 @@ export default function Navbar() {
             className="flex items-center gap-2 flex-shrink-0"
             aria-label="Heva avaleht"
           >
-            <div className="relative w-[90px] h-[32px]">
+            <div className="relative w-[110px] h-[38px]">
               <Image
-                src="/logo.jpg"
+                src="/logo-blue.png"
                 alt="Heva logo"
                 fill
-                className="object-contain"
+                className="object-contain object-left"
                 priority
               />
             </div>

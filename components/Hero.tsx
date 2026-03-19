@@ -53,9 +53,9 @@ export default function Hero() {
           >
             {/* Badge */}
             <motion.div variants={fadeInUp}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#e8f0ff] rounded-full mb-6">
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-lg mb-7" style={{ border: "1px solid rgba(2,91,255,0.2)", background: "rgba(2,91,255,0.04)" }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#025bff]" style={{ animation: "blink 2s ease-in-out infinite" }} />
-                <span className="text-xs font-semibold text-[#025bff] tracking-wide uppercase">
+                <span className="text-[11px] font-semibold text-[#025bff] tracking-[0.08em] uppercase">
                   Nüüd saadaval Eestis
                 </span>
               </div>
@@ -308,19 +308,22 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-        className="relative border-t border-[#e5e7eb] bg-white/70 backdrop-blur-sm"
+        className="relative border-t border-[#e5e7eb] bg-white/80 backdrop-blur-sm"
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-[#e5e7eb]">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center lg:px-8">
-                <p
-                  className="text-2xl sm:text-3xl font-bold text-[#0f1117] mb-1 tracking-tight"
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-5">
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 sm:gap-x-12">
+            {stats.map((stat, i) => (
+              <div key={stat.label} className="flex items-baseline gap-2.5">
+                <span
+                  className="text-xl sm:text-2xl font-bold text-[#0f1117] tracking-tight"
                   style={{ fontFamily: "var(--font-dm-serif), serif" }}
                 >
                   {stat.value}
-                </p>
-                <p className="text-sm text-[#6b7280] font-medium">{stat.label}</p>
+                </span>
+                <span className="text-xs text-[#9ca3af] font-medium">{stat.label}</span>
+                {i < stats.length - 1 && (
+                  <span className="ml-4 sm:ml-8 text-[#e5e7eb] select-none">·</span>
+                )}
               </div>
             ))}
           </div>

@@ -59,12 +59,12 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-2">
             <a href="/" className="flex items-center gap-2.5 mb-5" aria-label="Heva avaleht">
-              <div className="relative w-[80px] h-[28px]">
+              <div className="relative w-[100px] h-[34px]">
                 <Image
-                  src="/logo.jpg"
+                  src="/logo-blue.png"
                   alt="Heva logo"
                   fill
-                  className="object-contain brightness-[100] invert"
+                  className="object-contain object-left brightness-0 invert"
                 />
               </div>
             </a>
