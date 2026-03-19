@@ -311,7 +311,7 @@ export default function Hero() {
         className="relative border-t border-[#e5e7eb] bg-white/80 backdrop-blur-sm"
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-5">
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 sm:gap-x-12">
+          <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 sm:gap-x-12">
             {stats.map((stat, i) => (
               <div key={stat.label} className="flex items-baseline gap-2.5">
                 <span
@@ -322,7 +322,7 @@ export default function Hero() {
                 </span>
                 <span className="text-xs text-[#9ca3af] font-medium">{stat.label}</span>
                 {i < stats.length - 1 && (
-                  <span className="ml-4 sm:ml-8 text-[#e5e7eb] select-none">·</span>
+                  <span className="ml-4 sm:ml-8 text-[#d1d5db] select-none">·</span>
                 )}
               </div>
             ))}
