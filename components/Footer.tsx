@@ -60,8 +60,8 @@ export default function Footer() {
 
           {/* Brand — spans 5 cols */}
           <div className="lg:col-span-5 flex flex-col">
-            <a href="/" aria-label="Heva avaleht" className="mb-4 inline-block">
-              <div className="relative h-[42px] w-[160px]">
+            <a href="/" aria-label="Heva avaleht" className="mb-3 block" style={{ marginLeft: "-10px" }}>
+              <div className="relative h-[50px] w-[190px]">
                 <Image
                   src="/logo-white.png"
                   alt="Heva"
