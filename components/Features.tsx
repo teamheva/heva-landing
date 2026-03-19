@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Zap, Shield, Receipt, Clock, Building2 } from "lucide-react";
+import { MapPin, Zap, Shield, Receipt, Clock, Building2, type LucideIcon } from "lucide-react";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -13,7 +13,7 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.1 } },
 };
 
-const features = [
+const features: { icon: LucideIcon; title: string; description: string; color: string; bg: string }[] = [
   {
     icon: MapPin,
     title: "Reaalajas jälgimine",

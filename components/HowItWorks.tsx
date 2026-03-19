@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Package, Navigation, CheckCircle } from "lucide-react";
+import { Package, Navigation, CheckCircle, type LucideIcon } from "lucide-react";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -13,7 +13,7 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.14 } },
 };
 
-const steps = [
+const steps: { number: string; icon: LucideIcon; title: string; description: string }[] = [
   {
     number: "01",
     icon: Package,
