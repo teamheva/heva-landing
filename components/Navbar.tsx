@@ -56,7 +56,7 @@ export default function Navbar() {
               className="flex items-center flex-shrink-0"
               aria-label="Heva avaleht"
             >
-              <div className="relative w-[130px] h-[44px]">
+              <div className="relative w-[148px] h-[50px]">
                 <Image
                   src="/logo-blue.png"
                   alt="Heva logo"

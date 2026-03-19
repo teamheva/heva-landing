@@ -26,7 +26,7 @@ function FacebookIcon() {
   );
 }
 
-const footerLinks = [
+const navColumns = [
   {
     title: "Platvorm",
     links: [
@@ -54,27 +54,31 @@ export default function Footer() {
   return (
     <footer className="bg-[#0a0a0f] text-white" role="contentinfo">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        {/* Main grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 py-16">
-          {/* Brand column */}
-          <div className="lg:col-span-2">
-            {/* Logo — negative left margin compensates for PNG's internal whitespace so H aligns with text */}
-            <a href="/" className="block mb-3" style={{ marginLeft: "-8px" }} aria-label="Heva avaleht">
-              <div className="relative w-[156px] h-[52px]">
+
+        {/* ── Main section ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-x-10 gap-y-12 pt-16 pb-12">
+
+          {/* Brand — spans 5 cols */}
+          <div className="lg:col-span-5 flex flex-col">
+            <a href="/" aria-label="Heva avaleht" className="mb-4 inline-block">
+              <div className="relative h-[42px] w-[160px]">
                 <Image
-                  src="/logo-blue.png"
-                  alt="Heva logo"
+                  src="/logo-white.png"
+                  alt="Heva"
                   fill
-                  className="object-contain object-left brightness-0 invert"
+                  className="object-contain object-left"
+                  priority
                 />
               </div>
             </a>
-            <p className="text-gray-400 leading-relaxed mb-6 max-w-xs text-sm">
+
+            <p className="text-[15px] text-gray-400 leading-relaxed max-w-[280px] mb-6">
               Teeme kaubavedude tellimise Eestis sama lihtsaks kui takso kutsumise.
               Kiire, läbipaistev ja usaldusväärne.
             </p>
-            {/* Social links */}
-            <div className="flex gap-3">
+
+            {/* Social */}
+            <div className="flex gap-2">
               {[
                 { Icon: LinkedInIcon, href: "#", label: "LinkedIn" },
                 { Icon: InstagramIcon, href: "#", label: "Instagram" },
@@ -84,7 +88,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-all duration-200"
+                  className="w-9 h-9 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] flex items-center justify-center text-gray-400 hover:text-white transition-all duration-200"
                 >
                   <Icon />
                 </a>
@@ -92,18 +96,21 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Link columns */}
-          {footerLinks.map((section) => (
-            <div key={section.title}>
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4">
-                {section.title}
+          {/* Spacer — 1 col */}
+          <div className="hidden lg:block lg:col-span-1" />
+
+          {/* Nav columns — 3 cols each */}
+          {navColumns.map((col) => (
+            <div key={col.title} className="lg:col-span-3">
+              <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-[0.12em] mb-5">
+                {col.title}
               </p>
-              <ul className="space-y-3">
-                {section.links.map((link) => (
+              <ul className="space-y-3.5">
+                {col.links.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-sm text-gray-400 hover:text-white transition-colors duration-150"
+                      className="text-[14px] text-gray-400 hover:text-white transition-colors duration-150"
                     >
                       {link.label}
                     </a>
@@ -114,44 +121,59 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Contact strip */}
-        <div className="border-t border-white/[0.07] py-8">
-          <div className="flex flex-wrap gap-6 mb-6">
-            <a href="mailto:info@heva.ee" className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-              </svg>
-              info@heva.ee
-            </a>
-            <a href="tel:+37250000000" className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 6.75z" />
-              </svg>
-              +372 5000 0000
-            </a>
-            <span className="flex items-center gap-2 text-sm text-gray-400">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z" />
-              </svg>
-              Tallinn, Eesti
-            </span>
-          </div>
+        {/* ── Divider ── */}
+        <div className="border-t border-white/[0.07]" />
+
+        {/* ── Contact row ── */}
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-3 py-6">
+          <a
+            href="mailto:info@heva.ee"
+            className="flex items-center gap-2 text-[13px] text-gray-500 hover:text-gray-300 transition-colors"
+          >
+            <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+            </svg>
+            info@heva.ee
+          </a>
+          <a
+            href="tel:+37250000000"
+            className="flex items-center gap-2 text-[13px] text-gray-500 hover:text-gray-300 transition-colors"
+          >
+            <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 6.75z" />
+            </svg>
+            +372 5000 0000
+          </a>
+          <span className="flex items-center gap-2 text-[13px] text-gray-500">
+            <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z" />
+            </svg>
+            Tallinn, Eesti
+          </span>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/[0.07] py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-600">
+        {/* ── Divider ── */}
+        <div className="border-t border-white/[0.07]" />
+
+        {/* ── Bottom bar ── */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 py-5">
+          <p className="text-[12px] text-gray-600">
             © {year} Heva OÜ. Kõik õigused kaitstud.
           </p>
-          <div className="flex gap-5">
+          <div className="flex items-center gap-6">
             {["Privaatsuspoliitika", "Kasutustingimused", "Küpsised"].map((item) => (
-              <a key={item} href="#" className="text-xs text-gray-600 hover:text-gray-400 transition-colors">
+              <a
+                key={item}
+                href="#"
+                className="text-[12px] text-gray-600 hover:text-gray-400 transition-colors"
+              >
                 {item}
               </a>
             ))}
           </div>
         </div>
+
       </div>
     </footer>
   );
