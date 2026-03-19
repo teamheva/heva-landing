@@ -5,7 +5,7 @@ import { ArrowRight, MapPin, Truck, Star } from "lucide-react";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
 const stagger = {
@@ -133,7 +133,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, x: 40, scale: 0.96 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
             className="relative flex justify-center lg:justify-end"
             aria-hidden="true"
           >
@@ -268,7 +268,7 @@ export default function Hero() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.8, x: 20 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
-                transition={{ delay: 0.9, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ delay: 0.9, duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                 className="float-card-slow absolute -right-4 sm:-right-8 top-16 glass-card rounded-2xl px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.1)]"
               >
                 <div className="flex items-center gap-2.5">
@@ -285,7 +285,7 @@ export default function Hero() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.8, x: -20 }}
                 animate={{ opacity: 1, scale: 1, x: 0 }}
-                transition={{ delay: 1.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ delay: 1.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                 className="float-card absolute -left-4 sm:-left-12 bottom-28 glass-card rounded-2xl px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.1)]"
               >
                 <div className="flex items-center gap-2.5">
@@ -307,7 +307,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.6, delay: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
         className="relative border-t border-[#e5e7eb] bg-white/70 backdrop-blur-sm"
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-6">

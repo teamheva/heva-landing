@@ -5,7 +5,7 @@ import { Check, ArrowRight, TrendingUp, Euro, Map } from "lucide-react";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
 const stagger = {
@@ -63,7 +63,7 @@ export default function ForDrivers() {
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
             className="relative order-2 lg:order-1"
             aria-hidden="true"
           >
@@ -99,7 +99,7 @@ export default function ForDrivers() {
                         initial={{ height: 0 }}
                         whileInView={{ height: `${d.height}%` }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.1 * i, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ delay: 0.1 * i, duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                         className="w-full rounded-lg"
                         style={{
                           background: d.height >= 90 ? "#025bff" : d.height >= 70 ? "rgba(2,91,255,0.55)" : "rgba(2,91,255,0.25)",

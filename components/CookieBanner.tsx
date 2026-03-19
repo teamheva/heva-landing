@@ -32,7 +32,7 @@ export default function CookieBanner() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           className="fixed bottom-5 left-5 right-5 sm:left-auto sm:right-5 sm:max-w-[440px] z-50"
           role="dialog"
           aria-label="Küpsiste nõusolek"

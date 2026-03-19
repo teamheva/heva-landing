@@ -5,7 +5,7 @@ import { Truck, MapPin, Package } from "lucide-react";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
 const stagger = {
@@ -104,7 +104,7 @@ export default function AppDownload() {
             initial={{ opacity: 0, y: 40, rotate: -4 }}
             whileInView={{ opacity: 1, y: 0, rotate: -4 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
             className="float-card hidden sm:block"
             aria-hidden="true"
           >
@@ -158,7 +158,7 @@ export default function AppDownload() {
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
             className="float-card-slow relative z-10"
             aria-hidden="true"
           >
@@ -235,7 +235,7 @@ export default function AppDownload() {
             initial={{ opacity: 0, y: 40, rotate: 4 }}
             whileInView={{ opacity: 1, y: 0, rotate: 4 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
             className="float-card hidden sm:block"
             aria-hidden="true"
           >
