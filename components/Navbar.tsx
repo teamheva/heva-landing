@@ -48,27 +48,29 @@ export default function Navbar() {
         }`}
         role="banner"
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <a
-            href="/"
-            className="flex items-center gap-2 flex-shrink-0"
-            aria-label="Heva avaleht"
-          >
-            <div className="relative w-[110px] h-[38px]">
-              <Image
-                src="/logo-blue.png"
-                alt="Heva logo"
-                fill
-                className="object-contain object-left"
-                priority
-              />
-            </div>
-          </a>
+        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 flex items-center" style={{ height: "68px" }}>
+          {/* Logo — left third */}
+          <div className="flex-1 flex items-center">
+            <a
+              href="/"
+              className="flex items-center flex-shrink-0"
+              aria-label="Heva avaleht"
+            >
+              <div className="relative w-[130px] h-[44px]">
+                <Image
+                  src="/logo-blue.png"
+                  alt="Heva logo"
+                  fill
+                  className="object-contain object-left"
+                  priority
+                />
+              </div>
+            </a>
+          </div>
 
-          {/* Desktop Nav */}
+          {/* Desktop Nav — absolute center */}
           <nav
-            className="hidden md:flex items-center gap-1"
+            className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2"
             aria-label="Peamenüü"
           >
             {navLinks.map((link) => (
@@ -82,8 +84,8 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Desktop Right */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Desktop Right — right third */}
+          <div className="flex-1 hidden md:flex items-center justify-end gap-3">
             {/* Language toggle */}
             <div className="flex items-center gap-0.5 bg-[#f7f8fc] rounded-full p-1">
               {(["ET", "EN"] as const).map((l) => (
@@ -111,9 +113,9 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile hamburger — right side on mobile */}
           <button
-            className="md:hidden p-2 rounded-xl text-[#0f1117] hover:bg-[#f7f8fc] transition-colors cursor-pointer"
+            className="md:hidden p-2 rounded-xl text-[#0f1117] hover:bg-[#f7f8fc] transition-colors cursor-pointer ml-auto"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Sulge menüü" : "Ava menüü"}
             aria-expanded={mobileOpen}

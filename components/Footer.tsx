@@ -58,8 +58,8 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 py-16">
           {/* Brand column */}
           <div className="lg:col-span-2">
-            <a href="/" className="flex items-center gap-2.5 mb-5" aria-label="Heva avaleht">
-              <div className="relative w-[100px] h-[34px]">
+            <a href="/" className="inline-block mb-5" aria-label="Heva avaleht">
+              <div className="relative w-[140px] h-[48px]">
                 <Image
                   src="/logo-blue.png"
                   alt="Heva logo"
