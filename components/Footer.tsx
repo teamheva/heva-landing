@@ -58,8 +58,9 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 py-16">
           {/* Brand column */}
           <div className="lg:col-span-2">
-            <a href="/" className="inline-block mb-5" aria-label="Heva avaleht">
-              <div className="relative w-[140px] h-[48px]">
+            {/* Logo — negative left margin compensates for PNG's internal whitespace so H aligns with text */}
+            <a href="/" className="block mb-3" style={{ marginLeft: "-8px" }} aria-label="Heva avaleht">
+              <div className="relative w-[156px] h-[52px]">
                 <Image
                   src="/logo-blue.png"
                   alt="Heva logo"
