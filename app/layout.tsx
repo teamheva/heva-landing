@@ -38,9 +38,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
+        url: "/og-image.png",
+        width: 1080,
+        height: 1080,
         alt: "Heva - Kaup kohale. Lihtsalt ja kiiresti.",
       },
     ],
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Heva - Kaup kohale. Lihtsalt ja kiiresti.",
     description: "Heva ühendab sind lähima vaba vedajaga minutitega.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
