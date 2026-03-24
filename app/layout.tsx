@@ -21,7 +21,7 @@ const dmSerifDisplay = DM_Serif_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Heva – Kaup kohale. Lihtsalt ja kiiresti.",
+    default: "Heva - Kaup kohale. Lihtsalt ja kiiresti.",
     template: "%s | Heva",
   },
   description: "Heva ühendab sind lähima vaba vedajaga minutitega.",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   creator: "Heva OÜ",
   metadataBase: new URL("https://heva.me"),
   openGraph: {
-    title: "Heva – Kaup kohale. Lihtsalt ja kiiresti.",
+    title: "Heva - Kaup kohale. Lihtsalt ja kiiresti.",
     description: "Heva ühendab sind lähima vaba vedajaga minutitega.",
     url: "https://heva.me",
     siteName: "Heva",
@@ -41,13 +41,13 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Heva – Kaup kohale. Lihtsalt ja kiiresti.",
+        alt: "Heva - Kaup kohale. Lihtsalt ja kiiresti.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Heva – Kaup kohale. Lihtsalt ja kiiresti.",
+    title: "Heva - Kaup kohale. Lihtsalt ja kiiresti.",
     description: "Heva ühendab sind lähima vaba vedajaga minutitega.",
     images: ["/og-image.jpg"],
   },

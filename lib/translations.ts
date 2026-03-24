@@ -232,7 +232,7 @@ export const translations = {
       ariaClose: "Sulge küpsiste teade",
     },
     meta: {
-      title: "Heva – Kaup kohale. Lihtsalt ja kiiresti.",
+      title: "Heva - Kaup kohale. Lihtsalt ja kiiresti.",
       description: "Heva ühendab sind lähima vaba vedajaga minutitega.",
     },
   },
@@ -470,7 +470,7 @@ export const translations = {
       ariaClose: "Close cookie notice",
     },
     meta: {
-      title: "Heva – Cargo delivered. Simply and fast.",
+      title: "Heva - Cargo delivered. Simply and fast.",
       description: "Heva connects you with the nearest available carrier in minutes.",
     },
   },
