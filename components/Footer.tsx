@@ -1,5 +1,7 @@
 "use client";
 
+import { useLanguage } from "@/lib/LanguageContext";
+
 function LinkedInIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
@@ -24,29 +26,9 @@ function FacebookIcon() {
   );
 }
 
-const navColumns = [
-  {
-    title: "Platvorm",
-    links: [
-      { label: "Kuidas töötab", href: "#how-it-works" },
-      { label: "Hinnakiri", href: "#pricing" },
-      { label: "Vedajatele", href: "#for-drivers" },
-      { label: "Ettevõtetele", href: "#features" },
-      { label: "Blogi", href: "#" },
-    ],
-  },
-  {
-    title: "Ettevõte",
-    links: [
-      { label: "Meist", href: "#" },
-      { label: "Karjäär", href: "#" },
-      { label: "Press", href: "#" },
-      { label: "Kontakt", href: "#" },
-    ],
-  },
-];
-
 export default function Footer() {
+  const { t } = useLanguage();
+  const f = t.footer;
   const year = new Date().getFullYear();
 
   return (
@@ -54,13 +36,12 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
 
         {/* ── Main section ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-x-10 gap-y-12 pt-16 pb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-x-10 gap-y-10 pt-12 sm:pt-16 pb-10 sm:pb-12">
 
           {/* Brand — spans 5 cols */}
           <div className="lg:col-span-5 flex flex-col">
             <p className="text-[15px] text-gray-400 leading-relaxed max-w-[280px] mb-6">
-              Teeme kaubavedude tellimise Eestis sama lihtsaks kui takso kutsumise.
-              Kiire, läbipaistev ja usaldusväärne.
+              {f.tagline}
             </p>
 
             {/* Social */}
@@ -86,7 +67,7 @@ export default function Footer() {
           <div className="hidden lg:block lg:col-span-1" />
 
           {/* Nav columns — 3 cols each */}
-          {navColumns.map((col) => (
+          {f.columns.map((col) => (
             <div key={col.title} className="lg:col-span-3">
               <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-[0.12em] mb-5">
                 {col.title}
@@ -135,7 +116,7 @@ export default function Footer() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z" />
             </svg>
-            Tallinn, Eesti
+            {f.location}
           </span>
         </div>
 
@@ -145,10 +126,10 @@ export default function Footer() {
         {/* ── Bottom bar ── */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 py-5">
           <p className="text-[12px] text-gray-600">
-            © {year} Heva OÜ. Kõik õigused kaitstud.
+            © {year} Heva OÜ. {f.rights}
           </p>
-          <div className="flex items-center gap-6">
-            {["Privaatsuspoliitika", "Kasutustingimused", "Küpsised"].map((item) => (
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            {f.legalLinks.map((item) => (
               <a
                 key={item}
                 href="#"

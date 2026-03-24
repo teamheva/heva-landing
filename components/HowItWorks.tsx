@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Package, Navigation, CheckCircle, type LucideIcon } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -13,35 +14,17 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.14 } },
 };
 
-const steps: { number: string; icon: LucideIcon; title: string; description: string }[] = [
-  {
-    number: "01",
-    icon: Package,
-    title: "Sisesta kaup",
-    description:
-      "Märgi peale- ja mahalaadimiskoht, kauba mõõtmed ja aeg. Hind kuvatakse kohe — üllatusi pole.",
-  },
-  {
-    number: "02",
-    icon: Navigation,
-    title: "Vedaja tuleb",
-    description:
-      "Lähim saadaolev vedaja võtab tellimuse vastu. Näed teda kaardil reaalajas ja saad teavituse.",
-  },
-  {
-    number: "03",
-    icon: CheckCircle,
-    title: "Kaup kohale",
-    description:
-      "Saad kinnituse, arve ja hinnangu. Makse toimub automaatselt äpis — käsitsi ülekandeid pole.",
-  },
-];
+const stepIcons: LucideIcon[] = [Package, Navigation, CheckCircle];
+const stepNumbers = ["01", "02", "03"];
 
 export default function HowItWorks() {
+  const { t } = useLanguage();
+  const s = t.howItWorks;
+
   return (
     <section
       id="how-it-works"
-      className="py-24 sm:py-32 bg-[#f7f8fc]"
+      className="py-16 sm:py-28 bg-[#f7f8fc]"
       aria-labelledby="how-title"
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
@@ -51,20 +34,20 @@ export default function HowItWorks() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="text-center mb-16 sm:mb-20"
+          className="text-center mb-10 sm:mb-16"
         >
           <motion.p variants={fadeInUp} className="text-sm font-semibold text-[#025bff] uppercase tracking-widest mb-3">
-            Protsess
+            {s.eyebrow}
           </motion.p>
           <motion.h2
             variants={fadeInUp}
             id="how-title"
             className="text-4xl sm:text-5xl font-bold text-[#0f1117] tracking-tight mb-4"
           >
-            Kolm sammu, null peavalu
+            {s.h2}
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-lg text-[#6b7280] max-w-xl mx-auto">
-            Lihtsaim viis kaupa vedada. Tellimisest toimetamiseni — kõik ühes äpis.
+            {s.sub}
           </motion.p>
         </motion.div>
 
@@ -87,44 +70,47 @@ export default function HowItWorks() {
             />
           </div>
 
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.number}
-              variants={fadeInUp}
-              className="relative bg-white rounded-3xl p-8 shadow-[0_4px_24px_rgba(0,0,0,0.05)] border border-[#e5e7eb] hover:shadow-[0_8px_40px_rgba(2,91,255,0.08)] hover:border-[#c5d8ff] transition-all duration-300 group"
-            >
-              {/* Step number + icon */}
-              <div className="flex items-center gap-4 mb-6">
-                <div className="relative">
-                  <div className="w-14 h-14 rounded-2xl bg-[#e8f0ff] flex items-center justify-center group-hover:bg-[#025bff] transition-colors duration-300">
-                    <step.icon
-                      size={22}
-                      className="text-[#025bff] group-hover:text-white transition-colors duration-300"
-                    />
+          {s.steps.map((step, i) => {
+            const Icon = stepIcons[i];
+            return (
+              <motion.div
+                key={stepNumbers[i]}
+                variants={fadeInUp}
+                className="relative bg-white rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.05)] border border-[#e5e7eb] hover:shadow-[0_8px_40px_rgba(2,91,255,0.08)] hover:border-[#c5d8ff] transition-all duration-300 group"
+              >
+                {/* Step number + icon */}
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="relative">
+                    <div className="w-14 h-14 rounded-2xl bg-[#e8f0ff] flex items-center justify-center group-hover:bg-[#025bff] transition-colors duration-300">
+                      <Icon
+                        size={22}
+                        className="text-[#025bff] group-hover:text-white transition-colors duration-300"
+                      />
+                    </div>
                   </div>
+                  <span
+                    className="text-5xl font-bold text-[#b8ceff] group-hover:text-[#a0beff] transition-colors duration-300 leading-none"
+                    style={{ fontFamily: "var(--font-dm-serif), serif" }}
+                  >
+                    {stepNumbers[i]}
+                  </span>
                 </div>
-                <span
-                  className="text-5xl font-bold text-[#f0f5ff] group-hover:text-[#e8f0ff] transition-colors duration-300 leading-none"
-                  style={{ fontFamily: "var(--font-dm-serif), serif" }}
-                >
-                  {step.number}
-                </span>
-              </div>
 
-              <h3 className="text-xl font-bold text-[#0f1117] mb-3">{step.title}</h3>
-              <p className="text-[#6b7280] leading-relaxed">{step.description}</p>
+                <h3 className="text-xl font-bold text-[#0f1117] mb-3">{step.title}</h3>
+                <p className="text-[#6b7280] leading-relaxed">{step.description}</p>
 
-              {/* Arrow on mobile */}
-              {i < steps.length - 1 && (
-                <div className="md:hidden flex justify-center mt-6">
-                  <div className="flex flex-col items-center gap-1">
-                    <div className="w-px h-4 bg-[#e5e7eb]" />
-                    <div className="w-2 h-2 border-r-2 border-b-2 border-[#025bff] rotate-45 -mt-1" />
+                {/* Arrow on mobile */}
+                {i < s.steps.length - 1 && (
+                  <div className="md:hidden flex justify-center mt-6">
+                    <div className="flex flex-col items-center gap-1">
+                      <div className="w-px h-4 bg-[#e5e7eb]" />
+                      <div className="w-2 h-2 border-r-2 border-b-2 border-[#025bff] rotate-45 -mt-1" />
+                    </div>
                   </div>
-                </div>
-              )}
-            </motion.div>
-          ))}
+                )}
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         {/* Bottom CTA */}
@@ -136,9 +122,9 @@ export default function HowItWorks() {
           className="text-center mt-12"
         >
           <button className="btn-primary px-8 py-4 text-base font-semibold text-white rounded-full inline-flex items-center gap-2">
-            Proovi tasuta
+            {s.cta}
           </button>
-          <p className="text-sm text-[#6b7280] mt-3">Registreerimine võtab alla 2 minuti</p>
+          <p className="text-sm text-[#6b7280] mt-3">{s.ctaSub}</p>
         </motion.div>
       </div>
     </section>

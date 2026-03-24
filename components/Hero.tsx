@@ -2,6 +2,23 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin, Truck, Star } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
+
+function AppleIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 flex-shrink-0">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+    </svg>
+  );
+}
+
+function PlayIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 flex-shrink-0">
+      <path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.37.6 1.23 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z" />
+    </svg>
+  );
+}
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -13,18 +30,14 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.12 } },
 };
 
-const stats = [
-  { value: "500+", label: "Aktiivset vedajat" },
-  { value: "15 min", label: "Keskmine reageerimisaeg" },
-  { value: "98%", label: "Tellimusi täidetud" },
-  { value: "Üle-Eestiline", label: "Katvus" },
-];
-
 export default function Hero() {
+  const { t } = useLanguage();
+  const h = t.hero;
+
   return (
     <section
       className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16"
-      aria-label="Peakangelane"
+      aria-label={h.h1Line1}
     >
       {/* Background */}
       <div className="absolute inset-0 gradient-hero-bg" />
@@ -44,7 +57,7 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-16 sm:py-24 w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
-          {/* Left — Text */}
+          {/* Left – Text */}
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -56,7 +69,7 @@ export default function Hero() {
               <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-lg mb-7" style={{ border: "1px solid rgba(2,91,255,0.2)", background: "rgba(2,91,255,0.04)" }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-[#025bff]" style={{ animation: "blink 2s ease-in-out infinite" }} />
                 <span className="text-[11px] font-semibold text-[#025bff] tracking-[0.08em] uppercase">
-                  Nüüd saadaval Eestis
+                  {h.badge}
                 </span>
               </div>
             </motion.div>
@@ -67,43 +80,67 @@ export default function Hero() {
               className="text-[56px] sm:text-[72px] lg:text-[84px] leading-[1.0] tracking-[-0.03em] text-[#0f1117] mb-6"
               style={{ fontFamily: "var(--font-dm-serif), serif" }}
             >
-              Kaup kohale.
+              {h.h1Line1}
               <br />
-              <span className="text-[#025bff]">Lihtsalt</span> ja
+              <span className="text-[#025bff]">{h.h1Highlight}</span> {h.h1Line2}
               <br />
-              kiiresti.
+              {h.h1Line3}
             </motion.h1>
 
             {/* Subheadline */}
-            <motion.p
-              variants={fadeInUp}
-              className="text-lg sm:text-xl text-[#6b7280] leading-relaxed max-w-[480px] mb-8"
-            >
-              Heva ühendab sind lähima vaba vedajaga minutitega.
-              <br className="hidden sm:block" />
-              Kaubasaatjatele ja vedajatele — üks äpp, null bürokraatiat.
-            </motion.p>
+            <motion.div variants={fadeInUp} className="mb-8 max-w-[460px] flex flex-col gap-1">
+              <p className="text-[15px] sm:text-[17px] text-[#374151] leading-relaxed font-medium">
+                {h.sub1}
+              </p>
+              <p className="text-[15px] sm:text-[17px] text-[#374151] leading-relaxed">
+                {h.sub2}
+              </p>
+            </motion.div>
 
             {/* CTAs */}
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-3">
               <button
                 className="btn-primary flex items-center gap-2 px-7 py-4 text-base font-semibold text-white rounded-full"
-                aria-label="Telli vedu"
+                aria-label={h.ctaOrder}
               >
-                Telli vedu
+                {h.ctaOrder}
                 <ArrowRight size={18} />
               </button>
               <button
                 className="flex items-center gap-2 px-7 py-4 text-base font-semibold text-[#0f1117] rounded-full border border-[#e5e7eb] hover:border-[#025bff] hover:text-[#025bff] transition-all duration-200 cursor-pointer bg-white/80"
-                aria-label="Saa vedajaks"
+                aria-label={h.ctaDriver}
               >
                 <Truck size={18} />
-                Saa vedajaks
+                {h.ctaDriver}
+              </button>
+            </motion.div>
+
+            {/* App store download buttons */}
+            <motion.div variants={fadeInUp} className="flex flex-wrap gap-3 mt-6">
+              <button
+                className="flex items-center gap-3 px-5 py-3 bg-[#0f1117] text-white rounded-2xl hover:bg-[#1e293b] transition-colors duration-200 cursor-pointer"
+                aria-label="App Store"
+              >
+                <AppleIcon />
+                <div className="text-left">
+                  <p className="text-[10px] text-white/60 leading-none mb-0.5">{h.downloadOn}</p>
+                  <p className="text-[13px] font-semibold leading-none">App Store</p>
+                </div>
+              </button>
+              <button
+                className="flex items-center gap-3 px-5 py-3 bg-[#0f1117] text-white rounded-2xl hover:bg-[#1e293b] transition-colors duration-200 cursor-pointer"
+                aria-label="Google Play"
+              >
+                <PlayIcon />
+                <div className="text-left">
+                  <p className="text-[10px] text-white/60 leading-none mb-0.5">{h.availableOn}</p>
+                  <p className="text-[13px] font-semibold leading-none">Google Play</p>
+                </div>
               </button>
             </motion.div>
 
             {/* Social proof */}
-            <motion.div variants={fadeInUp} className="flex items-center gap-3 mt-8">
+            <motion.div variants={fadeInUp} className="flex items-center gap-3 mt-6">
               <div className="flex -space-x-2">
                 {["MK", "LT", "AV", "KP"].map((initials, i) => (
                   <div
@@ -123,13 +160,13 @@ export default function Hero() {
                   ))}
                 </div>
                 <span className="text-sm font-medium text-[#6b7280]">
-                  <strong className="text-[#0f1117]">4.9</strong> · 200+ arvustust
+                  <strong className="text-[#0f1117]">4.9</strong> · 200+ {h.reviews}
                 </span>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Right — App mockup */}
+          {/* Right – App mockup */}
           <motion.div
             initial={{ opacity: 0, x: 40, scale: 0.96 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -174,7 +211,7 @@ export default function Hero() {
                 <div className="px-5 pb-3">
                   <div className="flex items-center justify-between mb-1">
                     <div>
-                      <p className="text-[10px] font-medium text-[#6b7280]">Tere tulemast</p>
+                      <p className="text-[10px] font-medium text-[#6b7280]">{h.mockupWelcome}</p>
                       <p className="text-sm font-bold text-[#0f1117]">Marko Kask</p>
                     </div>
                     <div className="w-9 h-9 rounded-full bg-[#025bff] flex items-center justify-center">
@@ -185,19 +222,15 @@ export default function Hero() {
 
                 {/* Map area */}
                 <div className="mx-4 rounded-2xl overflow-hidden h-[200px] sm:h-[220px] relative bg-[#e8f0ff]">
-                  {/* Fake map grid */}
                   <div className="absolute inset-0">
-                    {/* Streets */}
                     <div className="absolute top-1/3 left-0 right-0 h-px bg-[#c5d8ff] opacity-80" />
                     <div className="absolute top-2/3 left-0 right-0 h-px bg-[#c5d8ff] opacity-60" />
                     <div className="absolute left-1/3 top-0 bottom-0 w-px bg-[#c5d8ff] opacity-80" />
                     <div className="absolute left-2/3 top-0 bottom-0 w-px bg-[#c5d8ff] opacity-60" />
                     <div className="absolute top-1/6 left-0 right-0 h-px bg-[#d5e4ff] opacity-50" />
                     <div className="absolute left-1/6 top-0 bottom-0 w-px bg-[#d5e4ff] opacity-50" />
-                    {/* Main roads */}
                     <div className="absolute top-[45%] left-0 right-0 h-[3px] bg-white opacity-90 rounded-full" />
                     <div className="absolute left-[48%] top-0 bottom-0 w-[3px] bg-white opacity-90 rounded-full" />
-                    {/* Route line */}
                     <svg className="absolute inset-0 w-full h-full" viewBox="0 0 260 200">
                       <path
                         d="M 40 140 Q 70 100 130 90 Q 180 80 220 60"
@@ -208,16 +241,13 @@ export default function Hero() {
                         strokeLinecap="round"
                       />
                     </svg>
-                    {/* Start pin */}
                     <div className="absolute left-[12px] bottom-[45px] flex flex-col items-center">
                       <div className="w-3 h-3 rounded-full bg-[#025bff] border-2 border-white shadow-md" />
                       <div className="w-0.5 h-2 bg-[#025bff]" />
                     </div>
-                    {/* End pin */}
                     <div className="absolute right-[20px] top-[35px]">
                       <MapPin size={18} className="text-[#025bff] fill-[#025bff]" strokeWidth={0} />
                     </div>
-                    {/* Truck icon */}
                     <div
                       className="absolute flex items-center justify-center w-8 h-8 rounded-full bg-white shadow-lg"
                       style={{ left: "42%", top: "36%", animation: "truckMove 2.5s ease-in-out alternate infinite" }}
@@ -231,8 +261,8 @@ export default function Hero() {
                 <div className="mx-4 mt-3">
                   <div className="bg-[#025bff] rounded-2xl px-4 py-3 flex items-center justify-between">
                     <div>
-                      <p className="text-[10px] font-medium text-blue-200">Vedaja on teel</p>
-                      <p className="text-sm font-bold text-white">Andres V. · 8 min</p>
+                      <p className="text-[10px] font-medium text-blue-200">{h.mockupDriverEnRoute}</p>
+                      <p className="text-sm font-bold text-white">{h.mockupDriverEta}</p>
                     </div>
                     <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
                       <span className="text-[10px] font-bold text-white">AV</span>
@@ -243,21 +273,21 @@ export default function Hero() {
                 {/* Quick stats */}
                 <div className="mx-4 mt-3 grid grid-cols-2 gap-2">
                   <div className="bg-[#f7f8fc] rounded-xl p-3">
-                    <p className="text-[9px] text-[#6b7280] font-medium">Pealelaadimiskoht</p>
+                    <p className="text-[9px] text-[#6b7280] font-medium">{h.mockupPickup}</p>
                     <p className="text-xs font-bold text-[#0f1117] mt-0.5 truncate">Tallinn, Ülemiste</p>
                   </div>
                   <div className="bg-[#f7f8fc] rounded-xl p-3">
-                    <p className="text-[9px] text-[#6b7280] font-medium">Mahalaadimine</p>
+                    <p className="text-[9px] text-[#6b7280] font-medium">{h.mockupDropoff}</p>
                     <p className="text-xs font-bold text-[#0f1117] mt-0.5 truncate">Tartu, Annelinn</p>
                   </div>
                 </div>
 
-                {/* Bottom button */}
+                {/* Progress */}
                 <div className="mx-4 mt-3">
                   <div className="h-1 bg-[#f7f8fc] rounded-full overflow-hidden">
                     <div className="h-full w-2/3 bg-[#025bff] rounded-full" />
                   </div>
-                  <p className="text-center text-[10px] text-[#6b7280] mt-1.5 font-medium">2 tundi 40 min jäänud</p>
+                  <p className="text-center text-[10px] text-[#6b7280] mt-1.5 font-medium">{h.mockupTimeLeft}</p>
                 </div>
 
                 {/* Home indicator */}
@@ -276,8 +306,8 @@ export default function Hero() {
                     <Truck size={15} className="text-[#025bff]" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-medium text-[#6b7280]">Vedajaid lähedal</p>
-                    <p className="text-sm font-bold text-[#0f1117]">12 vedajat</p>
+                    <p className="text-[10px] font-medium text-[#6b7280]">{h.mockupNearbyLabel}</p>
+                    <p className="text-sm font-bold text-[#0f1117]">{h.mockupNearbyCount}</p>
                   </div>
                 </div>
               </motion.div>
@@ -293,7 +323,7 @@ export default function Hero() {
                     <span className="text-sm">✓</span>
                   </div>
                   <div>
-                    <p className="text-[10px] font-medium text-[#6b7280]">Kaup toimetatud</p>
+                    <p className="text-[10px] font-medium text-[#6b7280]">{h.mockupDelivered}</p>
                     <p className="text-sm font-bold text-[#0f1117]">14:32 · Tartu</p>
                   </div>
                 </div>
@@ -311,10 +341,9 @@ export default function Hero() {
         className="relative border-t border-[#e5e7eb] bg-white/80 backdrop-blur-sm"
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-5">
-          {/* Centered block, left-aligned list inside */}
           <div className="flex justify-center">
             <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-y-3 gap-x-10 sm:gap-x-14">
-              {stats.map((stat, i) => (
+              {h.stats.map((stat, i) => (
                 <div key={stat.label} className="flex items-baseline gap-2.5">
                   <span
                     className="text-xl sm:text-2xl font-bold text-[#0f1117] tracking-tight"
@@ -323,7 +352,7 @@ export default function Hero() {
                     {stat.value}
                   </span>
                   <span className="text-xs text-[#9ca3af] font-medium">{stat.label}</span>
-                  {i < stats.length - 1 && (
+                  {i < h.stats.length - 1 && (
                     <span className="hidden sm:inline ml-6 sm:ml-10 text-[#d1d5db] select-none">·</span>
                   )}
                 </div>

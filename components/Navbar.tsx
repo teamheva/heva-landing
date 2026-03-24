@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/lib/LanguageContext";
 
 function AppleIcon() {
   return (
@@ -21,16 +22,10 @@ function PlayIcon() {
   );
 }
 
-const navLinks = [
-  { label: "Kuidas töötab", href: "#how-it-works" },
-  { label: "Vedajatele", href: "#for-drivers" },
-  { label: "Ettevõtetele", href: "#features" },
-];
-
 export default function Navbar() {
+  const { lang, setLang, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [lang, setLang] = useState<"ET" | "EN">("ET");
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 16);
@@ -38,7 +33,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Close menu on resize
   useEffect(() => {
     const handler = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
     window.addEventListener("resize", handler);
@@ -64,15 +58,15 @@ export default function Navbar() {
         }`}
         role="banner"
       >
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 flex items-center" style={{ height: "68px" }}>
-          {/* Logo — left third */}
-          <div className="flex-1 flex items-center">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 w-full grid grid-cols-[1fr_auto_1fr] items-center" style={{ height: "68px" }}>
+          {/* Logo — left */}
+          <div className="flex items-center">
             <a
               href="/"
               className="flex items-center flex-shrink-0"
-              aria-label="Heva avaleht"
+              aria-label={t.nav.ariaHome}
             >
-              <div className="relative w-[158px] h-[54px]" style={{ marginLeft: "-6px" }}>
+              <div className="relative w-[114px] h-[36px] sm:w-[164px] sm:h-[54px] sm:-ml-[2px]">
                 <Image
                   src="/logo-blue.png"
                   alt="Heva logo"
@@ -84,78 +78,61 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Desktop Nav — absolute center */}
+          {/* Desktop Nav — true center column */}
           <nav
-            className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2"
-            aria-label="Peamenüü"
+            className="hidden md:flex items-center gap-1"
+            aria-label={t.nav.ariaMain}
           >
-            {navLinks.map((link) => (
+            {t.nav.links.map((link) => (
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className="px-4 py-2 text-sm font-medium text-[#0f1117] rounded-full hover:bg-[#f7f8fc] transition-colors duration-150 cursor-pointer"
+                className="px-4 py-2 text-sm font-medium text-[#0f1117] rounded-full hover:bg-[#f7f8fc] transition-colors duration-150 cursor-pointer whitespace-nowrap"
               >
                 {link.label}
               </button>
             ))}
           </nav>
 
-          {/* Desktop Right — right third */}
-          <div className="flex-1 hidden md:flex items-center justify-end gap-2.5">
+          {/* Desktop Right — right column */}
+          <div className="hidden md:flex items-center justify-end gap-3">
             {/* Language toggle */}
-            <div className="flex items-center gap-0.5 bg-[#f7f8fc] rounded-full p-1">
-              {(["ET", "EN"] as const).map((l) => (
-                <button
-                  key={l}
-                  onClick={() => setLang(l)}
-                  className={`px-3 py-1 text-xs font-semibold rounded-full transition-all duration-150 ${
-                    lang === l
-                      ? "bg-white text-[#0f1117] shadow-[0_1px_4px_rgba(0,0,0,0.1)]"
-                      : "text-[#6b7280] hover:text-[#0f1117]"
-                  }`}
-                  aria-label={`Vaheta keel: ${l}`}
-                >
-                  {l}
-                </button>
-              ))}
+            <div className="flex items-center gap-1 text-[12px] font-medium">
+              <button
+                onClick={() => setLang("et")}
+                className={`transition-colors duration-150 cursor-pointer ${lang === "et" ? "text-[#0f1117]" : "text-[#9ca3af] hover:text-[#6b7280]"}`}
+                aria-label="Eesti keel"
+              >ET</button>
+              <span className="text-[#d1d5db] select-none">/</span>
+              <button
+                onClick={() => setLang("en")}
+                className={`transition-colors duration-150 cursor-pointer ${lang === "en" ? "text-[#0f1117]" : "text-[#9ca3af] hover:text-[#6b7280]"}`}
+                aria-label="English"
+              >EN</button>
             </div>
 
-            {/* App store buttons */}
-            <div className="flex items-center gap-1.5">
-              <button
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0f1117] text-white rounded-xl hover:bg-[#1e293b] transition-colors duration-150 cursor-pointer"
-                aria-label="Laadi alla App Store'ist"
-              >
-                <AppleIcon />
-                <span className="hidden lg:block text-[11px] font-semibold leading-none">App Store</span>
-              </button>
-              <button
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0f1117] text-white rounded-xl hover:bg-[#1e293b] transition-colors duration-150 cursor-pointer"
-                aria-label="Laadi alla Google Play'st"
-              >
-                <PlayIcon />
-                <span className="hidden lg:block text-[11px] font-semibold leading-none">Google Play</span>
-              </button>
-            </div>
+            <div className="w-px h-4 bg-[#e5e7eb]" />
 
-            <button className="px-4 py-2 text-sm font-medium text-[#0f1117] hover:text-[#025bff] transition-colors duration-150 cursor-pointer">
-              Logi sisse
+            <button className="text-sm font-medium text-[#6b7280] hover:text-[#0f1117] transition-colors duration-150 cursor-pointer whitespace-nowrap">
+              {t.nav.login}
             </button>
 
-            <button className="btn-primary px-5 py-2.5 text-sm font-semibold text-white rounded-full cursor-pointer">
-              Alusta
+            <button className="btn-primary px-5 py-2 text-sm font-semibold text-white rounded-full cursor-pointer whitespace-nowrap">
+              {t.nav.start}
             </button>
           </div>
 
-          {/* Mobile hamburger — right side on mobile */}
-          <button
-            className="md:hidden p-2 rounded-xl text-[#0f1117] hover:bg-[#f7f8fc] transition-colors cursor-pointer ml-auto"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Sulge menüü" : "Ava menüü"}
-            aria-expanded={mobileOpen}
-          >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Mobile: hamburger */}
+          <div className="md:hidden flex items-center justify-end col-start-3">
+            <button
+              className="p-2 rounded-xl text-[#0f1117] hover:bg-[#f7f8fc] transition-colors cursor-pointer"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? t.nav.ariaClose : t.nav.ariaOpen}
+              aria-expanded={mobileOpen}
+            >
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </motion.header>
 
@@ -168,10 +145,10 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed top-16 left-0 right-0 z-40 bg-white/95 backdrop-blur-xl border-b border-[#e5e7eb] shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
+            className="fixed top-[68px] left-0 right-0 z-40 bg-white/95 backdrop-blur-xl border-b border-[#e5e7eb] shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
           >
             <div className="max-w-7xl mx-auto px-5 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
+              {t.nav.links.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => handleNavClick(link.href)}
@@ -185,7 +162,7 @@ export default function Navbar() {
 
               <div className="flex items-center gap-3 px-2">
                 <div className="flex items-center gap-0.5 bg-[#f7f8fc] rounded-full p-1">
-                  {(["ET", "EN"] as const).map((l) => (
+                  {(["et", "en"] as const).map((l) => (
                     <button
                       key={l}
                       onClick={() => setLang(l)}
@@ -195,17 +172,17 @@ export default function Navbar() {
                           : "text-[#6b7280]"
                       }`}
                     >
-                      {l}
+                      {l.toUpperCase()}
                     </button>
                   ))}
                 </div>
                 <button className="text-sm font-medium text-[#6b7280] px-2 cursor-pointer">
-                  Logi sisse
+                  {t.nav.login}
                 </button>
               </div>
 
               <button className="btn-primary w-full mt-2 py-3 text-sm font-semibold text-white rounded-2xl cursor-pointer">
-                Alusta
+                {t.nav.start}
               </button>
 
               <div className="h-px bg-[#e5e7eb] my-2" />
@@ -214,14 +191,14 @@ export default function Navbar() {
               <div className="flex gap-2 px-1">
                 <button
                   className="flex-1 flex items-center justify-center gap-2 py-3 bg-[#0f1117] text-white rounded-2xl hover:bg-[#1e293b] transition-colors cursor-pointer"
-                  aria-label="Laadi alla App Store'ist"
+                  aria-label="App Store"
                 >
                   <AppleIcon />
                   <span className="text-[13px] font-semibold">App Store</span>
                 </button>
                 <button
                   className="flex-1 flex items-center justify-center gap-2 py-3 bg-[#0f1117] text-white rounded-2xl hover:bg-[#1e293b] transition-colors cursor-pointer"
-                  aria-label="Laadi alla Google Play'st"
+                  aria-label="Google Play"
                 >
                   <PlayIcon />
                   <span className="text-[13px] font-semibold">Google Play</span>

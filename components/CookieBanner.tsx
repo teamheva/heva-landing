@@ -3,8 +3,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Cookie } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function CookieBanner() {
+  const { t } = useLanguage();
+  const c = t.cookie;
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -35,7 +38,7 @@ export default function CookieBanner() {
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           className="fixed bottom-5 left-5 right-5 sm:left-auto sm:right-5 sm:max-w-[440px] z-50"
           role="dialog"
-          aria-label="Küpsiste nõusolek"
+          aria-label={c.ariaDialog}
           aria-live="polite"
         >
           <div
@@ -54,27 +57,27 @@ export default function CookieBanner() {
 
               {/* Content */}
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-white mb-1">Kasutame küpsiseid</p>
+                <p className="text-sm font-semibold text-white mb-1">{c.title}</p>
                 <p className="text-xs text-gray-400 leading-relaxed mb-4">
-                  Kasutame küpsiseid parema kogemuse tagamiseks ja kasutusstatistika mõõtmiseks.{" "}
+                  {c.desc}{" "}
                   <a href="#" className="text-[#60a5fa] hover:underline">
-                    Loe lähemalt
+                    {c.readMore}
                   </a>
                 </p>
                 <div className="flex gap-2">
                   <button
                     onClick={decline}
                     className="px-4 py-2 text-xs font-semibold text-gray-400 border border-white/10 rounded-xl hover:border-white/20 hover:text-white transition-all duration-150 cursor-pointer"
-                    aria-label="Lükka küpsised tagasi"
+                    aria-label={c.ariaDecline}
                   >
-                    Lükka tagasi
+                    {c.decline}
                   </button>
                   <button
                     onClick={accept}
                     className="btn-primary flex-1 px-4 py-2 text-xs font-semibold text-white rounded-xl cursor-pointer"
-                    aria-label="Nõustu küpsistega"
+                    aria-label={c.ariaAccept}
                   >
-                    Nõustun
+                    {c.accept}
                   </button>
                 </div>
               </div>
@@ -83,7 +86,7 @@ export default function CookieBanner() {
               <button
                 onClick={decline}
                 className="text-gray-600 hover:text-gray-400 transition-colors cursor-pointer flex-shrink-0 mt-0.5"
-                aria-label="Sulge küpsiste teade"
+                aria-label={c.ariaClose}
               >
                 <X size={16} />
               </button>

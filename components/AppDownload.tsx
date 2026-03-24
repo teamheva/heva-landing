@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Truck, MapPin, Package } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -30,10 +31,13 @@ function PlayIcon() {
 }
 
 export default function AppDownload() {
+  const { t } = useLanguage();
+  const a = t.appDownload;
+
   return (
     <section
       id="app"
-      className="py-24 sm:py-32 relative overflow-hidden"
+      className="py-16 sm:py-28 relative overflow-hidden"
       aria-labelledby="app-title"
       style={{ background: "linear-gradient(180deg, #e8f0ff 0%, #ffffff 60%)" }}
     >
@@ -52,48 +56,48 @@ export default function AppDownload() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="text-center mb-16 sm:mb-20"
+          className="text-center mb-10 sm:mb-16"
         >
           <motion.p variants={fadeInUp} className="text-sm font-semibold text-[#025bff] uppercase tracking-widest mb-3">
-            Mobiiliäpp
+            {a.eyebrow}
           </motion.p>
           <motion.h2
             variants={fadeInUp}
             id="app-title"
             className="text-4xl sm:text-5xl font-bold text-[#0f1117] tracking-tight mb-4"
           >
-            Äpp on taskus
+            {a.h2}
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-lg text-[#6b7280] max-w-md mx-auto mb-8">
-            Saadaval iOS ja Android platvormidel. Tasuta allalaadimine, tasuta registreerimine.
+            {a.sub}
           </motion.p>
 
           {/* Download buttons */}
           <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-4 mb-4">
             <button
               className="flex items-center gap-3 px-6 py-4 bg-[#0f1117] text-white rounded-2xl hover:bg-[#1a1a2e] transition-all duration-200 cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.2)]"
-              aria-label="Laadi alla App Store'ist"
+              aria-label="App Store"
             >
               <AppleIcon />
               <div className="text-left">
-                <p className="text-[10px] text-gray-400 leading-none">Laadi alla</p>
+                <p className="text-[10px] text-gray-400 leading-none">{a.downloadOn}</p>
                 <p className="text-sm font-bold mt-0.5">App Store</p>
               </div>
             </button>
             <button
               className="flex items-center gap-3 px-6 py-4 bg-[#0f1117] text-white rounded-2xl hover:bg-[#1a1a2e] transition-all duration-200 cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.2)]"
-              aria-label="Laadi alla Google Play'st"
+              aria-label="Google Play"
             >
               <PlayIcon />
               <div className="text-left">
-                <p className="text-[10px] text-gray-400 leading-none">Saadaval</p>
+                <p className="text-[10px] text-gray-400 leading-none">{a.availableOn}</p>
                 <p className="text-sm font-bold mt-0.5">Google Play</p>
               </div>
             </button>
           </motion.div>
 
           <motion.p variants={fadeInUp} className="text-sm text-[#6b7280]">
-            Üle <strong className="text-[#0f1117]">1 000</strong> allalaadimise esimesel kuul
+            {a.downloadsText("1 000")}
           </motion.p>
         </motion.div>
 
@@ -117,20 +121,20 @@ export default function AppDownload() {
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-[#1c1c2e] rounded-b-[14px] z-10" />
               <div className="pt-8 px-4">
                 <div className="flex justify-between items-center mb-4">
-                  <p className="text-xs font-bold text-[#0f1117]">Minu tellimused</p>
+                  <p className="text-xs font-bold text-[#0f1117]">{a.mockupMyOrders}</p>
                   <div className="w-6 h-6 rounded-full bg-[#025bff] flex items-center justify-center">
                     <span className="text-[8px] font-bold text-white">3</span>
                   </div>
                 </div>
                 {[
-                  { from: "Tallinn", to: "Tartu", status: "Teel", color: "#025bff" },
-                  { from: "Pärnu", to: "Tallinn", status: "Lõpetatud", color: "#10b981" },
+                  { from: "Tallinn", to: "Tartu", status: a.mockupStatusEnRoute, color: "#025bff" },
+                  { from: "Pärnu", to: "Tallinn", status: a.mockupStatusDone, color: "#10b981" },
                 ].map((order, i) => (
                   <div key={i} className="mb-3 bg-[#f7f8fc] rounded-xl p-3">
                     <div className="flex justify-between items-start">
                       <div>
                         <p className="text-[10px] font-bold text-[#0f1117]">{order.from} → {order.to}</p>
-                        <p className="text-[9px] text-[#6b7280] mt-0.5">Täna 14:00</p>
+                        <p className="text-[9px] text-[#6b7280] mt-0.5">14:00</p>
                       </div>
                       <span
                         className="text-[9px] font-bold px-2 py-0.5 rounded-full"
@@ -173,8 +177,8 @@ export default function AppDownload() {
               <div className="h-full bg-[#025bff] flex flex-col">
                 {/* Top */}
                 <div className="px-5 pt-10 pb-4">
-                  <p className="text-xs font-medium text-blue-200 mt-2">Tere, Marko!</p>
-                  <p className="text-xl font-bold text-white mt-1">Telli vedu</p>
+                  <p className="text-xs font-medium text-blue-200 mt-2">{a.mockupHello}</p>
+                  <p className="text-xl font-bold text-white mt-1">{a.mockupOrderTitle}</p>
                 </div>
                 {/* Form card */}
                 <div className="mx-3 bg-white rounded-3xl p-4 flex-1">
@@ -182,42 +186,42 @@ export default function AppDownload() {
                     <div className="flex items-center gap-2.5 p-3 bg-[#f7f8fc] rounded-xl">
                       <MapPin size={14} className="text-[#025bff] flex-shrink-0" />
                       <div>
-                        <p className="text-[9px] text-[#6b7280] font-medium">Pealelaadimiskoht</p>
+                        <p className="text-[9px] text-[#6b7280] font-medium">{a.mockupPickup}</p>
                         <p className="text-xs font-semibold text-[#0f1117]">Ülemiste City, Tallinn</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2.5 p-3 bg-[#f7f8fc] rounded-xl">
                       <MapPin size={14} className="text-[#ef4444] flex-shrink-0" />
                       <div>
-                        <p className="text-[9px] text-[#6b7280] font-medium">Mahalaadimine</p>
+                        <p className="text-[9px] text-[#6b7280] font-medium">{a.mockupDropoff}</p>
                         <p className="text-xs font-semibold text-[#0f1117]">Tartu, Emajõe 5</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2.5 p-3 bg-[#f7f8fc] rounded-xl">
                       <Package size={14} className="text-[#6b7280] flex-shrink-0" />
                       <div>
-                        <p className="text-[9px] text-[#6b7280] font-medium">Kaup</p>
+                        <p className="text-[9px] text-[#6b7280] font-medium">{a.mockupCargo}</p>
                         <p className="text-xs font-semibold text-[#0f1117]">8 pallet · 1,200 kg</p>
                       </div>
                     </div>
                     {/* Price box */}
                     <div className="bg-[#e8f0ff] rounded-xl p-3 flex justify-between items-center">
-                      <span className="text-xs text-[#6b7280] font-medium">Hind</span>
+                      <span className="text-xs text-[#6b7280] font-medium">{a.mockupPrice}</span>
                       <span className="text-lg font-bold text-[#025bff]">€ 187.50</span>
                     </div>
                     {/* CTA button */}
                     <div className="bg-[#025bff] rounded-2xl p-3.5 text-center">
-                      <span className="text-sm font-bold text-white">Telli vedaja</span>
+                      <span className="text-sm font-bold text-white">{a.mockupOrderDriver}</span>
                     </div>
                   </div>
                   {/* Bottom hint */}
                   <p className="text-center text-[9px] text-[#6b7280] mt-3">
-                    Vedaja leitakse ~8 minutiga
+                    {a.mockupFindTime}
                   </p>
                 </div>
                 {/* Bottom nav */}
                 <div className="bg-white mx-3 mb-3 rounded-2xl px-2 py-2 flex justify-around">
-                  {["Kodu", "Minu veod", "Konto"].map((item, i) => (
+                  {[a.mockupHome, a.mockupMyTrips, a.mockupAccount].map((item, i) => (
                     <div key={item} className="flex flex-col items-center gap-1">
                       <div className={`w-4 h-1 rounded-full ${i === 0 ? "bg-[#025bff]" : "bg-transparent"}`} />
                       <span className={`text-[9px] font-semibold ${i === 0 ? "text-[#025bff]" : "text-[#6b7280]"}`}>
@@ -247,10 +251,10 @@ export default function AppDownload() {
             >
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-[#1c1c2e] rounded-b-[14px] z-10" />
               <div className="pt-8 px-4">
-                <p className="text-xs font-bold text-[#0f1117] mb-4">Vedaja vaade</p>
+                <p className="text-xs font-bold text-[#0f1117] mb-4">{a.mockupDriverView}</p>
                 {/* Earnings summary */}
                 <div className="bg-[#025bff] rounded-2xl p-4 mb-3 text-white">
-                  <p className="text-[10px] opacity-70">Täna teenitud</p>
+                  <p className="text-[10px] opacity-70">{a.mockupEarningsToday}</p>
                   <p className="text-2xl font-bold">€ 285</p>
                   <div className="flex gap-1 mt-1">
                     {[...Array(5)].map((_, i) => (
@@ -263,18 +267,18 @@ export default function AppDownload() {
                 {/* Available order */}
                 <div className="bg-[#f7f8fc] rounded-xl p-3 mb-3">
                   <div className="flex justify-between items-start mb-2">
-                    <p className="text-[10px] font-bold text-[#0f1117]">Uus tellimus</p>
+                    <p className="text-[10px] font-bold text-[#0f1117]">{a.mockupNewOrder}</p>
                     <span className="text-[9px] font-bold text-[#025bff] bg-[#e8f0ff] px-2 py-0.5 rounded-full">€ 195</span>
                   </div>
                   <p className="text-[9px] text-[#6b7280]">Tallinn → Pärnu · 126 km</p>
                   <div className="flex gap-1.5 mt-2">
-                    <div className="flex-1 py-1.5 bg-[#025bff] rounded-lg text-center text-[9px] font-bold text-white">Võta vastu</div>
-                    <div className="flex-1 py-1.5 bg-[#f0f0f0] rounded-lg text-center text-[9px] font-bold text-[#6b7280]">Jäta</div>
+                    <div className="flex-1 py-1.5 bg-[#025bff] rounded-lg text-center text-[9px] font-bold text-white">{a.mockupAccept}</div>
+                    <div className="flex-1 py-1.5 bg-[#f0f0f0] rounded-lg text-center text-[9px] font-bold text-[#6b7280]">{a.mockupDecline}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-[#10b981]" />
-                  <p className="text-[10px] text-[#6b7280] font-medium">Oled online · Tallinn</p>
+                  <p className="text-[10px] text-[#6b7280] font-medium">{a.mockupOnline}</p>
                 </div>
               </div>
             </div>

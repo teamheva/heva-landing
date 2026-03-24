@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Package, Clock, MapPin } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -13,25 +14,20 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.1 } },
 };
 
-const benefits = [
-  "Sisesta tellimus 2 minutiga",
-  "Kohene hinnapakkumine, üllatusi pole",
-  "Reaalajas jälgimine ja teavitused",
-  "Arved automaatselt e-mailile",
-  "Ettevõtte konto koos aruannetega",
-];
-
 export default function ForSenders() {
+  const { t } = useLanguage();
+  const s = t.forSenders;
+
   return (
     <section
       id="for-senders"
-      className="py-24 sm:py-32 bg-white"
+      className="py-16 sm:py-28 bg-white"
       aria-labelledby="senders-title"
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          {/* Left — Text */}
+          {/* Left – Text */}
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -39,24 +35,23 @@ export default function ForSenders() {
             viewport={{ once: true, margin: "-80px" }}
           >
             <motion.p variants={fadeInUp} className="text-sm font-semibold text-[#025bff] uppercase tracking-widest mb-3">
-              Saatjatele
+              {s.eyebrow}
             </motion.p>
             <motion.h2
               variants={fadeInUp}
               id="senders-title"
               className="text-4xl sm:text-5xl font-bold text-[#0f1117] tracking-tight mb-5"
             >
-              Üks platvorm,<br />
-              <span className="text-[#025bff]">kõik veod.</span>
+              {s.h2Line1}<br />
+              <span className="text-[#025bff]">{s.h2Highlight}</span>
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-lg text-[#6b7280] leading-relaxed mb-8 max-w-lg">
-              Pallettidest mööblini, ehitusmaterjalidest toidukaubani — Heva lahendab kõik
-              veovajadused. Kiirelt, läbipaistvalt, usaldusväärselt.
+              {s.sub}
             </motion.p>
 
             {/* Benefits */}
             <motion.ul variants={stagger} className="space-y-3.5 mb-10">
-              {benefits.map((benefit) => (
+              {s.benefits.map((benefit) => (
                 <motion.li
                   key={benefit}
                   variants={fadeInUp}
@@ -72,16 +67,16 @@ export default function ForSenders() {
 
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-3">
               <button className="btn-primary flex items-center gap-2 px-7 py-4 text-base font-semibold text-white rounded-full">
-                Alusta tasuta
+                {s.cta}
                 <ArrowRight size={18} />
               </button>
               <button className="flex items-center gap-2 px-7 py-4 text-base font-semibold text-[#6b7280] hover:text-[#025bff] transition-colors duration-200 cursor-pointer">
-                Vaata hinnakiri
+                {s.ctaSecondary}
               </button>
             </motion.div>
           </motion.div>
 
-          {/* Right — UI Mockup */}
+          {/* Right – UI Mockup */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -101,11 +96,11 @@ export default function ForSenders() {
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <p className="text-xs font-semibold text-[#6b7280] uppercase tracking-wide">Uus tellimus</p>
-                  <h3 className="text-lg font-bold text-[#0f1117] mt-0.5">Veotellimus #2847</h3>
+                  <p className="text-xs font-semibold text-[#6b7280] uppercase tracking-wide">{s.mockupNewOrder}</p>
+                  <h3 className="text-lg font-bold text-[#0f1117] mt-0.5">{s.mockupOrderTitle}</h3>
                 </div>
                 <div className="px-3 py-1.5 bg-[#d1fae5] rounded-full">
-                  <span className="text-xs font-bold text-[#065f46]">✓ Kinnitatud</span>
+                  <span className="text-xs font-bold text-[#065f46]">{s.mockupConfirmed}</span>
                 </div>
               </div>
 
@@ -119,11 +114,11 @@ export default function ForSenders() {
                   </div>
                   <div className="flex-1">
                     <div className="mb-2">
-                      <p className="text-[10px] font-medium text-[#6b7280] uppercase">Peale</p>
+                      <p className="text-[10px] font-medium text-[#6b7280] uppercase">{s.mockupFrom}</p>
                       <p className="text-sm font-semibold text-[#0f1117]">Tallinn, Ülemiste City</p>
                     </div>
                     <div>
-                      <p className="text-[10px] font-medium text-[#6b7280] uppercase">Maha</p>
+                      <p className="text-[10px] font-medium text-[#6b7280] uppercase">{s.mockupTo}</p>
                       <p className="text-sm font-semibold text-[#0f1117]">Tartu, Emajõe 5</p>
                     </div>
                   </div>
@@ -133,9 +128,9 @@ export default function ForSenders() {
               {/* Details grid */}
               <div className="grid grid-cols-3 gap-3 mb-5">
                 {[
-                  { icon: Package, label: "Kaup", value: "8 pallet" },
-                  { icon: Clock, label: "Aeg", value: "Täna 14:00" },
-                  { icon: MapPin, label: "Kaugus", value: "185 km" },
+                  { icon: Package, label: s.mockupCargo, value: "8 pallet" },
+                  { icon: Clock, label: s.mockupTime, value: s.mockupTimeValue },
+                  { icon: MapPin, label: s.mockupDistance, value: "185 km" },
                 ].map((item) => (
                   <div key={item.label} className="bg-[#f7f8fc] rounded-xl p-3 text-center">
                     <item.icon size={14} className="text-[#025bff] mx-auto mb-1" />
@@ -148,11 +143,11 @@ export default function ForSenders() {
               {/* Price */}
               <div className="flex items-center justify-between p-4 bg-[#e8f0ff] rounded-2xl mb-4">
                 <div>
-                  <p className="text-xs text-[#6b7280] font-medium">Koguhind (koos km-iga)</p>
+                  <p className="text-xs text-[#6b7280] font-medium">{s.mockupPriceLabel}</p>
                   <p className="text-2xl font-bold text-[#0f1117] mt-0.5">€ 187.50</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-[10px] text-[#6b7280]">Vedaja</p>
+                  <p className="text-[10px] text-[#6b7280]">{s.mockupDriverLabel}</p>
                   <div className="flex items-center gap-1.5 mt-1">
                     <div className="w-6 h-6 rounded-full bg-[#025bff] flex items-center justify-center">
                       <span className="text-[8px] font-bold text-white">AV</span>
@@ -165,16 +160,16 @@ export default function ForSenders() {
               {/* Progress */}
               <div>
                 <div className="flex justify-between text-xs font-medium text-[#6b7280] mb-1.5">
-                  <span>Tellimuse olek</span>
+                  <span>{s.mockupStatusLabel}</span>
                   <span>66%</span>
                 </div>
                 <div className="h-2 bg-[#e5e7eb] rounded-full overflow-hidden">
                   <div className="h-full w-2/3 bg-[#025bff] rounded-full" style={{ transition: "width 1s ease" }} />
                 </div>
                 <div className="flex justify-between text-[10px] text-[#6b7280] mt-1">
-                  <span>Kinnitatud</span>
-                  <span className="font-semibold text-[#025bff]">Teel →</span>
-                  <span>Kohale</span>
+                  <span>{s.mockupStatus1}</span>
+                  <span className="font-semibold text-[#025bff]">{s.mockupStatus2}</span>
+                  <span>{s.mockupStatus3}</span>
                 </div>
               </div>
             </div>
@@ -185,10 +180,10 @@ export default function ForSenders() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="absolute -bottom-4 -right-4 glass-card rounded-2xl px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.1)]"
+              className="hidden sm:block absolute -bottom-4 -right-4 glass-card rounded-2xl px-4 py-3 shadow-[0_8px_24px_rgba(0,0,0,0.1)]"
             >
-              <p className="text-[10px] text-[#6b7280] font-medium">SMS teavitus</p>
-              <p className="text-xs font-bold text-[#0f1117] mt-0.5">Vedaja on 5 min kaugusel 📍</p>
+              <p className="text-[10px] text-[#6b7280] font-medium">{s.mockupSmsTitle}</p>
+              <p className="text-xs font-bold text-[#0f1117] mt-0.5">{s.mockupSmsText}</p>
             </motion.div>
           </motion.div>
         </div>

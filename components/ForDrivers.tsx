@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check, ArrowRight, TrendingUp, Euro, Map } from "lucide-react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -13,29 +14,17 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.1 } },
 };
 
-const benefits = [
-  "Vali tellimused, mis sobivad sinu marsruudiga",
-  "Väljamaksed iganädalaselt, otse kontole",
-  "Ei mingit vahendajat ega käsitsi läbirääkimist",
-  "Näe tulusaid piirkondi kaardil",
-  "Tugi eesti keeles ööpäevaringselt",
-];
-
-const earningsData = [
-  { day: "E", height: 60, amount: "€210" },
-  { day: "T", height: 80, amount: "€285" },
-  { day: "K", height: 55, amount: "€190" },
-  { day: "N", height: 95, amount: "€340" },
-  { day: "R", height: 100, amount: "€365" },
-  { day: "L", height: 70, amount: "€250" },
-  { day: "P", height: 40, amount: "€140" },
-];
+const earningsHeights = [60, 80, 55, 95, 100, 70, 40];
+const earningsAmounts = ["€210", "€285", "€190", "€340", "€365", "€250", "€140"];
 
 export default function ForDrivers() {
+  const { t } = useLanguage();
+  const d = t.forDrivers;
+
   return (
     <section
       id="for-drivers"
-      className="py-24 sm:py-32 bg-[#0a0a0f] overflow-hidden relative"
+      className="py-16 sm:py-28 bg-[#0a0a0f] overflow-hidden relative"
       aria-labelledby="drivers-title"
     >
       {/* Background elements */}
@@ -58,7 +47,7 @@ export default function ForDrivers() {
       <div className="relative max-w-7xl mx-auto px-5 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          {/* Left — Earnings mockup */}
+          {/* Left – Earnings mockup */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -78,11 +67,11 @@ export default function ForDrivers() {
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">See nädal</p>
+                  <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">{d.mockupThisWeek}</p>
                   <p className="text-3xl font-bold text-white mt-1">€ 1,780</p>
                   <div className="flex items-center gap-1.5 mt-1">
                     <TrendingUp size={13} className="text-[#34d399]" />
-                    <span className="text-xs font-semibold text-[#34d399]">+24% eelmisest nädalast</span>
+                    <span className="text-xs font-semibold text-[#34d399]">{d.mockupTrend}</span>
                   </div>
                 </div>
                 <div className="w-12 h-12 rounded-2xl bg-[#025bff]/20 flex items-center justify-center">
@@ -93,24 +82,24 @@ export default function ForDrivers() {
               {/* Bar chart */}
               <div className="mb-6">
                 <div className="flex items-end gap-2 h-[100px]">
-                  {earningsData.map((d, i) => (
-                    <div key={d.day} className="flex-1 flex flex-col items-center gap-1">
+                  {earningsHeights.map((height, i) => (
+                    <div key={i} className="flex-1 flex flex-col items-center gap-1">
                       <motion.div
                         initial={{ height: 0 }}
-                        whileInView={{ height: `${d.height}%` }}
+                        whileInView={{ height: `${height}%` }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 * i, duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                         className="w-full rounded-lg"
                         style={{
-                          background: d.height >= 90 ? "#025bff" : d.height >= 70 ? "rgba(2,91,255,0.55)" : "rgba(2,91,255,0.25)",
+                          background: height >= 90 ? "#025bff" : height >= 70 ? "rgba(2,91,255,0.55)" : "rgba(2,91,255,0.25)",
                         }}
                       />
                     </div>
                   ))}
                 </div>
                 <div className="flex gap-2 mt-1.5">
-                  {earningsData.map((d) => (
-                    <div key={d.day} className="flex-1 text-center text-[10px] font-medium text-gray-500">{d.day}</div>
+                  {d.mockupDays.map((day) => (
+                    <div key={day} className="flex-1 text-center text-[10px] font-medium text-gray-500">{day}</div>
                   ))}
                 </div>
               </div>
@@ -118,9 +107,9 @@ export default function ForDrivers() {
               {/* Stats row */}
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { label: "Tellimusi", value: "24" },
-                  { label: "Kilomeetrid", value: "1,240" },
-                  { label: "Hinne", value: "4.97 ★" },
+                  { label: d.mockupOrders, value: "24" },
+                  { label: d.mockupKm, value: "1,240" },
+                  { label: d.mockupRating, value: "4.97 ★" },
                 ].map((s) => (
                   <div
                     key={s.label}
@@ -157,7 +146,7 @@ export default function ForDrivers() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="absolute -top-5 -right-5"
+              className="hidden sm:block absolute -top-5 -right-5"
             >
               <div
                 className="rounded-2xl px-4 py-3"
@@ -166,13 +155,13 @@ export default function ForDrivers() {
                   boxShadow: "0 8px 24px rgba(2,91,255,0.4)",
                 }}
               >
-                <p className="text-[10px] font-medium text-blue-200">Väljamakse reedel</p>
+                <p className="text-[10px] font-medium text-blue-200">{d.mockupPayoutLabel}</p>
                 <p className="text-base font-bold text-white">€ 1,780 →</p>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Right — Text */}
+          {/* Right – Text */}
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -181,27 +170,26 @@ export default function ForDrivers() {
             className="order-1 lg:order-2"
           >
             <motion.p variants={fadeInUp} className="text-sm font-semibold text-[#60a5fa] uppercase tracking-widest mb-3">
-              Vedajatele
+              {d.eyebrow}
             </motion.p>
             <motion.h2
               variants={fadeInUp}
               id="drivers-title"
               className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-5"
             >
-              Täida tühisõite.
+              {d.h2Line1}
               <br />
-              <span className="text-[#60a5fa]">Teenid rohkem,</span>
+              <span className="text-[#60a5fa]">{d.h2Highlight}</span>
               <br />
-              planeerid ise.
+              {d.h2Line2}
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-lg text-gray-400 leading-relaxed mb-8 max-w-lg">
-              Heva sobib professionaalsetele vedajatele, kes tahavad oma laadimist optimeerida
-              ja tühisõite tasuvaks muuta — ilma vahendajate ja bürokraatiata.
+              {d.sub}
             </motion.p>
 
             {/* Benefits */}
             <motion.ul variants={stagger} className="space-y-3.5 mb-10">
-              {benefits.map((benefit) => (
+              {d.benefits.map((benefit) => (
                 <motion.li
                   key={benefit}
                   variants={fadeInUp}
@@ -218,15 +206,15 @@ export default function ForDrivers() {
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-3">
               <button
                 className="flex items-center gap-2 px-7 py-4 text-base font-semibold text-white rounded-full border border-white/30 hover:border-white hover:bg-white/10 transition-all duration-200 cursor-pointer"
-                aria-label="Registreeru vedajaks"
+                aria-label={d.cta}
               >
-                Registreeru vedajaks
+                {d.cta}
                 <ArrowRight size={18} />
               </button>
             </motion.div>
 
             <motion.p variants={fadeInUp} className="text-sm text-gray-500 mt-4">
-              Verifitseerimine võtab tavaliselt 24–48 tundi
+              {d.ctaSub}
             </motion.p>
           </motion.div>
         </div>
