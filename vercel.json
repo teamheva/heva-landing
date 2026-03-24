@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.heva.me" }],
+      "destination": "https://heva.me/$1",
+      "permanent": true
+    }
+  ]
+}
