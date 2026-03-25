@@ -6,6 +6,15 @@ import { useLanguage } from "@/lib/LanguageContext";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
+const Rule = ({ delay }: { delay: number }) => (
+  <motion.div
+    initial={{ scaleX: 0 }}
+    animate={{ scaleX: 1 }}
+    transition={{ duration: 0.75, ease, delay }}
+    style={{ transformOrigin: "left", height: "1px", background: "rgba(255,255,255,0.07)" }}
+  />
+);
+
 export default function HowItWorks() {
   const { t } = useLanguage();
   const s = t.howItWorks;
@@ -17,146 +26,118 @@ export default function HowItWorks() {
       id="how-it-works"
       ref={ref}
       aria-labelledby="how-title"
-      className="relative py-16 sm:py-24 overflow-hidden bg-[#0a0a0f]"
+      className="relative py-20 sm:py-28 overflow-hidden bg-[#0a0a0f]"
     >
       {/* Dot grid */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
+            "radial-gradient(circle, rgba(255,255,255,0.028) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
         }}
       />
-
-      {/* Blue glow — bottom center */}
+      {/* Blue glow bottom */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 80% 55% at 50% 115%, rgba(2,91,255,0.11) 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 40% at 50% 120%, rgba(2,91,255,0.09) 0%, transparent 70%)",
         }}
       />
 
-      <div className="relative max-w-5xl mx-auto px-5 sm:px-8">
+      <div className="relative max-w-4xl mx-auto px-5 sm:px-8">
 
         {/* Header */}
-        <div className="mb-12 sm:mb-16">
+        <div className="mb-14 sm:mb-20">
           <motion.p
-            initial={{ opacity: 0, y: 6 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.4, ease }}
-            className="text-[10px] font-mono font-semibold text-[#025bff] uppercase tracking-[0.2em] mb-3"
+            className="text-[10px] font-mono font-semibold text-[#025bff] uppercase tracking-[0.22em] mb-4"
           >
             {s.eyebrow}
           </motion.p>
           <motion.h2
             id="how-title"
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, ease, delay: 0.06 }}
-            className="text-[2rem] sm:text-[2.75rem] font-bold text-white tracking-tight leading-[1.1]"
+            transition={{ duration: 0.55, ease, delay: 0.06 }}
+            className="font-bold text-white tracking-tight leading-[1.0]"
+            style={{ fontSize: "clamp(2.2rem, 5.5vw, 3.75rem)" }}
           >
             {s.h2}
           </motion.h2>
         </div>
 
-        {/* Steps */}
-        <div className="relative">
+        {/* Steps — editorial numbered rows */}
+        <div>
+          {/* Top rule */}
+          {inView && <Rule delay={0.22} />}
 
-          {/* Horizontal connector — desktop only, centered on 44px badge */}
-          <div className="hidden sm:block absolute top-[22px] inset-x-0 h-px overflow-hidden">
-            <div className="absolute inset-0" style={{ background: "rgba(255,255,255,0.05)" }} />
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={inView ? { scaleX: 1 } : {}}
-              transition={{ duration: 0.9, ease, delay: 0.3 }}
-              style={{
-                transformOrigin: "left",
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(to right, rgba(2,91,255,0.55), rgba(2,91,255,0.2), rgba(2,91,255,0.55))",
-              }}
-            />
-            {/* Flowing dot */}
-            <motion.div
-              initial={{ x: "0%", opacity: 0 }}
-              animate={inView ? { x: "100%", opacity: [0, 1, 1, 0] } : {}}
-              transition={{ duration: 1.6, ease: "linear", delay: 1.1 }}
-              className="absolute top-[-3px] w-[7px] h-[7px] rounded-full"
-              style={{ background: "#025bff", boxShadow: "0 0 10px rgba(2,91,255,0.9)" }}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10">
-            {s.steps.map((step, i) => (
+          {s.steps.map((step, i) => (
+            <div key={i}>
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 22 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.55, ease, delay: 0.18 + i * 0.1 }}
-                className="group relative"
+                transition={{ duration: 0.6, ease, delay: 0.28 + i * 0.12 }}
+                className="group relative grid grid-cols-[44px_1fr] sm:grid-cols-[68px_1fr] items-start py-8 sm:py-11 cursor-default overflow-hidden"
               >
-                {/* Number badge — 44px, masks connector line */}
-                <div className="relative w-[44px] h-[44px] mb-6">
-                  <div
-                    className="absolute rounded-full bg-[#0a0a0f]"
-                    style={{ inset: "-5px" }}
-                  />
-                  <div
-                    className="absolute inset-0 rounded-full transition-all duration-500"
-                    style={{ border: "1px solid rgba(2,91,255,0.35)" }}
-                  />
-                  <div
-                    className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{
-                      boxShadow: "0 0 18px rgba(2,91,255,0.55), inset 0 0 8px rgba(2,91,255,0.12)",
-                      border: "1px solid rgba(2,91,255,0.75)",
-                    }}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center z-10">
-                    <span
-                      className="font-mono text-[12px] font-bold leading-none"
-                      style={{ color: "#025bff" }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Mobile divider */}
+                {/* Hover: left accent + background wash */}
                 <div
-                  className="sm:hidden h-px mb-6"
-                  style={{ background: "rgba(255,255,255,0.05)" }}
+                  className="absolute left-0 top-0 bottom-0 w-[1.5px] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"
+                  style={{ background: "rgba(2,91,255,0.55)" }}
+                />
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to right, rgba(2,91,255,0.04), transparent 50%)",
+                  }}
                 />
 
-                {/* Title — big and dominant */}
-                <h3
-                  className="text-[1.25rem] sm:text-[1.4rem] font-bold mb-2.5 leading-snug tracking-tight transition-colors duration-300 group-hover:text-white"
-                  style={{ color: "rgba(255,255,255,0.92)" }}
-                >
-                  {step.title}
-                </h3>
+                {/* Step number */}
+                <div className="pt-[6px] sm:pt-[11px]">
+                  <span
+                    className="font-mono text-[11px] font-semibold leading-none"
+                    style={{ color: "rgba(2,91,255,0.6)" }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
 
-                {/* Description — short and muted */}
-                <p
-                  className="text-[13px] leading-relaxed"
-                  style={{ color: "rgba(255,255,255,0.32)" }}
-                >
-                  {step.description}
-                </p>
+                {/* Title + description */}
+                <div>
+                  <h3
+                    className="font-bold leading-[1.05] tracking-tight mb-3 group-hover:text-white transition-colors duration-300"
+                    style={{
+                      fontSize: "clamp(1.6rem, 3.8vw, 2.4rem)",
+                      color: "rgba(255,255,255,0.92)",
+                    }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p
+                    className="text-[13px] sm:text-[14px] leading-relaxed"
+                    style={{ color: "rgba(255,255,255,0.3)" }}
+                  >
+                    {step.description}
+                  </p>
+                </div>
               </motion.div>
-            ))}
-          </div>
+
+              {/* Rule after each row */}
+              {inView && <Rule delay={0.32 + i * 0.12} />}
+            </div>
+          ))}
         </div>
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease, delay: 0.6 }}
-          className="mt-12 sm:mt-14 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-5"
+          transition={{ duration: 0.5, ease, delay: 0.75 }}
+          className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-5"
         >
           <button className="btn-primary px-6 py-3 text-[13.5px] font-semibold text-white rounded-full">
             {s.cta}
