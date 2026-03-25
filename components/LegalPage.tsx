@@ -1,6 +1,8 @@
 "use client";
 
 import { useLanguage } from "@/lib/LanguageContext";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 type Section = {
   title: string;
@@ -25,7 +27,9 @@ export default function LegalPage({
   const c = lang === "et" ? et : en;
 
   return (
-    <main className="min-h-screen bg-white">
+    <>
+      <Navbar />
+      <main className="min-h-screen bg-white">
       <div className="max-w-2xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
         <p className="text-[11px] font-semibold text-[#025bff] uppercase tracking-[0.15em] mb-4">
           {c.updated}
@@ -57,5 +61,7 @@ export default function LegalPage({
         </p>
       </div>
     </main>
+    <Footer />
+    </>
   );
 }

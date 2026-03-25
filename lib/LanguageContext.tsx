@@ -24,17 +24,23 @@ export function LanguageProvider({
 }) {
   const [lang, setLangState] = useState<Lang>(initialLang);
 
+  // On mount: restore saved language preference from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("heva-lang") as Lang | null;
+    if (saved === "et" || saved === "en") {
+      setLangState(saved);
+      document.documentElement.lang = saved;
+    } else {
+      document.documentElement.lang = initialLang;
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const setLang = (l: Lang) => {
     setLangState(l);
-    if (typeof document !== "undefined") {
-      document.documentElement.lang = l;
-    }
+    localStorage.setItem("heva-lang", l);
+    document.documentElement.lang = l;
   };
-
-  // Sync html lang on initial mount (client hydration)
-  useEffect(() => {
-    document.documentElement.lang = lang;
-  }, [lang]);
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t: translations[lang] as Translations }}>
