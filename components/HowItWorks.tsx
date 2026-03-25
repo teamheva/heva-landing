@@ -1,131 +1,134 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Package, Navigation, CheckCircle, type LucideIcon } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import { useLanguage } from "@/lib/LanguageContext";
+import { ArrowUpRight } from "lucide-react";
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
-};
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.14 } },
-};
-
-const stepIcons: LucideIcon[] = [Package, Navigation, CheckCircle];
-const stepNumbers = ["01", "02", "03"];
+const nums = ["01", "02", "03"];
 
 export default function HowItWorks() {
   const { t } = useLanguage();
   const s = t.howItWorks;
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section
       id="how-it-works"
-      className="py-16 sm:py-28 bg-[#f7f8fc]"
+      ref={ref}
       aria-labelledby="how-title"
+      className="relative py-20 sm:py-32 overflow-hidden"
+      style={{
+        background:
+          "radial-gradient(ellipse 60% 40% at 5% 50%, rgba(2,91,255,0.05) 0%, transparent 70%), #f7f8fc",
+      }}
     >
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+
         {/* Header */}
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          className="text-center mb-10 sm:mb-16"
-        >
-          <motion.p variants={fadeInUp} className="text-sm font-semibold text-[#025bff] uppercase tracking-widest mb-3">
-            {s.eyebrow}
-          </motion.p>
-          <motion.h2
-            variants={fadeInUp}
-            id="how-title"
-            className="text-4xl sm:text-5xl font-bold text-[#0f1117] tracking-tight mb-4"
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16 sm:mb-20">
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="text-[11px] font-semibold text-[#025bff] uppercase tracking-[0.15em] mb-4"
+            >
+              {s.eyebrow}
+            </motion.p>
+            <motion.h2
+              id="how-title"
+              initial={{ opacity: 0, y: 14 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.07 }}
+              className="text-[2.2rem] sm:text-[3rem] font-bold text-[#0f1117] tracking-tight leading-[1.1] max-w-sm"
+            >
+              {s.h2}
+            </motion.h2>
+          </div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-[13px] text-[#9ca3af] max-w-[220px] leading-relaxed hidden sm:block pb-1"
           >
-            {s.h2}
-          </motion.h2>
-          <motion.p variants={fadeInUp} className="text-lg text-[#6b7280] max-w-xl mx-auto">
             {s.sub}
           </motion.p>
-        </motion.div>
+        </div>
 
         {/* Steps */}
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          className="grid md:grid-cols-3 gap-6 lg:gap-8 relative"
-        >
-          {/* Connector lines (desktop only) */}
-          <div className="hidden md:block absolute top-[52px] left-[calc(33.3%+16px)] right-[calc(33.3%+16px)] h-[2px]">
-            <div
-              className="w-full h-full"
-              style={{
-                background: "repeating-linear-gradient(90deg, #025bff 0px, #025bff 6px, transparent 6px, transparent 14px)",
-                opacity: 0.25,
-              }}
-            />
-          </div>
-
-          {s.steps.map((step, i) => {
-            const Icon = stepIcons[i];
-            return (
+        <div className="flex flex-col">
+          {s.steps.map((step, i) => (
+            <div key={nums[i]}>
+              {/* Divider — draws in left to right */}
               <motion.div
-                key={stepNumbers[i]}
-                variants={fadeInUp}
-                className="relative bg-white rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.05)] border border-[#e5e7eb] hover:shadow-[0_8px_40px_rgba(2,91,255,0.08)] hover:border-[#c5d8ff] transition-all duration-300 group"
+                initial={{ scaleX: 0 }}
+                animate={inView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: i * 0.16 }}
+                style={{ transformOrigin: "left" }}
+                className="h-px bg-[#e0e3ea]"
+              />
+
+              {/* Row */}
+              <motion.div
+                initial={{ opacity: 0, y: 22 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.16 + 0.08 }}
+                className="group flex items-center gap-6 sm:gap-10 py-7 sm:py-9 cursor-default"
               >
-                {/* Step number + icon */}
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="relative">
-                    <div className="w-14 h-14 rounded-2xl bg-[#e8f0ff] flex items-center justify-center group-hover:bg-[#025bff] transition-colors duration-300">
-                      <Icon
-                        size={22}
-                        className="text-[#025bff] group-hover:text-white transition-colors duration-300"
-                      />
-                    </div>
-                  </div>
-                  <span
-                    className="text-5xl font-bold text-[#b8ceff] group-hover:text-[#a0beff] transition-colors duration-300 leading-none"
-                    style={{ fontFamily: "var(--font-dm-serif), serif" }}
-                  >
-                    {stepNumbers[i]}
-                  </span>
+                {/* Number with glow on hover */}
+                <span
+                  className="text-[3rem] sm:text-[4.5rem] font-bold leading-none tabular-nums flex-shrink-0 w-[72px] sm:w-[110px] text-[#025bff] group-hover:drop-shadow-[0_0_24px_rgba(2,91,255,0.5)] transition-all duration-300"
+                  style={{ fontFamily: "var(--font-dm-serif), serif" }}
+                >
+                  {nums[i]}
+                </span>
+
+                {/* Dot */}
+                <div className="hidden sm:block w-1.5 h-1.5 rounded-full bg-[#d1d5db] flex-shrink-0 group-hover:bg-[#025bff] group-hover:scale-125 transition-all duration-300" />
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-[1.05rem] sm:text-[1.2rem] font-bold text-[#0f1117] mb-1.5 leading-snug group-hover:text-[#025bff] transition-colors duration-300">
+                    {step.title}
+                  </h3>
+                  <p className="text-[13px] text-[#8a919e] leading-relaxed max-w-lg">
+                    {step.description}
+                  </p>
                 </div>
 
-                <h3 className="text-xl font-bold text-[#0f1117] mb-3">{step.title}</h3>
-                <p className="text-[#6b7280] leading-relaxed">{step.description}</p>
-
-                {/* Arrow on mobile */}
-                {i < s.steps.length - 1 && (
-                  <div className="md:hidden flex justify-center mt-6">
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="w-px h-4 bg-[#e5e7eb]" />
-                      <div className="w-2 h-2 border-r-2 border-b-2 border-[#025bff] rotate-45 -mt-1" />
-                    </div>
-                  </div>
-                )}
+                {/* Arrow — slides in on hover */}
+                <div className="hidden sm:flex flex-shrink-0 w-9 h-9 rounded-full items-center justify-center border border-transparent text-[#d1d5db] group-hover:border-[#025bff] group-hover:text-[#025bff] group-hover:bg-[#025bff]/5 transition-all duration-300 -translate-x-2 group-hover:translate-x-0">
+                  <ArrowUpRight size={15} />
+                </div>
               </motion.div>
-            );
-          })}
-        </motion.div>
+            </div>
+          ))}
 
-        {/* Bottom CTA */}
+          {/* Last divider */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={inView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: s.steps.length * 0.16 }}
+            style={{ transformOrigin: "left" }}
+            className="h-px bg-[#e0e3ea]"
+          />
+        </div>
+
+        {/* CTA */}
         <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          className="text-center mt-12"
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.65 }}
+          className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6"
         >
-          <button className="btn-primary px-8 py-4 text-base font-semibold text-white rounded-full inline-flex items-center gap-2">
+          <button className="btn-primary px-7 py-3.5 text-[14px] font-semibold text-white rounded-full">
             {s.cta}
           </button>
-          <p className="text-sm text-[#6b7280] mt-3">{s.ctaSub}</p>
+          <p className="text-[12px] text-[#b0b8c4]">{s.ctaSub}</p>
         </motion.div>
+
       </div>
     </section>
   );
