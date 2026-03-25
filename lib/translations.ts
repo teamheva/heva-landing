@@ -19,8 +19,8 @@ export const translations = {
       h1Highlight: "Lihtsalt",
       h1Line2: "ja",
       h1Line3: "kiiresti.",
-      sub1: "Heva ühendab sind lähima vaba vedajaga minutitega.",
-      sub2: "Kaubasaatjatele ja vedajatele – üks äpp, null bürokraatiat.",
+      sub1: "Üks äpp kaubasaatjatele ja vedajatele. Null bürokraatiat.",
+      sub2: "",
       ctaOrder: "Telli vedu",
       ctaDriver: "Saa vedajaks",
       downloadOn: "Laadi alla",
@@ -45,7 +45,7 @@ export const translations = {
     howItWorks: {
       eyebrow: "Protsess",
       h2: "Kolm sammu, null peavalu",
-      sub: "Lihtsaim viis kaupa vedada. Tellimisest toimetamiseni – kõik ühes äpis.",
+      sub: "Tellimisest toimetamiseni – kõik ühes äpis.",
       steps: [
         {
           title: "Sisesta kaup",
@@ -79,13 +79,12 @@ export const translations = {
       eyebrow: "Saatjatele",
       h2Line1: "Üks platvorm,",
       h2Highlight: "kõik veod.",
-      sub: "Pallettidest mööblini, ehitusmaterjalidest toidukaubani – Heva lahendab kõik veovajadused. Kiirelt, läbipaistvalt, usaldusväärselt.",
+      sub: "Pallettidest mööblini – kõik veovajadused kaetud.",
       benefits: [
         "Sisesta tellimus 2 minutiga",
         "Kohene hinnapakkumine, üllatusi pole",
         "Reaalajas jälgimine ja teavitused",
         "Arved automaatselt e-mailile",
-        "Ettevõtte konto koos aruannetega",
       ],
       cta: "Alusta tasuta",
       ctaSecondary: "Vaata hinnakiri",
@@ -112,13 +111,12 @@ export const translations = {
       h2Line1: "Täida tühisõite.",
       h2Highlight: "Teenid rohkem,",
       h2Line2: "planeerid ise.",
-      sub: "Heva sobib professionaalsetele vedajatele, kes tahavad oma laadimist optimeerida ja tühisõite tasuvaks muuta – ilma vahendajate ja bürokraatiata.",
+      sub: "Tee tühisõidud tasuvaks. Ilma vahendajate ja bürokraatiata.",
       benefits: [
-        "Vali tellimused, mis sobivad sinu marsruudiga",
+        "Vali tellimused oma marsruudil",
         "Väljamaksed iganädalaselt, otse kontole",
         "Ei mingit vahendajat ega käsitsi läbirääkimist",
         "Näe tulusaid piirkondi kaardil",
-        "Tugi eesti keeles ööpäevaringselt",
       ],
       cta: "Registreeru vedajaks",
       ctaSub: "Verifitseerimine võtab tavaliselt 24–48 tundi",
@@ -194,7 +192,7 @@ export const translations = {
       ],
     },
     footer: {
-      tagline: "Teeme kaubavedude tellimise Eestis sama lihtsaks kui takso kutsumise. Kiire, läbipaistev ja usaldusväärne.",
+      tagline: "Kaup kohale – lihtsalt ja kiiresti.",
       columns: [
         {
           title: "Platvorm",
@@ -261,8 +259,8 @@ export const translations = {
       h1Highlight: "Simply",
       h1Line2: "and",
       h1Line3: "fast.",
-      sub1: "Heva connects you with the nearest available carrier in minutes.",
-      sub2: "For senders and drivers – one app, zero bureaucracy.",
+      sub1: "One app for senders and drivers. Zero bureaucracy.",
+      sub2: "",
       ctaOrder: "Book delivery",
       ctaDriver: "Become a driver",
       downloadOn: "Download on",
@@ -287,7 +285,7 @@ export const translations = {
     howItWorks: {
       eyebrow: "Process",
       h2: "Three steps, zero hassle",
-      sub: "The simplest way to move cargo. From order to delivery – all in one app.",
+      sub: "From order to delivery – all in one app.",
       steps: [
         {
           title: "Enter your cargo",
@@ -321,13 +319,12 @@ export const translations = {
       eyebrow: "For senders",
       h2Line1: "One platform,",
       h2Highlight: "all shipments.",
-      sub: "From pallets to furniture, construction materials to food – Heva handles all your shipping needs. Fast, transparent, reliable.",
+      sub: "From pallets to furniture – all your shipping needs covered.",
       benefits: [
         "Place an order in 2 minutes",
         "Instant quote, no surprises",
         "Real-time tracking and notifications",
         "Invoices automatically by email",
-        "Business account with reports",
       ],
       cta: "Start for free",
       ctaSecondary: "View pricing",
@@ -354,13 +351,12 @@ export const translations = {
       h2Line1: "Fill dead miles.",
       h2Highlight: "Earn more,",
       h2Line2: "plan yourself.",
-      sub: "Heva is for professional drivers who want to optimise their loads and make empty runs profitable – without middlemen or paperwork.",
+      sub: "Turn dead miles into revenue. No middlemen, no paperwork.",
       benefits: [
-        "Choose orders that fit your route",
+        "Choose orders on your route",
         "Weekly payouts, directly to your account",
         "No middlemen, no manual negotiations",
         "See profitable areas on the map",
-        "Estonian-language support, 24/7",
       ],
       cta: "Register as a driver",
       ctaSub: "Verification usually takes 24–48 hours",
@@ -436,7 +432,7 @@ export const translations = {
       ],
     },
     footer: {
-      tagline: "We make ordering freight in Estonia as easy as calling a taxi. Fast, transparent and reliable.",
+      tagline: "Cargo delivered – simply and fast.",
       columns: [
         {
           title: "Platform",

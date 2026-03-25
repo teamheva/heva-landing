@@ -4,7 +4,6 @@ import Features from "@/components/Features";
 import ForSenders from "@/components/ForSenders";
 import ForDrivers from "@/components/ForDrivers";
 import AppDownload from "@/components/AppDownload";
-import Testimonials from "@/components/Testimonials";
 
 export default function Home() {
   return (
@@ -15,7 +14,6 @@ export default function Home() {
       <ForSenders />
       <ForDrivers />
       <AppDownload />
-      <Testimonials />
     </main>
   );
 }

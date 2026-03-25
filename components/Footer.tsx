@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
 
 function LinkedInIcon() {
@@ -41,7 +42,15 @@ export default function Footer() {
 
           {/* Brand — spans 5 cols */}
           <div className="lg:col-span-5 flex flex-col">
-            <p className="text-[15px] text-gray-400 leading-relaxed max-w-[280px] mb-6">
+            <div className="relative w-[120px] h-[38px] mb-6">
+              <Image
+                src="/logo-footer.png"
+                alt="Heva"
+                fill
+                className="object-contain object-left"
+              />
+            </div>
+            <p className="text-[14px] text-gray-500 leading-relaxed max-w-[260px] mb-6">
               {f.tagline}
             </p>
 

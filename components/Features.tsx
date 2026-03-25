@@ -78,14 +78,14 @@ export default function Features() {
         >
           <motion.p
             variants={fadeInUp}
-            className="text-[11px] font-semibold text-[#025bff] uppercase tracking-[0.15em] mb-4"
+            className="text-sm font-semibold text-[#025bff] uppercase tracking-widest mb-3"
           >
             {f.eyebrow}
           </motion.p>
           <motion.h2
             variants={fadeInUp}
             id="features-title"
-            className="text-3xl sm:text-[2.5rem] font-bold text-[#0f1117] tracking-tight leading-[1.15] max-w-md"
+            className="text-4xl sm:text-5xl font-bold text-[#0f1117] tracking-tight leading-tight max-w-md"
           >
             {f.h2}
           </motion.h2>

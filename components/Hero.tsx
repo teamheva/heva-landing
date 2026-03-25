@@ -64,16 +64,6 @@ export default function Hero() {
             animate="visible"
             className="flex flex-col items-start"
           >
-            {/* Badge */}
-            <motion.div variants={fadeInUp}>
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-lg mb-7" style={{ border: "1px solid rgba(2,91,255,0.2)", background: "rgba(2,91,255,0.04)" }}>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#025bff]" style={{ animation: "blink 2s ease-in-out infinite" }} />
-                <span className="text-[11px] font-semibold text-[#025bff] tracking-[0.08em] uppercase">
-                  {h.badge}
-                </span>
-              </div>
-            </motion.div>
-
             {/* Headline */}
             <motion.h1
               variants={fadeInUp}
@@ -88,13 +78,15 @@ export default function Hero() {
             </motion.h1>
 
             {/* Subheadline */}
-            <motion.div variants={fadeInUp} className="mb-8 max-w-[460px] flex flex-col gap-1">
-              <p className="text-[15px] sm:text-[17px] text-[#374151] leading-relaxed font-medium">
+            <motion.div variants={fadeInUp} className="mb-8 max-w-[460px]">
+              <p className="text-[16px] sm:text-[18px] text-[#374151] leading-relaxed">
                 {h.sub1}
               </p>
-              <p className="text-[15px] sm:text-[17px] text-[#374151] leading-relaxed">
-                {h.sub2}
-              </p>
+              {h.sub2 && (
+                <p className="text-[16px] sm:text-[18px] text-[#6b7280] leading-relaxed mt-1">
+                  {h.sub2}
+                </p>
+              )}
             </motion.div>
 
             {/* CTAs */}
