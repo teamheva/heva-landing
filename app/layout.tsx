@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { DM_Sans, DM_Serif_Display } from "next/font/google";
 import { headers } from "next/headers";
 import { LanguageProvider } from "@/lib/LanguageContext";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import CookieBanner from "@/components/CookieBanner";
 import type { Lang } from "@/lib/translations";
 import "./globals.css";
 
@@ -83,7 +86,10 @@ export default async function RootLayout({
         style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
       >
         <LanguageProvider initialLang={initialLang}>
+          <Navbar />
           {children}
+          <Footer />
+          <CookieBanner />
         </LanguageProvider>
       </body>
     </html>

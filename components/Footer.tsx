@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
 
 function LinkedInIcon() {
@@ -130,13 +131,13 @@ export default function Footer() {
           </p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {f.legalLinks.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 className="text-[12px] text-gray-600 hover:text-gray-400 transition-colors"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
