@@ -49,15 +49,15 @@ export const translations = {
       steps: [
         {
           title: "Sisesta kaup",
-          description: "Märgi peale- ja mahalaadimiskoht, kauba mõõtmed ja aeg. Hind kuvatakse kohe – üllatusi pole.",
+          description: "Aadressid, mõõtmed, kellaaeg. Hind nähtav kohe.",
         },
         {
           title: "Vedaja tuleb",
-          description: "Lähim saadaolev vedaja võtab tellimuse vastu. Näed teda kaardil reaalajas ja saad teavituse.",
+          description: "Lähim vaba vedaja võtab tellimuse. Jälgi kaardil reaalajas.",
         },
         {
           title: "Kaup kohale",
-          description: "Saad kinnituse, arve ja hinnangu. Makse toimub automaatselt äpis – käsitsi ülekandeid pole.",
+          description: "Kinnitus, arve, hinnang. Makse äpis automaatselt.",
         },
       ],
       cta: "Proovi tasuta",
@@ -291,15 +291,15 @@ export const translations = {
       steps: [
         {
           title: "Enter your cargo",
-          description: "Enter pickup and drop-off location, cargo dimensions and time. Price shown instantly – no surprises.",
+          description: "Address, dimensions, time. Price visible instantly.",
         },
         {
           title: "Driver arrives",
-          description: "The nearest available driver accepts the order. Track them on the map in real time and get notified.",
+          description: "Nearest available driver accepts. Track in real time.",
         },
         {
           title: "Cargo delivered",
-          description: "You receive confirmation, invoice and rating. Payment is handled automatically in the app – no manual transfers.",
+          description: "Confirmation, invoice, rating. Payment automatic in app.",
         },
       ],
       cta: "Try for free",
