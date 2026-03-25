@@ -41,8 +41,10 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }, 260);
   };
 
   return (
@@ -136,75 +138,101 @@ export default function Navbar() {
         </div>
       </motion.header>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — fullscreen */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             key="mobile-menu"
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: "-100%" }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed top-[68px] left-0 right-0 z-40 bg-white/95 backdrop-blur-xl border-b border-[#e5e7eb] shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
+            exit={{ opacity: 0, y: "-100%" }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+            className="fixed inset-0 z-40 bg-[#0a0a0f] flex flex-col"
           >
-            <div className="max-w-7xl mx-auto px-5 py-4 flex flex-col gap-1">
-              {t.nav.links.map((link) => (
-                <button
+            {/* Top bar */}
+            <div className="flex items-center justify-between px-5 h-[68px] border-b border-white/[0.06] flex-shrink-0">
+              <div className="relative w-[100px] h-[32px]">
+                <Image
+                  src="/logo-footer.png"
+                  alt="Heva"
+                  fill
+                  className="object-contain object-left"
+                />
+              </div>
+              <button
+                className="p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/[0.08] transition-colors cursor-pointer"
+                onClick={() => setMobileOpen(false)}
+                aria-label={t.nav.ariaClose}
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            {/* Nav links */}
+            <div className="flex-1 flex flex-col justify-center px-6 gap-1">
+              {t.nav.links.map((link, i) => (
+                <motion.button
                   key={link.href}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 + i * 0.06, duration: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                   onClick={() => handleNavClick(link.href)}
-                  className="w-full text-left px-4 py-3 text-base font-medium text-[#0f1117] rounded-xl hover:bg-[#f7f8fc] transition-colors cursor-pointer"
+                  className="w-full text-left py-4 text-[2rem] font-bold text-white/90 hover:text-white hover:text-[#025bff] transition-colors duration-150 cursor-pointer border-b border-white/[0.06] last:border-0"
                 >
                   {link.label}
-                </button>
+                </motion.button>
               ))}
+            </div>
 
-              <div className="h-px bg-[#e5e7eb] my-2" />
-
-              <div className="flex items-center gap-3 px-2">
-                <div className="flex items-center gap-0.5 bg-[#f7f8fc] rounded-full p-1">
-                  {(["et", "en"] as const).map((l) => (
-                    <button
-                      key={l}
-                      onClick={() => setLang(l)}
-                      className={`px-3 py-1 text-xs font-semibold rounded-full transition-all ${
-                        lang === l
-                          ? "bg-white text-[#0f1117] shadow-sm"
-                          : "text-[#6b7280]"
-                      }`}
-                    >
-                      {l.toUpperCase()}
-                    </button>
-                  ))}
-                </div>
-                <button className="text-sm font-medium text-[#6b7280] px-2 cursor-pointer">
-                  {t.nav.login}
-                </button>
-              </div>
-
-              <button className="btn-primary w-full mt-2 py-3 text-sm font-semibold text-white rounded-2xl cursor-pointer">
+            {/* Bottom actions */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.28, duration: 0.35, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+              className="px-6 pb-10 flex flex-col gap-3"
+            >
+              <button className="btn-primary w-full py-4 text-base font-semibold text-white rounded-2xl cursor-pointer">
                 {t.nav.start}
               </button>
 
-              <div className="h-px bg-[#e5e7eb] my-2" />
-
-              {/* App store buttons — mobile */}
-              <div className="flex gap-2 px-1">
+              <div className="flex gap-2">
                 <button
-                  className="flex-1 flex items-center justify-center gap-2 py-3 bg-[#0f1117] text-white rounded-2xl hover:bg-[#1e293b] transition-colors cursor-pointer"
+                  className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-white/[0.07] text-white rounded-2xl cursor-pointer"
                   aria-label="App Store"
                 >
                   <AppleIcon />
                   <span className="text-[13px] font-semibold">App Store</span>
                 </button>
                 <button
-                  className="flex-1 flex items-center justify-center gap-2 py-3 bg-[#0f1117] text-white rounded-2xl hover:bg-[#1e293b] transition-colors cursor-pointer"
+                  className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-white/[0.07] text-white rounded-2xl cursor-pointer"
                   aria-label="Google Play"
                 >
                   <PlayIcon />
                   <span className="text-[13px] font-semibold">Google Play</span>
                 </button>
               </div>
-            </div>
+
+              <div className="flex items-center justify-between pt-1">
+                <button className="text-sm font-medium text-white/40 cursor-pointer">
+                  {t.nav.login}
+                </button>
+                <div className="flex items-center gap-1 bg-white/[0.06] rounded-full p-1">
+                  {(["et", "en"] as const).map((l) => (
+                    <button
+                      key={l}
+                      onClick={() => setLang(l)}
+                      className={`px-3 py-1 text-xs font-semibold rounded-full transition-all cursor-pointer ${
+                        lang === l
+                          ? "bg-white text-[#0f1117]"
+                          : "text-white/40"
+                      }`}
+                    >
+                      {l.toUpperCase()}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
