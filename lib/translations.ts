@@ -218,7 +218,11 @@ export const translations = {
       ],
       location: "Tallinn, Eesti",
       rights: "Kõik õigused kaitstud.",
-      legalLinks: ["Privaatsuspoliitika", "Kasutustingimused", "Küpsised"],
+      legalLinks: [
+        { label: "Privaatsuspoliitika", href: "/privacy" },
+        { label: "Kasutustingimused", href: "/terms" },
+        { label: "Küpsised", href: "/cookies" },
+      ],
     },
     cookie: {
       title: "Kasutame küpsiseid",
@@ -456,7 +460,11 @@ export const translations = {
       ],
       location: "Tallinn, Estonia",
       rights: "All rights reserved.",
-      legalLinks: ["Privacy policy", "Terms of service", "Cookies"],
+      legalLinks: [
+        { label: "Privacy policy", href: "/privacy" },
+        { label: "Terms of service", href: "/terms" },
+        { label: "Cookies", href: "/cookies" },
+      ],
     },
     cookie: {
       title: "We use cookies",

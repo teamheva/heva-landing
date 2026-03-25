@@ -131,11 +131,11 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {f.legalLinks.map((item) => (
               <a
-                key={item}
-                href="#"
+                key={item.href}
+                href={item.href}
                 className="text-[12px] text-gray-600 hover:text-gray-400 transition-colors"
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </div>
