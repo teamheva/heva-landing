@@ -4,7 +4,7 @@ const et = {
   title: "Privaatsuspoliitika",
   updated: "Uuendatud märts 2026",
   intro:
-    "Heva OÜ (registrikood 12345678, aadress Tallinn, Eesti) töötleb isikuandmeid kooskõlas Euroopa Liidu isikuandmete kaitse üldmäärusega (GDPR) ja Eesti isikuandmete kaitse seadusega. Käesolev privaatsuspoliitika selgitab, milliseid andmeid kogume, miks ja kuidas neid kasutame.",
+    "HeVa Technology OÜ (registrikood 17448087, aadress Pärnu mnt 158/1, 11317 Tallinn) töötleb isikuandmeid kooskõlas Euroopa Liidu isikuandmete kaitse üldmäärusega (GDPR) ja Eesti isikuandmete kaitse seadusega. Käesolev privaatsuspoliitika selgitab, milliseid andmeid kogume, miks ja kuidas neid kasutame.",
   sections: [
     {
       title: "1. Kogutavad andmed",
@@ -35,7 +35,7 @@ const et = {
       title: "5. Sinu õigused",
       body: [
         "Sul on õigus: tutvuda oma andmetega, nõuda andmete parandamist või kustutamist, piirata töötlemist, esitada vastuväiteid ning nõuda andmete ülekandmist.",
-        "Õiguste kasutamiseks võta ühendust: support@heva.me. Vastame 30 päeva jooksul. Kaebuse esitamise korral võid pöörduda Andmekaitse Inspektsiooni poole (www.aki.ee).",
+        "Õiguste kasutamiseks võta ühendust: info@heva.me. Vastame 30 päeva jooksul. Kaebuse esitamise korral võid pöörduda Andmekaitse Inspektsiooni poole (www.aki.ee).",
       ],
     },
     {
@@ -47,7 +47,7 @@ const et = {
     {
       title: "7. Kontakt",
       body: [
-        "Privaatsusküsimustes võta ühendust: support@heva.me",
+        "Privaatsusküsimustes võta ühendust: info@heva.me",
       ],
     },
   ],
@@ -57,7 +57,7 @@ const en = {
   title: "Privacy Policy",
   updated: "Updated March 2026",
   intro:
-    "Heva OÜ (registration code 12345678, address Tallinn, Estonia) processes personal data in accordance with the EU General Data Protection Regulation (GDPR) and Estonian Personal Data Protection Act. This privacy policy explains what data we collect, why, and how we use it.",
+    "HeVa Technology OÜ (registration code 17448087, address Pärnu mnt 158/1, 11317 Tallinn, Estonia) processes personal data in accordance with the EU General Data Protection Regulation (GDPR) and Estonian Personal Data Protection Act. This privacy policy explains what data we collect, why, and how we use it.",
   sections: [
     {
       title: "1. Data we collect",
@@ -88,7 +88,7 @@ const en = {
       title: "5. Your rights",
       body: [
         "You have the right to: access your data, request correction or deletion, restrict processing, object to processing, and request data portability.",
-        "To exercise your rights, contact: support@heva.me. We will respond within 30 days. You may also lodge a complaint with the Estonian Data Protection Inspectorate (www.aki.ee).",
+        "To exercise your rights, contact: info@heva.me. We will respond within 30 days. You may also lodge a complaint with the Estonian Data Protection Inspectorate (www.aki.ee).",
       ],
     },
     {
@@ -100,7 +100,7 @@ const en = {
     {
       title: "7. Contact",
       body: [
-        "For privacy-related questions, contact: support@heva.me",
+        "For privacy-related questions, contact: info@heva.me",
       ],
     },
   ],

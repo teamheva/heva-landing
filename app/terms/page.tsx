@@ -4,18 +4,18 @@ const et = {
   title: "Kasutustingimused",
   updated: "Uuendatud märts 2026",
   intro:
-    "Käesolevad kasutustingimused reguleerivad Heva OÜ platvormi kasutamist. Platvormi kasutades nõustud nende tingimustega. Kui sa ei nõustu, palun ära kasuta platvormi.",
+    "Käesolevad kasutustingimused reguleerivad HeVa Technology OÜ platvormi kasutamist. Platvormi kasutades nõustud nende tingimustega. Kui sa ei nõustu, palun ära kasuta platvormi.",
   sections: [
     {
       title: "1. Teenuse kirjeldus",
       body: [
-        "Heva on digitaalne platvorm, mis ühendab kaubasaatjad (edaspidi 'klient') ja vedajad (edaspidi 'vedaja'). Heva OÜ on vahendaja — leping veo teostamiseks sõlmitakse kliendi ja vedaja vahel.",
+        "Heva on digitaalne platvorm, mis ühendab kaubasaatjad (edaspidi 'klient') ja vedajad (edaspidi 'vedaja'). HeVa Technology OÜ on vahendaja — leping veo teostamiseks sõlmitakse kliendi ja vedaja vahel.",
       ],
     },
     {
       title: "2. Registreerimine ja konto",
       body: [
-        "Platvormi kasutamiseks tuleb luua konto. Oled vastutav konto turvalisuse eest ning pead viivitamata teavitama volitamata kasutusest aadressil support@heva.me.",
+        "Platvormi kasutamiseks tuleb luua konto. Oled vastutav konto turvalisuse eest ning pead viivitamata teavitama volitamata kasutusest aadressil info@heva.me.",
         "Konto loomiseks pead olema vähemalt 18-aastane. Ettevõtte nimel registreerudes kinnitad, et sul on õigus seda teha.",
       ],
     },
@@ -41,14 +41,14 @@ const et = {
     {
       title: "6. Vastutuse piiramine",
       body: [
-        "Heva OÜ vahendab teenust ega vastuta vedaja tegevuse, viivituste ega kauba kahjustumise eest, välja arvatud juhul, kui see tuleneb Heva otsesest hooletusest.",
-        "Heva OÜ vastutus on piiratud platvormi kaudu makstud teenustasuga konkreetse tellimuse eest.",
+        "HeVa Technology OÜ vahendab teenust ega vastuta vedaja tegevuse, viivituste ega kauba kahjustumise eest, välja arvatud juhul, kui see tuleneb Heva otsesest hooletusest.",
+        "HeVa Technology OÜ vastutus on piiratud platvormi kaudu makstud teenustasuga konkreetse tellimuse eest.",
       ],
     },
     {
       title: "7. Tingimuste muutmine",
       body: [
-        "Heva OÜ-l on õigus tingimusi muuta, teavitades kasutajaid e-posti teel vähemalt 14 päeva ette. Platvormi edasine kasutamine pärast muutuste jõustumist loetakse nõustumiseks.",
+        "HeVa Technology OÜ-l on õigus tingimusi muuta, teavitades kasutajaid e-posti teel vähemalt 14 päeva ette. Platvormi edasine kasutamine pärast muutuste jõustumist loetakse nõustumiseks.",
       ],
     },
     {
@@ -64,18 +64,18 @@ const en = {
   title: "Terms of Service",
   updated: "Updated March 2026",
   intro:
-    "These terms of service govern your use of the Heva OÜ platform. By using the platform, you agree to these terms. If you do not agree, please do not use the platform.",
+    "These terms of service govern your use of the HeVa Technology OÜ platform. By using the platform, you agree to these terms. If you do not agree, please do not use the platform.",
   sections: [
     {
       title: "1. Service description",
       body: [
-        "Heva is a digital platform connecting cargo senders ('customer') and carriers ('driver'). Heva OÜ acts as an intermediary — the contract for transport is concluded between the customer and the driver.",
+        "Heva is a digital platform connecting cargo senders ('customer') and carriers ('driver'). HeVa Technology OÜ acts as an intermediary — the contract for transport is concluded between the customer and the driver.",
       ],
     },
     {
       title: "2. Registration and account",
       body: [
-        "To use the platform, you must create an account. You are responsible for the security of your account and must immediately notify unauthorised use at support@heva.me.",
+        "To use the platform, you must create an account. You are responsible for the security of your account and must immediately notify unauthorised use at info@heva.me.",
         "You must be at least 18 years old to register. If registering on behalf of a company, you confirm you have the authority to do so.",
       ],
     },
@@ -101,14 +101,14 @@ const en = {
     {
       title: "6. Limitation of liability",
       body: [
-        "Heva OÜ acts as an intermediary and is not liable for the driver's actions, delays or cargo damage, except where resulting from Heva's direct negligence.",
-        "Heva OÜ's liability is limited to the service fee paid through the platform for the specific order.",
+        "HeVa Technology OÜ acts as an intermediary and is not liable for the driver's actions, delays or cargo damage, except where resulting from Heva's direct negligence.",
+        "HeVa Technology OÜ's liability is limited to the service fee paid through the platform for the specific order.",
       ],
     },
     {
       title: "7. Changes to terms",
       body: [
-        "Heva OÜ reserves the right to modify these terms, notifying users by email at least 14 days in advance. Continued use of the platform after changes take effect constitutes acceptance.",
+        "HeVa Technology OÜ reserves the right to modify these terms, notifying users by email at least 14 days in advance. Continued use of the platform after changes take effect constitutes acceptance.",
       ],
     },
     {

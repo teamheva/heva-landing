@@ -53,7 +53,7 @@ export default function LegalPage({
         </div>
 
         <p className="mt-14 text-[12px] text-[#9ca3af]">
-          © {new Date().getFullYear()} Heva OÜ
+          © {new Date().getFullYear()} HeVa Technology OÜ
         </p>
       </div>
     </main>

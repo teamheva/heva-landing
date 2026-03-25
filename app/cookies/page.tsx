@@ -29,7 +29,7 @@ const et = {
     {
       title: "4. Kontakt",
       body: [
-        "Küpsistega seotud küsimuste korral võta ühendust: support@heva.me",
+        "Küpsistega seotud küsimuste korral võta ühendust: info@heva.me",
       ],
     },
   ],
@@ -64,7 +64,7 @@ const en = {
     {
       title: "4. Contact",
       body: [
-        "For cookie-related questions, contact: support@heva.me",
+        "For cookie-related questions, contact: info@heva.me",
       ],
     },
   ],
