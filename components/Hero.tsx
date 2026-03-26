@@ -325,34 +325,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Stats bar */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-        className="relative border-t border-[#e5e7eb] bg-white/80 backdrop-blur-sm"
-      >
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-5">
-          <div className="flex justify-center">
-            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-y-3 gap-x-10 sm:gap-x-14">
-              {h.stats.map((stat, i) => (
-                <div key={stat.label} className="flex items-baseline gap-2.5">
-                  <span
-                    className="text-xl sm:text-2xl font-bold text-[#0f1117] tracking-tight"
-                    style={{ fontFamily: "var(--font-dm-serif), serif" }}
-                  >
-                    {stat.value}
-                  </span>
-                  <span className="text-xs text-[#9ca3af] font-medium">{stat.label}</span>
-                  {i < h.stats.length - 1 && (
-                    <span className="hidden sm:inline ml-6 sm:ml-10 text-[#d1d5db] select-none">·</span>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </motion.div>
     </section>
   );
 }
