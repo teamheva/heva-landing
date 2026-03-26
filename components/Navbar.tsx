@@ -54,7 +54,9 @@ export default function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
+          mobileOpen
+            ? "bg-[#0a0a0f]"
+            : scrolled
             ? "bg-white/90 backdrop-blur-xl"
             : "bg-transparent"
         }`}
@@ -70,7 +72,7 @@ export default function Navbar() {
             >
               <div className="relative w-[114px] h-[36px] sm:w-[164px] sm:h-[54px] sm:-ml-[2px]">
                 <Image
-                  src="/logo-blue.png"
+                  src={mobileOpen ? "/logo-footer.png" : "/logo-blue.png"}
                   alt="Heva logo"
                   fill
                   className="object-contain object-left"
@@ -127,7 +129,7 @@ export default function Navbar() {
           {/* Mobile: hamburger */}
           <div className="md:hidden flex items-center justify-end col-start-3">
             <button
-              className="p-2 rounded-xl text-[#0f1117] hover:bg-[#f7f8fc] transition-colors cursor-pointer"
+              className={`p-2 rounded-xl transition-colors cursor-pointer ${mobileOpen ? "text-white hover:bg-white/10" : "text-[#0f1117] hover:bg-[#f7f8fc]"}`}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? t.nav.ariaClose : t.nav.ariaOpen}
               aria-expanded={mobileOpen}
@@ -149,24 +151,8 @@ export default function Navbar() {
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
             className="fixed inset-0 z-40 bg-[#0a0a0f] flex flex-col"
           >
-            {/* Top bar */}
-            <div className="flex items-center justify-between px-5 h-[68px] border-b border-white/[0.06] flex-shrink-0">
-              <div className="relative w-[100px] h-[32px]">
-                <Image
-                  src="/logo-footer.png"
-                  alt="Heva"
-                  fill
-                  className="object-contain object-left"
-                />
-              </div>
-              <button
-                className="p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/[0.08] transition-colors cursor-pointer"
-                onClick={() => setMobileOpen(false)}
-                aria-label={t.nav.ariaClose}
-              >
-                <X size={22} />
-              </button>
-            </div>
+            {/* Spacer for navbar height */}
+            <div className="h-[68px] flex-shrink-0" />
 
             {/* Nav links */}
             <div className="flex-1 flex flex-col justify-center px-6 gap-1">
