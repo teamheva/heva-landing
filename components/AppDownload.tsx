@@ -98,9 +98,9 @@ export default function AppDownload() {
           </motion.p>
 
           {/* Download buttons */}
-          <motion.div variants={fadeInUp} className="flex gap-3 mb-4 w-full sm:w-auto justify-center">
-            <StoreButton label={a.downloadOn} store="App Store" icon="apple" className="flex-1 sm:flex-none" />
-            <StoreButton label={a.availableOn} store="Google Play" icon="play" className="flex-1 sm:flex-none" />
+          <motion.div variants={fadeInUp} className="flex gap-3 mb-4 justify-center">
+            <StoreButton label={a.downloadOn} store="App Store" icon="apple" />
+            <StoreButton label={a.availableOn} store="Google Play" icon="play" />
           </motion.div>
 
         </motion.div>

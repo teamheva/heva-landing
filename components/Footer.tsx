@@ -102,11 +102,11 @@ export default function Footer() {
 
         {/* ── Bottom bar ── */}
         <div
-          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 py-6"
+          className="py-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
           style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
         >
-          {/* Logo + social */}
-          <div className="flex items-center gap-5">
+          {/* Logo then social below on mobile; side by side on desktop */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
             <div className="relative w-[90px] h-[28px]">
               <Image src="/logo-footer.png" alt="Heva" fill className="object-contain object-left" />
             </div>
@@ -124,11 +124,9 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Copyright + legal */}
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <p className="text-[11px] text-gray-600">
-              © {year} HeVa Technology OÜ.
-            </p>
+          {/* Each on its own line on mobile; inline row on desktop */}
+          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-1.5 sm:gap-x-3 sm:gap-y-1">
+            <p className="text-[11px] text-gray-600">© {year} HeVa Technology OÜ.</p>
             {f.legalLinks.map((item) => (
               <Link
                 key={item.href}
