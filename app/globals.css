@@ -84,7 +84,7 @@ body {
 }
 
 .gradient-hero-bg {
-  background: linear-gradient(160deg, #e8eeff 0%, #eef3ff 30%, rgba(243, 248, 255, 0.25) 72%, transparent 100%);
+  background: linear-gradient(180deg, #e8eeff 0%, #eef3ff 22%, rgba(243, 248, 255, 0.35) 52%, transparent 78%);
 }
 
 .page-light-sections {
