@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Package, Clock, MapPin } from "lucide-react";
+import { Check, ArrowRight, Package, MapPin } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const fadeInUp = {
@@ -21,7 +21,7 @@ export default function ForSenders() {
   return (
     <section
       id="for-senders"
-      className="py-16 sm:py-28 bg-white"
+      className="py-16 sm:py-28"
       aria-labelledby="senders-title"
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
@@ -45,9 +45,6 @@ export default function ForSenders() {
               {s.h2Line1}<br />
               <span className="text-[#025bff]">{s.h2Highlight}</span>
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-lg text-[#6b7280] leading-relaxed mb-8 max-w-lg">
-              {s.sub}
-            </motion.p>
 
             {/* Benefits */}
             <motion.ul variants={stagger} className="space-y-3.5 mb-10">
@@ -66,12 +63,15 @@ export default function ForSenders() {
             </motion.ul>
 
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-3">
-              <button className="btn-primary flex items-center gap-2 px-7 py-4 text-base font-semibold text-white rounded-full">
+              <button
+                className="flex items-center gap-2 px-7 py-4 text-[15px] font-bold text-white rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
+                style={{
+                  background: "linear-gradient(135deg, #025bff 0%, #1a71ff 100%)",
+                  boxShadow: "0 4px 20px rgba(2,91,255,0.35), 0 1px 3px rgba(0,0,0,0.1)",
+                }}
+              >
                 {s.cta}
-                <ArrowRight size={18} />
-              </button>
-              <button className="flex items-center gap-2 px-7 py-4 text-base font-semibold text-[#6b7280] hover:text-[#025bff] transition-colors duration-200 cursor-pointer">
-                {s.ctaSecondary}
+                <ArrowRight size={17} />
               </button>
             </motion.div>
           </motion.div>
@@ -106,31 +106,30 @@ export default function ForSenders() {
 
               {/* Route */}
               <div className="bg-[#f7f8fc] rounded-2xl p-4 mb-4">
-                <div className="flex items-start gap-3 mb-3">
+                <div className="flex items-start gap-3">
                   <div className="mt-1 flex flex-col items-center gap-1">
                     <div className="w-2.5 h-2.5 rounded-full bg-[#025bff]" />
                     <div className="w-0.5 h-8 bg-[#e5e7eb]" />
                     <div className="w-2.5 h-2.5 rounded-full border-2 border-[#025bff]" />
                   </div>
                   <div className="flex-1">
-                    <div className="mb-2">
+                    <div className="mb-3">
                       <p className="text-[10px] font-medium text-[#6b7280] uppercase">{s.mockupFrom}</p>
-                      <p className="text-sm font-semibold text-[#0f1117]">Tallinn, Ülemiste City</p>
+                      <p className="text-sm font-semibold text-[#0f1117]">{s.mockupFromValue}</p>
                     </div>
                     <div>
                       <p className="text-[10px] font-medium text-[#6b7280] uppercase">{s.mockupTo}</p>
-                      <p className="text-sm font-semibold text-[#0f1117]">Tartu, Emajõe 5</p>
+                      <p className="text-sm font-semibold text-[#0f1117]">{s.mockupToValue}</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Details grid */}
-              <div className="grid grid-cols-3 gap-3 mb-5">
+              {/* Details grid — 2 columns (no time) */}
+              <div className="grid grid-cols-2 gap-3 mb-5">
                 {[
-                  { icon: Package, label: s.mockupCargo, value: "8 pallet" },
-                  { icon: Clock, label: s.mockupTime, value: s.mockupTimeValue },
-                  { icon: MapPin, label: s.mockupDistance, value: "185 km" },
+                  { icon: Package, label: s.mockupCargo, value: s.mockupCargoValue },
+                  { icon: MapPin, label: s.mockupDistance, value: s.mockupDistanceValue },
                 ].map((item) => (
                   <div key={item.label} className="bg-[#f7f8fc] rounded-xl p-3 text-center">
                     <item.icon size={14} className="text-[#025bff] mx-auto mb-1" />
@@ -144,7 +143,7 @@ export default function ForSenders() {
               <div className="flex items-center justify-between p-4 bg-[#e8f0ff] rounded-2xl mb-4">
                 <div>
                   <p className="text-xs text-[#6b7280] font-medium">{s.mockupPriceLabel}</p>
-                  <p className="text-2xl font-bold text-[#0f1117] mt-0.5">€ 187.50</p>
+                  <p className="text-2xl font-bold text-[#0f1117] mt-0.5">{s.mockupPriceValue}</p>
                 </div>
                 <div className="text-right">
                   <p className="text-[10px] text-[#6b7280]">{s.mockupDriverLabel}</p>

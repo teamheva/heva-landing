@@ -84,7 +84,11 @@ body {
 }
 
 .gradient-hero-bg {
-  background: linear-gradient(145deg, #f0f5ff 0%, #ffffff 40%, #f7f8fc 100%);
+  background: linear-gradient(160deg, #eaefff 0%, #f2f6ff 25%, #f8faff 65%, #ffffff 100%);
+}
+
+.page-light-sections {
+  background: linear-gradient(180deg, #e6eeff 0%, #edf2ff 6%, #f3f7ff 16%, #f8fafe 32%, #fbfcff 52%, #ffffff 75%);
 }
 
 .gradient-mesh {

@@ -8,10 +8,12 @@ import AppDownload from "@/components/AppDownload";
 export default function Home() {
   return (
     <main>
-      <Hero />
-      <HowItWorks />
-      <Features />
-      <ForSenders />
+      <div className="page-light-sections">
+        <Hero />
+        <HowItWorks />
+        <Features />
+        <ForSenders />
+      </div>
       <ForDrivers />
       <AppDownload />
     </main>
