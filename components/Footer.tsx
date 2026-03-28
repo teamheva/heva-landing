@@ -110,7 +110,7 @@ export default function Footer() {
             <div className="relative w-[90px] h-[28px]">
               <Image src="/logo-footer.png" alt="Heva" fill className="object-contain object-left" />
             </div>
-            <div className="flex items-center gap-0.5">
+            <div className="flex items-center gap-0.5 -ml-2">
               {SOCIAL.map(({ Icon, href, label }) => (
                 <a
                   key={label}
