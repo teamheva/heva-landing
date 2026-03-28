@@ -66,7 +66,7 @@ export default function Features() {
             <motion.div
               key={item.title}
               variants={fadeInUp}
-              className="group flex flex-col px-5 py-5 sm:px-6 sm:py-6 bg-white/90 hover:bg-[#f7f8fc]/90 transition-colors duration-300 cursor-default"
+              className="group flex flex-col px-5 py-5 sm:px-6 sm:py-6 bg-white/90 hover:bg-[#f7f8fc]/90 transition-colors duration-300 cursor-default min-h-[8rem] sm:min-h-[9rem]"
             >
               {item.stat && (
                 <>

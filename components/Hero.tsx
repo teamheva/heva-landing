@@ -83,7 +83,13 @@ export default function Hero() {
       {/* Background */}
       <div className="absolute inset-0 gradient-hero-bg" />
       <div className="gradient-mesh" />
-      <div className="absolute inset-0 dot-pattern opacity-40" />
+      <div
+        className="absolute inset-0 dot-pattern opacity-40"
+        style={{
+          WebkitMaskImage: "linear-gradient(to bottom, black 55%, transparent 88%)",
+          maskImage: "linear-gradient(to bottom, black 55%, transparent 88%)",
+        }}
+      />
 
       {/* Decorative blobs */}
       <div

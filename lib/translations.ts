@@ -74,7 +74,7 @@ export const translations = {
         { title: "Kindel ja turvaline", description: "Kõik vedajad kontrollitud, kaup kindlustatud.", stat: "100%", statLabel: "kindlustatud" },
         { title: "Läbipaistev hinnastus", description: "Hind arvutatakse enne tellimist – peidetud kulud puuduvad.", stat: "€0", statLabel: "peidetud kulusid" },
         { title: "Alati olemas", description: "Oleme olemas.", stat: "24/7", statLabel: "saadaval" },
-        { title: "1 platvorm", description: "Arved mugavalt ühes kohas.", stat: "1", statLabel: "platvorm" },
+        { title: "Selge ülevaade", description: "Arved mugavalt ühes kohas.", stat: "1", statLabel: "platvorm" },
       ],
     },
     forSenders: {
@@ -319,7 +319,7 @@ export const translations = {
         { title: "Safe and secure", description: "All drivers verified, cargo insured.", stat: "100%", statLabel: "insured" },
         { title: "Transparent pricing", description: "Price calculated before order – no hidden costs.", stat: "€0", statLabel: "hidden costs" },
         { title: "Always here", description: "We are always here.", stat: "24/7", statLabel: "available" },
-        { title: "1 platform", description: "Invoices conveniently in one place.", stat: "1", statLabel: "platform" },
+        { title: "Clear overview", description: "Invoices conveniently in one place.", stat: "1", statLabel: "platform" },
       ],
     },
     forSenders: {
