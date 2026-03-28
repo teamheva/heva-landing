@@ -3,21 +3,57 @@
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin, Truck, Star } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
+import { useEffect, useState } from "react";
 
 function AppleIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 flex-shrink-0">
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 flex-shrink-0 text-white">
       <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
     </svg>
   );
 }
 
-function PlayIcon() {
+function GooglePlayIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 flex-shrink-0">
-      <path d="M3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.37.6 1.23 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z" />
+    <svg viewBox="0 0 24 24" className="w-6 h-6 flex-shrink-0" fill="none">
+      <path d="M3.18 1.03C2.47 1.42 2 2.17 2 3.06v17.88c0 .89.47 1.64 1.18 2.03l.1.06 10.02-10.02v-.23L3.28.97l-.1.06z" fill="#4FC3F7" />
+      <path d="M16.64 16.36l-3.34-3.34v-.24l3.34-3.34.07.04 3.96 2.25c1.13.64 1.13 1.69 0 2.34l-3.96 2.25-.07.04z" fill="#FFD54F" />
+      <path d="M16.71 16.32L13.3 12.9 3.18 23.01c.37.4.94.44 1.59.08l11.94-6.77" fill="#F48FB1" />
+      <path d="M16.71 7.68L4.77.91C4.12.55 3.55.59 3.18.99l10.12 10.11 3.41-3.42z" fill="#69F0AE" />
     </svg>
   );
+}
+
+function StoreButton({ label, store, icon, className }: { label: string; store: string; icon: "apple" | "play"; className?: string }) {
+  return (
+    <button
+      className={`group flex items-center gap-3.5 px-4 py-3.5 sm:px-5 sm:py-[14px] rounded-2xl transition-all duration-300 cursor-pointer hover:-translate-y-[2px]${className ? ` ${className}` : ""}`}
+      style={{
+        background: "linear-gradient(150deg, #1a1a2e 0%, #0f1117 100%)",
+        border: "1px solid rgba(255,255,255,0.1)",
+        boxShadow: "0 2px 12px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.07)",
+      }}
+      onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 8px 28px rgba(2,91,255,0.32), 0 2px 12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.07)")}
+      onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.07)")}
+      aria-label={store}
+    >
+      {icon === "apple" ? <AppleIcon /> : <GooglePlayIcon />}
+      <div className="text-left">
+        <p className="text-[9px] text-white/45 font-medium leading-none tracking-[0.1em] uppercase">{label}</p>
+        <p className="text-[15px] font-bold text-white leading-tight mt-[3px]">{store}</p>
+      </div>
+    </button>
+  );
+}
+
+const LAUNCH_MS = new Date("2026-03-20T00:00:00Z").getTime();
+
+function computeStats() {
+  const now = Date.now();
+  const elapsed = Math.max(0, now - LAUNCH_MS);
+  const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+  const thirtyMinIntervals = Math.floor(elapsed / (1000 * 60 * 30));
+  return { drivers: 10 + days, trips: thirtyMinIntervals };
 }
 
 const fadeInUp = {
@@ -27,12 +63,17 @@ const fadeInUp = {
 
 const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  visible: { transition: { staggerChildren: 0.10 } },
 };
 
 export default function Hero() {
   const { t } = useLanguage();
   const h = t.hero;
+  const [stats, setStats] = useState({ drivers: 10, trips: 0 });
+
+  useEffect(() => {
+    setStats(computeStats());
+  }, []);
 
   return (
     <section
@@ -67,7 +108,7 @@ export default function Hero() {
             {/* Headline */}
             <motion.h1
               variants={fadeInUp}
-              className="text-[56px] sm:text-[72px] lg:text-[84px] leading-[1.0] tracking-[-0.03em] text-[#0f1117] mb-6"
+              className="text-[56px] sm:text-[72px] lg:text-[84px] leading-[1.0] tracking-[-0.03em] text-[#0f1117] mb-7"
               style={{ fontFamily: "var(--font-dm-serif), serif" }}
             >
               {h.h1Line1}
@@ -77,62 +118,39 @@ export default function Hero() {
               {h.h1Line3}
             </motion.h1>
 
-            {/* Subheadline */}
-            <motion.div variants={fadeInUp} className="mb-8 max-w-[460px]">
-              <p className="text-[16px] sm:text-[18px] text-[#374151] leading-relaxed">
-                {h.sub1}
-              </p>
-              {h.sub2 && (
-                <p className="text-[16px] sm:text-[18px] text-[#6b7280] leading-relaxed mt-1">
-                  {h.sub2}
-                </p>
-              )}
-            </motion.div>
-
-            {/* CTAs */}
-            <motion.div variants={fadeInUp} className="flex flex-wrap gap-3">
+            {/* Primary CTAs */}
+            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-3 mb-5 w-full sm:w-auto">
               <button
-                className="btn-primary flex items-center gap-2 px-7 py-4 text-base font-semibold text-white rounded-full"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-4 text-[15px] font-bold text-white rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
+                style={{
+                  background: "linear-gradient(135deg, #025bff 0%, #1a71ff 100%)",
+                  boxShadow: "0 4px 20px rgba(2,91,255,0.38), 0 1px 3px rgba(0,0,0,0.12)",
+                }}
                 aria-label={h.ctaOrder}
               >
                 {h.ctaOrder}
                 <ArrowRight size={18} />
               </button>
               <button
-                className="flex items-center gap-2 px-7 py-4 text-base font-semibold text-[#0f1117] rounded-full border border-[#e5e7eb] hover:border-[#025bff] hover:text-[#025bff] transition-all duration-200 cursor-pointer bg-white/80"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-4 text-[15px] font-bold text-[#0f1117] rounded-full border border-[#d1d5db] hover:border-[#025bff] hover:text-[#025bff] transition-all duration-200 cursor-pointer bg-white/80 hover:-translate-y-0.5"
+                style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}
                 aria-label={h.ctaDriver}
+                onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 4px 16px rgba(2,91,255,0.18), 0 1px 4px rgba(0,0,0,0.06)")}
+                onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 1px 4px rgba(0,0,0,0.06)")}
               >
-                <Truck size={18} />
+                <Truck size={17} />
                 {h.ctaDriver}
               </button>
             </motion.div>
 
-            {/* App store download buttons */}
-            <motion.div variants={fadeInUp} className="flex flex-wrap gap-3 mt-6">
-              <button
-                className="flex items-center gap-3 px-5 py-3 bg-[#0f1117] text-white rounded-2xl hover:bg-[#1e293b] transition-colors duration-200 cursor-pointer"
-                aria-label="App Store"
-              >
-                <AppleIcon />
-                <div className="text-left">
-                  <p className="text-[10px] text-white/60 leading-none mb-0.5">{h.downloadOn}</p>
-                  <p className="text-[13px] font-semibold leading-none">App Store</p>
-                </div>
-              </button>
-              <button
-                className="flex items-center gap-3 px-5 py-3 bg-[#0f1117] text-white rounded-2xl hover:bg-[#1e293b] transition-colors duration-200 cursor-pointer"
-                aria-label="Google Play"
-              >
-                <PlayIcon />
-                <div className="text-left">
-                  <p className="text-[10px] text-white/60 leading-none mb-0.5">{h.availableOn}</p>
-                  <p className="text-[13px] font-semibold leading-none">Google Play</p>
-                </div>
-              </button>
+            {/* App store buttons */}
+            <motion.div variants={fadeInUp} className="flex gap-3 mb-7 w-full sm:w-auto">
+              <StoreButton label={h.downloadOn} store="App Store" icon="apple" className="flex-1 sm:flex-none" />
+              <StoreButton label={h.availableOn} store="Google Play" icon="play" className="flex-1 sm:flex-none" />
             </motion.div>
 
             {/* Social proof */}
-            <motion.div variants={fadeInUp} className="flex items-center gap-3 mt-6">
+            <motion.div variants={fadeInUp} className="flex items-center gap-3">
               <div className="flex -space-x-2">
                 {["MK", "LT", "AV", "KP"].map((initials, i) => (
                   <div
@@ -167,30 +185,23 @@ export default function Hero() {
             aria-hidden="true"
           >
             <div className="relative">
-              {/* Glow behind phone */}
               <div
                 className="absolute inset-0 rounded-[48px] blur-3xl opacity-20 scale-95"
                 style={{ background: "linear-gradient(135deg, #025bff, #4d8fff)" }}
               />
-
-              {/* Phone shell */}
               <div
                 className="float-card relative w-[280px] sm:w-[300px] h-[560px] sm:h-[600px] rounded-[44px] bg-white overflow-hidden"
                 style={{
-                  boxShadow:
-                    "0 0 0 10px #1c1c2e, 0 0 0 12px #2a2a40, 0 40px 80px rgba(0,0,0,0.28), 0 8px 24px rgba(0,0,0,0.12)",
+                  boxShadow: "0 0 0 10px #1c1c2e, 0 0 0 12px #2a2a40, 0 40px 80px rgba(0,0,0,0.28), 0 8px 24px rgba(0,0,0,0.12)",
                 }}
               >
-                {/* Notch */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[110px] h-7 bg-[#1c1c2e] rounded-b-[20px] z-20" />
-
-                {/* Status bar */}
                 <div className="flex justify-between items-center px-7 pt-10 pb-2">
                   <span className="text-[11px] font-semibold text-[#0f1117]">9:41</span>
                   <div className="flex items-center gap-1">
                     <div className="flex gap-0.5 items-end h-3">
-                      {[3, 5, 7, 9].map((h, i) => (
-                        <div key={i} className="w-1 rounded-sm bg-[#0f1117]" style={{ height: h }} />
+                      {[3, 5, 7, 9].map((ht, i) => (
+                        <div key={i} className="w-1 rounded-sm bg-[#0f1117]" style={{ height: ht }} />
                       ))}
                     </div>
                     <div className="w-4 h-2.5 rounded-sm border border-[#0f1117] relative">
@@ -198,8 +209,6 @@ export default function Hero() {
                     </div>
                   </div>
                 </div>
-
-                {/* App header */}
                 <div className="px-5 pb-3">
                   <div className="flex items-center justify-between mb-1">
                     <div>
@@ -211,27 +220,16 @@ export default function Hero() {
                     </div>
                   </div>
                 </div>
-
-                {/* Map area */}
                 <div className="mx-4 rounded-2xl overflow-hidden h-[200px] sm:h-[220px] relative bg-[#e8f0ff]">
                   <div className="absolute inset-0">
                     <div className="absolute top-1/3 left-0 right-0 h-px bg-[#c5d8ff] opacity-80" />
                     <div className="absolute top-2/3 left-0 right-0 h-px bg-[#c5d8ff] opacity-60" />
                     <div className="absolute left-1/3 top-0 bottom-0 w-px bg-[#c5d8ff] opacity-80" />
                     <div className="absolute left-2/3 top-0 bottom-0 w-px bg-[#c5d8ff] opacity-60" />
-                    <div className="absolute top-1/6 left-0 right-0 h-px bg-[#d5e4ff] opacity-50" />
-                    <div className="absolute left-1/6 top-0 bottom-0 w-px bg-[#d5e4ff] opacity-50" />
                     <div className="absolute top-[45%] left-0 right-0 h-[3px] bg-white opacity-90 rounded-full" />
                     <div className="absolute left-[48%] top-0 bottom-0 w-[3px] bg-white opacity-90 rounded-full" />
                     <svg className="absolute inset-0 w-full h-full" viewBox="0 0 260 200">
-                      <path
-                        d="M 40 140 Q 70 100 130 90 Q 180 80 220 60"
-                        stroke="#025bff"
-                        strokeWidth="3"
-                        fill="none"
-                        strokeDasharray="6 3"
-                        strokeLinecap="round"
-                      />
+                      <path d="M 40 140 Q 70 100 130 90 Q 180 80 220 60" stroke="#025bff" strokeWidth="3" fill="none" strokeDasharray="6 3" strokeLinecap="round" />
                     </svg>
                     <div className="absolute left-[12px] bottom-[45px] flex flex-col items-center">
                       <div className="w-3 h-3 rounded-full bg-[#025bff] border-2 border-white shadow-md" />
@@ -248,8 +246,6 @@ export default function Hero() {
                     </div>
                   </div>
                 </div>
-
-                {/* Status card */}
                 <div className="mx-4 mt-3">
                   <div className="bg-[#025bff] rounded-2xl px-4 py-3 flex items-center justify-between">
                     <div>
@@ -261,8 +257,6 @@ export default function Hero() {
                     </div>
                   </div>
                 </div>
-
-                {/* Quick stats */}
                 <div className="mx-4 mt-3 grid grid-cols-2 gap-2">
                   <div className="bg-[#f7f8fc] rounded-xl p-3">
                     <p className="text-[9px] text-[#6b7280] font-medium">{h.mockupPickup}</p>
@@ -273,16 +267,12 @@ export default function Hero() {
                     <p className="text-xs font-bold text-[#0f1117] mt-0.5 truncate">Tartu, Annelinn</p>
                   </div>
                 </div>
-
-                {/* Progress */}
                 <div className="mx-4 mt-3">
                   <div className="h-1 bg-[#f7f8fc] rounded-full overflow-hidden">
                     <div className="h-full w-2/3 bg-[#025bff] rounded-full" />
                   </div>
                   <p className="text-center text-[10px] text-[#6b7280] mt-1.5 font-medium">{h.mockupTimeLeft}</p>
                 </div>
-
-                {/* Home indicator */}
                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-[#1c1c2e] rounded-full" />
               </div>
 
@@ -323,6 +313,57 @@ export default function Hero() {
             </div>
           </motion.div>
         </div>
+
+        {/* Stats bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+          className="mt-14 sm:mt-16 rounded-2xl overflow-hidden"
+          style={{
+            background: "rgba(255,255,255,0.75)",
+            backdropFilter: "blur(20px)",
+            border: "1px solid rgba(255,255,255,0.95)",
+            boxShadow: "0 4px 24px rgba(0,0,0,0.04), 0 1px 6px rgba(2,91,255,0.06)",
+          }}
+        >
+          <div className="grid grid-cols-2 sm:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#e5e7eb]/70">
+            {/* Drivers – live */}
+            <div className="flex flex-col items-center sm:items-start px-4 py-4 sm:px-6 sm:py-5">
+              <div className="flex items-end gap-2 sm:gap-2.5 mb-1.5">
+                <span className="text-[1.45rem] sm:text-[1.9rem] font-bold text-[#0f1117] tabular-nums leading-none">{stats.drivers}</span>
+                <span className="flex items-center gap-1 px-2 py-[3px] rounded-full text-[10px] font-bold text-[#10b981] mb-[3px]"
+                  style={{ background: "rgba(16,185,129,0.1)" }}>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] inline-block" style={{ animation: "blink 2s ease-in-out infinite" }} />
+                  Live
+                </span>
+              </div>
+              <p className="text-[10px] sm:text-[11px] text-[#9ca3af] font-semibold uppercase tracking-wider">{h.statsDriversLabel}</p>
+            </div>
+            {/* Response */}
+            <div className="flex flex-col items-center sm:items-start px-4 py-4 sm:px-6 sm:py-5">
+              <span className="text-[1.45rem] sm:text-[1.9rem] font-bold text-[#0f1117] leading-none mb-1.5">{h.statsResponseValue}</span>
+              <p className="text-[10px] sm:text-[11px] text-[#9ca3af] font-semibold uppercase tracking-wider">{h.statsResponseLabel}</p>
+            </div>
+            {/* Trips – live */}
+            <div className="flex flex-col items-center sm:items-start px-4 py-4 sm:px-6 sm:py-5">
+              <div className="flex items-end gap-2 sm:gap-2.5 mb-1.5">
+                <span className="text-[1.45rem] sm:text-[1.9rem] font-bold text-[#0f1117] tabular-nums leading-none">{stats.trips.toLocaleString("et-EE")}</span>
+                <span className="flex items-center gap-1 px-2 py-[3px] rounded-full text-[10px] font-bold text-[#10b981] mb-[3px]"
+                  style={{ background: "rgba(16,185,129,0.1)" }}>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] inline-block" style={{ animation: "blink 2s ease-in-out infinite" }} />
+                  Live
+                </span>
+              </div>
+              <p className="text-[10px] sm:text-[11px] text-[#9ca3af] font-semibold uppercase tracking-wider">{h.statsTripsLabel}</p>
+            </div>
+            {/* Coverage */}
+            <div className="flex flex-col items-center sm:items-start px-4 py-4 sm:px-6 sm:py-5">
+              <span className="text-[1.45rem] sm:text-[1.9rem] font-bold text-[#0f1117] leading-none mb-1.5 truncate">{h.statsCoverageValue}</span>
+              <p className="text-[10px] sm:text-[11px] text-[#9ca3af] font-semibold uppercase tracking-wider">{h.statsCoverageLabel}</p>
+            </div>
+          </div>
+        </motion.div>
       </div>
 
     </section>

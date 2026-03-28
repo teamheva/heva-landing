@@ -15,37 +15,6 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.06 } },
 };
 
-function FeatureItem({
-  title,
-  stat,
-  statLabel,
-}: {
-  title: string;
-  stat?: string;
-  statLabel?: string;
-}) {
-  return (
-    <motion.div
-      variants={fadeInUp}
-      className="group py-6 sm:py-7 border-t-2 border-[#ebebf0] hover:border-[#025bff] transition-all duration-300 cursor-default"
-    >
-      {stat && (
-        <>
-          <span className="block text-[2rem] sm:text-[2.3rem] font-bold tabular-nums text-[#0f1117] leading-none mb-1 group-hover:text-[#025bff] transition-colors duration-300">
-            {stat}
-          </span>
-          <span className="block text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest text-[#c0c8d4] mb-3 group-hover:text-[#93b4f5] transition-colors duration-300">
-            {statLabel}
-          </span>
-        </>
-      )}
-      <p className="text-[14px] sm:text-[15px] font-semibold text-[#0f1117] leading-snug">
-        {title}
-      </p>
-    </motion.div>
-  );
-}
-
 export default function Features() {
   const { t } = useLanguage();
   const f = t.features;
@@ -80,21 +49,39 @@ export default function Features() {
           </motion.h2>
         </motion.div>
 
-        {/* Grid — 2 cols mobile, 3 cols desktop */}
+        {/* Card grid — same style as stats bar */}
         <motion.div
           variants={stagger}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
-          className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-0 sm:gap-x-12"
+          className="grid grid-cols-2 sm:grid-cols-3 gap-px rounded-2xl overflow-hidden"
+          style={{
+            background: "rgba(220, 224, 238, 0.55)",
+            boxShadow: "0 4px 24px rgba(0,0,0,0.04), 0 1px 6px rgba(2,91,255,0.05)",
+            border: "1px solid rgba(255,255,255,0.9)",
+          }}
         >
           {f.items.map((item) => (
-            <FeatureItem
+            <motion.div
               key={item.title}
-              title={item.title}
-              stat={item.stat}
-              statLabel={item.statLabel}
-            />
+              variants={fadeInUp}
+              className="group flex flex-col px-5 py-5 sm:px-6 sm:py-6 bg-white/90 hover:bg-[#f7f8fc]/90 transition-colors duration-300 cursor-default"
+            >
+              {item.stat && (
+                <>
+                  <span className="block text-[2rem] sm:text-[2.3rem] font-bold tabular-nums text-[#0f1117] leading-none mb-1 group-hover:text-[#025bff] transition-colors duration-300">
+                    {item.stat}
+                  </span>
+                  <span className="block text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest text-[#c0c8d4] mb-2.5 group-hover:text-[#93b4f5] transition-colors duration-300">
+                    {item.statLabel}
+                  </span>
+                </>
+              )}
+              <p className="text-[13px] sm:text-[14px] font-semibold text-[#0f1117] leading-snug">
+                {item.title}
+              </p>
+            </motion.div>
           ))}
         </motion.div>
       </div>

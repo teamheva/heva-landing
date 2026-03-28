@@ -207,7 +207,7 @@ export default function Navbar() {
             >
               {/* Primary CTA */}
               <button
-                className="w-full flex items-center justify-center gap-2 py-4 text-[15px] font-bold text-white rounded-2xl cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
+                className="w-full flex items-center justify-center gap-2 py-4 text-[15px] font-bold text-white rounded-full cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
                 style={{
                   background: "linear-gradient(135deg, #025bff 0%, #1a71ff 100%)",
                   boxShadow: "0 4px 20px rgba(2,91,255,0.35)",
@@ -219,8 +219,8 @@ export default function Navbar() {
 
               {/* Secondary CTA */}
               <button
-                className="w-full flex items-center justify-center gap-2 py-4 text-[15px] font-bold text-[#0f1117] rounded-2xl border border-[#e5e7eb] cursor-pointer transition-all duration-200 hover:border-[#025bff] hover:text-[#025bff] hover:-translate-y-0.5 bg-white"
-                style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}
+                className="w-full flex items-center justify-center gap-2 py-4 text-[15px] font-bold text-[#0f1117] rounded-full border border-[#c5cad4] cursor-pointer transition-all duration-200 hover:border-[#025bff] hover:text-[#025bff] hover:-translate-y-0.5 bg-white"
+                style={{ boxShadow: "0 1px 6px rgba(0,0,0,0.09)" }}
               >
                 <Truck size={17} />
                 {t.howItWorks.ctaDriver}
