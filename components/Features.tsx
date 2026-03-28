@@ -55,7 +55,7 @@ export default function Features() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
-          className="grid grid-cols-2 sm:grid-cols-3 gap-px rounded-2xl overflow-hidden"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px rounded-2xl overflow-hidden"
           style={{
             background: "rgba(220, 224, 238, 0.55)",
             boxShadow: "0 4px 24px rgba(0,0,0,0.04), 0 1px 6px rgba(2,91,255,0.05)",
@@ -66,11 +66,11 @@ export default function Features() {
             <motion.div
               key={item.title}
               variants={fadeInUp}
-              className="group flex flex-col px-5 py-5 sm:px-6 sm:py-6 bg-white/90 hover:bg-[#f7f8fc]/90 transition-colors duration-300 cursor-default min-h-[8rem] sm:min-h-[9rem]"
+              className="group flex flex-col px-4 py-5 sm:px-5 sm:py-6 bg-white/90 hover:bg-[#f7f8fc]/90 transition-colors duration-300 cursor-default min-h-[8rem] sm:min-h-[9rem] lg:min-h-[10rem]"
             >
               {item.stat && (
                 <>
-                  <span className="block text-[2rem] sm:text-[2.3rem] font-bold tabular-nums text-[#0f1117] leading-none mb-1 group-hover:text-[#025bff] transition-colors duration-300">
+                  <span className="block text-[1.7rem] sm:text-[2rem] font-bold tabular-nums text-[#0f1117] leading-none mb-1 group-hover:text-[#025bff] transition-colors duration-300">
                     {item.stat}
                   </span>
                   <span className="block text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest text-[#c0c8d4] mb-2.5 group-hover:text-[#93b4f5] transition-colors duration-300">
