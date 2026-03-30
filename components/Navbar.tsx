@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Check, ArrowRight, Truck, Headphones, Mail, Phone } from "lucide-react";
+import { Menu, X, ChevronDown, Check, ArrowRight, Truck, Headphones } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const LANG_OPTIONS = [
@@ -16,7 +17,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
-  const [supportOpen, setSupportOpen] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,11 +41,10 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  // Lock body scroll when mobile menu or support modal open
   useEffect(() => {
-    document.body.style.overflow = (mobileOpen || supportOpen) ? "hidden" : "";
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
-  }, [mobileOpen, supportOpen]);
+  }, [mobileOpen]);
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
@@ -55,16 +54,8 @@ export default function Navbar() {
     }, 260);
   };
 
-  const handleSupportLink = (href: string) => {
-    setSupportOpen(false);
-    setTimeout(() => {
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }, 200);
-  };
-
   const currentLang = LANG_OPTIONS.find(l => l.code === lang)!;
-  const s = t.support;
+  const supportLabel = lang === "et" ? "Klienditugi" : "Support";
 
   return (
     <>
@@ -113,15 +104,14 @@ export default function Navbar() {
           {/* Desktop Right */}
           <div className="hidden md:flex items-center justify-end gap-2">
             {/* Support button */}
-            <button
-              onClick={() => setSupportOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-[#f7f8fc] transition-colors duration-150 cursor-pointer text-[#374151] hover:text-[#0f1117]"
-              aria-label={s.ariaButton}
-              title={s.ariaButton}
+            <Link
+              href="/support"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-[#f7f8fc] transition-colors duration-150 text-[#374151] hover:text-[#0f1117]"
+              aria-label={supportLabel}
             >
               <Headphones size={16} />
-              <span className="text-[12px] font-semibold hidden lg:inline">{s.title}</span>
-            </button>
+              <span className="text-[12px] font-semibold hidden lg:inline">{supportLabel}</span>
+            </Link>
 
             {/* Language dropdown */}
             <div ref={langDropdownRef} className="relative">
@@ -178,13 +168,13 @@ export default function Navbar() {
 
           {/* Mobile: support + hamburger */}
           <div className="md:hidden flex items-center justify-end gap-1 col-start-3">
-            <button
-              className="p-2 rounded-xl transition-colors cursor-pointer text-[#0f1117] hover:bg-[#f7f8fc]"
-              onClick={() => setSupportOpen(true)}
-              aria-label={s.ariaButton}
+            <Link
+              href="/support"
+              className="p-2 rounded-xl transition-colors text-[#0f1117] hover:bg-[#f7f8fc]"
+              aria-label={supportLabel}
             >
               <Headphones size={20} />
-            </button>
+            </Link>
             <button
               className="p-2 rounded-xl transition-colors cursor-pointer text-[#0f1117] hover:bg-[#f7f8fc]"
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -197,7 +187,7 @@ export default function Navbar() {
         </div>
       </motion.header>
 
-      {/* Mobile menu — light theme */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -233,7 +223,6 @@ export default function Navbar() {
               transition={{ delay: 0.18, duration: 0.28, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
               className="px-6 pb-10 pt-6 flex flex-col gap-3"
             >
-              {/* Primary CTA */}
               <button
                 className="w-full flex items-center justify-center gap-2 py-4 text-[15px] font-bold text-white rounded-full cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
                 style={{
@@ -245,7 +234,6 @@ export default function Navbar() {
                 <ArrowRight size={18} />
               </button>
 
-              {/* Secondary CTA */}
               <button
                 className="w-full flex items-center justify-center gap-2 py-4 text-[15px] font-bold text-[#0f1117] rounded-full border border-[#c5cad4] cursor-pointer transition-all duration-200 hover:border-[#025bff] hover:text-[#025bff] hover:-translate-y-0.5 bg-white"
                 style={{ boxShadow: "0 1px 6px rgba(0,0,0,0.09)" }}
@@ -316,108 +304,6 @@ export default function Navbar() {
               </div>
             </motion.div>
           </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Support modal */}
-      <AnimatePresence>
-        {supportOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              key="support-backdrop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm"
-              onClick={() => setSupportOpen(false)}
-            />
-
-            {/* Panel */}
-            <motion.div
-              key="support-panel"
-              initial={{ opacity: 0, scale: 0.96, y: 12 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: 12 }}
-              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-              className="fixed z-[61] inset-x-4 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 top-1/2 -translate-y-1/2 w-auto sm:w-[400px] max-w-[400px] rounded-3xl overflow-hidden"
-              style={{ boxShadow: "0 32px 80px rgba(0,0,0,0.28), 0 8px 24px rgba(0,0,0,0.14)" }}
-            >
-              {/* Header */}
-              <div
-                className="relative px-6 pt-6 pb-7"
-                style={{ background: "linear-gradient(135deg, #025bff 0%, #0a46cc 100%)" }}
-              >
-                <button
-                  onClick={() => setSupportOpen(false)}
-                  className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-white hover:bg-white/25 transition-colors cursor-pointer"
-                  aria-label="Sulge"
-                >
-                  <X size={15} />
-                </button>
-                <div className="flex items-center gap-3.5">
-                  <div className="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center flex-shrink-0">
-                    <Headphones size={22} className="text-white" />
-                  </div>
-                  <div>
-                    <p className="text-white font-bold text-lg leading-tight">{s.title}</p>
-                    <p className="text-blue-200 text-[13px] mt-0.5">{s.subtitle}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Body */}
-              <div className="bg-white px-5 py-5 space-y-3">
-                {/* Email */}
-                <a
-                  href={`mailto:${s.email}`}
-                  className="flex items-center gap-3.5 p-4 rounded-2xl border border-[#e5e7eb] hover:border-[#025bff] hover:bg-[#f0f5ff] transition-all duration-150 group cursor-pointer"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-[#e8f0ff] flex items-center justify-center flex-shrink-0 group-hover:bg-[#025bff] transition-colors duration-150">
-                    <Mail size={17} className="text-[#025bff] group-hover:text-white transition-colors duration-150" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-[0.1em]">{s.emailLabel}</p>
-                    <p className="text-sm font-bold text-[#0f1117] mt-0.5 truncate">{s.email}</p>
-                  </div>
-                  <ArrowRight size={15} className="text-[#d1d5db] group-hover:text-[#025bff] transition-colors duration-150 flex-shrink-0" />
-                </a>
-
-                {/* Phone */}
-                <a
-                  href={`tel:${s.phone.replace(/\s/g, "")}`}
-                  className="flex items-center gap-3.5 p-4 rounded-2xl border border-[#e5e7eb] hover:border-[#025bff] hover:bg-[#f0f5ff] transition-all duration-150 group cursor-pointer"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-[#e8f0ff] flex items-center justify-center flex-shrink-0 group-hover:bg-[#025bff] transition-colors duration-150">
-                    <Phone size={17} className="text-[#025bff] group-hover:text-white transition-colors duration-150" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-[0.1em]">{s.phoneLabel}</p>
-                    <p className="text-sm font-bold text-[#0f1117] mt-0.5">{s.phone}</p>
-                  </div>
-                  <ArrowRight size={15} className="text-[#d1d5db] group-hover:text-[#025bff] transition-colors duration-150 flex-shrink-0" />
-                </a>
-
-                {/* Quick links */}
-                <div className="pt-1">
-                  <p className="text-[10px] font-bold text-[#9ca3af] uppercase tracking-[0.12em] mb-2 px-1">{s.quickTitle}</p>
-                  <div className="space-y-0.5">
-                    {s.quickLinks.map((link) => (
-                      <button
-                        key={link.label}
-                        onClick={() => handleSupportLink(link.href)}
-                        className="w-full flex items-center justify-between px-4 py-3 rounded-xl hover:bg-[#f7f8fc] transition-colors text-left cursor-pointer group"
-                      >
-                        <span className="text-[13.5px] text-[#374151] group-hover:text-[#0f1117] transition-colors">{link.label}</span>
-                        <ArrowRight size={13} className="text-[#c5cad4] group-hover:text-[#025bff] transition-colors flex-shrink-0" />
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </>
         )}
       </AnimatePresence>
     </>

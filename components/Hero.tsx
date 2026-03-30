@@ -190,7 +190,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 40, scale: 0.96 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-            className="relative flex justify-center lg:justify-end"
+            className="relative flex justify-center lg:justify-center"
             aria-hidden="true"
           >
             <div className="relative">
