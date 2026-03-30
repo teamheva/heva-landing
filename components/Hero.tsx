@@ -27,7 +27,7 @@ function GooglePlayIcon() {
 function StoreButton({ label, store, icon, className }: { label: string; store: string; icon: "apple" | "play"; className?: string }) {
   return (
     <button
-      className={`group flex items-center gap-3 px-4 py-3 sm:px-4 sm:py-3 rounded-2xl transition-all duration-300 cursor-pointer hover:-translate-y-[2px]${className ? ` ${className}` : ""}`}
+      className={`group flex items-center gap-2.5 px-3.5 py-[9px] rounded-xl transition-all duration-300 cursor-pointer hover:-translate-y-[2px]${className ? ` ${className}` : ""}`}
       style={{
         background: "linear-gradient(150deg, #1a1a2e 0%, #0f1117 100%)",
         border: "1px solid rgba(255,255,255,0.1)",
@@ -39,8 +39,8 @@ function StoreButton({ label, store, icon, className }: { label: string; store: 
     >
       {icon === "apple" ? <AppleIcon /> : <GooglePlayIcon />}
       <div className="text-left">
-        <p className="text-[9px] text-white/45 font-medium leading-none tracking-[0.1em] uppercase">{label}</p>
-        <p className="text-[13px] font-bold text-white leading-tight mt-[2px]">{store}</p>
+        <p className="text-[8px] text-white/45 font-medium leading-none tracking-[0.1em] uppercase">{label}</p>
+        <p className="text-[12px] font-bold text-white leading-tight mt-[2px]">{store}</p>
       </div>
     </button>
   );
@@ -127,35 +127,41 @@ export default function Hero() {
               {h.h1Line3}
             </motion.h1>
 
-            {/* Primary CTAs */}
-            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-3 mb-5 w-full sm:w-auto">
-              <button
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-4 text-[15px] font-bold text-white rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
-                style={{
-                  background: "linear-gradient(135deg, #025bff 0%, #1a71ff 100%)",
-                  boxShadow: "0 4px 20px rgba(2,91,255,0.38), 0 1px 3px rgba(0,0,0,0.12)",
-                }}
-                aria-label={h.ctaOrder}
-              >
-                {h.ctaOrder}
-                <ArrowRight size={18} />
-              </button>
-              <button
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-4 text-[15px] font-bold text-[#0f1117] rounded-full border border-[#d1d5db] hover:border-[#025bff] hover:text-[#025bff] transition-all duration-200 cursor-pointer bg-white/80 hover:-translate-y-0.5"
-                style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}
-                aria-label={h.ctaDriver}
-                onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 4px 16px rgba(2,91,255,0.18), 0 1px 4px rgba(0,0,0,0.06)")}
-                onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 1px 4px rgba(0,0,0,0.06)")}
-              >
-                <Truck size={17} />
-                {h.ctaDriver}
-              </button>
-            </motion.div>
+            {/* CTAs + Store — single row on desktop */}
+            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-0 mb-7 w-full sm:w-auto">
+              {/* Primary action buttons */}
+              <div className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
+                <button
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-[10px] text-[13.5px] font-bold text-white rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
+                  style={{
+                    background: "linear-gradient(135deg, #025bff 0%, #1a71ff 100%)",
+                    boxShadow: "0 4px 20px rgba(2,91,255,0.38), 0 1px 3px rgba(0,0,0,0.12)",
+                  }}
+                  aria-label={h.ctaOrder}
+                >
+                  {h.ctaOrder}
+                  <ArrowRight size={15} />
+                </button>
+                <button
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-[10px] text-[13.5px] font-bold text-[#0f1117] rounded-full border border-[#d1d5db] hover:border-[#025bff] hover:text-[#025bff] transition-all duration-200 cursor-pointer bg-white/80 hover:-translate-y-0.5"
+                  style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}
+                  aria-label={h.ctaDriver}
+                  onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 4px 16px rgba(2,91,255,0.18), 0 1px 4px rgba(0,0,0,0.06)")}
+                  onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 1px 4px rgba(0,0,0,0.06)")}
+                >
+                  <Truck size={15} />
+                  {h.ctaDriver}
+                </button>
+              </div>
 
-            {/* App store buttons */}
-            <motion.div variants={fadeInUp} className="flex gap-3 mb-7 w-full sm:w-auto">
-              <StoreButton label={h.downloadOn} store="App Store" icon="apple" className="flex-1 sm:flex-none" />
-              <StoreButton label={h.availableOn} store="Google Play" icon="play" className="flex-1 sm:flex-none" />
+              {/* Divider — desktop only */}
+              <div className="hidden sm:block w-px h-7 bg-[#d1d5db] mx-3.5 flex-shrink-0" />
+
+              {/* Store buttons */}
+              <div className="flex gap-2.5">
+                <StoreButton label={h.downloadOn} store="App Store" icon="apple" className="flex-1 sm:flex-none" />
+                <StoreButton label={h.availableOn} store="Google Play" icon="play" className="flex-1 sm:flex-none" />
+              </div>
             </motion.div>
 
             {/* Social proof */}
