@@ -72,7 +72,7 @@ export default function Footer() {
             >
               <span className="text-white">{f.tagline.split(".")[0]}.</span>
               <br />
-              <span className="text-white/75">{f.tagline.split(".").slice(1).join(".").trim()}</span>
+              <span className="text-white">{f.tagline.split(".").slice(1).join(".").trim()}</span>
             </h2>
           </div>
 
