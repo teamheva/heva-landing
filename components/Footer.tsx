@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
 
 function LinkedInIcon() {
@@ -43,6 +45,7 @@ export default function Footer() {
   const { t } = useLanguage();
   const f = t.footer;
   const year = new Date().getFullYear();
+  const [navOpen, setNavOpen] = useState(false);
 
   return (
     <footer className="bg-[#0a0a0f] text-white relative overflow-hidden" role="contentinfo">
@@ -62,41 +65,95 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-          className="pt-14 sm:pt-20 pb-12 sm:pb-14 flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-20"
+          className="pt-14 sm:pt-20 pb-12 sm:pb-14 flex flex-col lg:flex-row items-start justify-between gap-8 lg:gap-20"
         >
           {/* Tagline */}
           <div className="flex-1">
             <h2
-              className="text-[2.6rem] sm:text-[3.4rem] lg:text-[4rem] font-bold leading-[1.06] tracking-tight"
+              className="text-[1.9rem] sm:text-[2.5rem] lg:text-[3rem] font-bold leading-[1.06] tracking-tight"
               style={{ fontFamily: "var(--font-dm-serif), serif" }}
             >
               <span className="text-white">{f.tagline.split(".")[0]}.</span>
               <br />
-              <span className="text-white/30">{f.tagline.split(".").slice(1).join(".").trim()}</span>
+              <span className="text-white/50">{f.tagline.split(".").slice(1).join(".").trim()}</span>
             </h2>
           </div>
 
           {/* Nav columns */}
-          <div className="flex gap-10 sm:gap-14">
-            {f.columns.map((col) => (
-              <div key={col.title}>
-                <p className="text-[10px] font-bold text-gray-600 uppercase tracking-[0.14em] mb-4">
-                  {col.title}
-                </p>
-                <ul className="space-y-3">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-[13px] text-gray-500 hover:text-white transition-colors duration-150"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          <div className="w-full lg:w-auto">
+            {/* Mobile/tablet toggle button */}
+            <div className="lg:hidden mb-3">
+              <button
+                onClick={() => setNavOpen(!navOpen)}
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-gray-300 hover:text-white hover:border-white/20 transition-all duration-200 cursor-pointer"
+              >
+                <Menu size={16} />
+                <span className="text-[13px] font-semibold">{navOpen ? f.columns[0].title : "Lingid"}</span>
+                <ChevronDown
+                  size={14}
+                  className={`ml-1 text-gray-500 transition-transform duration-200 ${navOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+            </div>
+
+            {/* Nav columns — always visible on desktop, toggle on mobile */}
+            <AnimatePresence initial={false}>
+              {(navOpen) && (
+                <motion.div
+                  key="mobile-nav"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                  className="overflow-hidden lg:hidden"
+                >
+                  <div className="flex gap-10 sm:gap-14 pt-2 pb-2">
+                    {f.columns.map((col) => (
+                      <div key={col.title}>
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.14em] mb-3">
+                          {col.title}
+                        </p>
+                        <ul className="space-y-2.5">
+                          {col.links.map((link) => (
+                            <li key={link.label}>
+                              <a
+                                href={link.href}
+                                className="text-[14px] text-gray-400 hover:text-white transition-colors duration-150"
+                              >
+                                {link.label}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Desktop — always visible */}
+            <div className="hidden lg:flex gap-10 sm:gap-14">
+              {f.columns.map((col) => (
+                <div key={col.title}>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.14em] mb-4">
+                    {col.title}
+                  </p>
+                  <ul className="space-y-3">
+                    {col.links.map((link) => (
+                      <li key={link.label}>
+                        <a
+                          href={link.href}
+                          className="text-[14px] text-gray-400 hover:text-white transition-colors duration-150"
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
 
@@ -126,12 +183,12 @@ export default function Footer() {
 
           {/* Each on its own line on mobile; inline row on desktop */}
           <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-1.5 sm:gap-x-3 sm:gap-y-1">
-            <p className="text-[11px] text-gray-600">© {year} HeVa Technology OÜ.</p>
+            <p className="text-[11px] text-gray-500">© {year} HeVa Technology OÜ.</p>
             {f.legalLinks.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-[11px] text-gray-600 hover:text-gray-400 transition-colors"
+                className="text-[11px] text-gray-500 hover:text-gray-300 transition-colors"
               >
                 {item.label}
               </Link>

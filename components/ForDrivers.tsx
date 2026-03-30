@@ -15,7 +15,6 @@ const stagger = {
 };
 
 const earningsHeights = [60, 80, 55, 95, 100, 70, 40];
-const earningsAmounts = ["€210", "€285", "€190", "€340", "€365", "€250", "€140"];
 
 export default function ForDrivers() {
   const { t } = useLanguage();
@@ -110,14 +109,14 @@ export default function ForDrivers() {
                   { label: d.mockupOrders, value: "24" },
                   { label: d.mockupKm, value: "1,240" },
                   { label: d.mockupRating, value: "4.97 ★" },
-                ].map((s) => (
+                ].map((stat) => (
                   <div
-                    key={s.label}
+                    key={stat.label}
                     className="rounded-xl p-3 text-center"
                     style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
                   >
-                    <p className="text-base font-bold text-white">{s.value}</p>
-                    <p className="text-[10px] text-gray-500 font-medium mt-0.5">{s.label}</p>
+                    <p className="text-base font-bold text-white">{stat.value}</p>
+                    <p className="text-[10px] text-gray-500 font-medium mt-0.5">{stat.label}</p>
                   </div>
                 ))}
               </div>
@@ -203,19 +202,23 @@ export default function ForDrivers() {
               ))}
             </motion.ul>
 
-            <motion.div variants={fadeInUp} className="flex flex-wrap gap-3">
+            {/* CTA button — prominent */}
+            <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4">
               <button
-                className="flex items-center gap-2 px-7 py-4 text-base font-semibold text-white rounded-full border border-white/30 hover:border-white hover:bg-white/10 transition-all duration-200 cursor-pointer"
+                className="flex items-center gap-2.5 px-8 py-4 text-[15px] font-bold text-white rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
+                style={{
+                  background: "linear-gradient(135deg, #025bff 0%, #1a71ff 100%)",
+                  boxShadow: "0 4px 24px rgba(2,91,255,0.45), 0 1px 4px rgba(0,0,0,0.2)",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 8px 36px rgba(2,91,255,0.55), 0 2px 8px rgba(0,0,0,0.25)")}
+                onMouseLeave={e => (e.currentTarget.style.boxShadow = "0 4px 24px rgba(2,91,255,0.45), 0 1px 4px rgba(0,0,0,0.2)")}
                 aria-label={d.cta}
               >
                 {d.cta}
                 <ArrowRight size={18} />
               </button>
+              <p className="text-[12.5px] text-gray-500">{d.ctaSub}</p>
             </motion.div>
-
-            <motion.p variants={fadeInUp} className="text-sm text-gray-500 mt-4">
-              {d.ctaSub}
-            </motion.p>
           </motion.div>
         </div>
       </div>

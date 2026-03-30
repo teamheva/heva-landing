@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 function AppleIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 flex-shrink-0 text-white">
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 flex-shrink-0 text-white">
       <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
     </svg>
   );
@@ -15,7 +15,7 @@ function AppleIcon() {
 
 function GooglePlayIcon() {
   return (
-    <svg viewBox="0 0 24 24" className="w-6 h-6 flex-shrink-0" fill="none">
+    <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0" fill="none">
       <path d="M3.18 1.03C2.47 1.42 2 2.17 2 3.06v17.88c0 .89.47 1.64 1.18 2.03l.1.06 10.02-10.02v-.23L3.28.97l-.1.06z" fill="#4FC3F7" />
       <path d="M16.64 16.36l-3.34-3.34v-.24l3.34-3.34.07.04 3.96 2.25c1.13.64 1.13 1.69 0 2.34l-3.96 2.25-.07.04z" fill="#FFD54F" />
       <path d="M16.71 16.32L13.3 12.9 3.18 23.01c.37.4.94.44 1.59.08l11.94-6.77" fill="#F48FB1" />
@@ -27,7 +27,7 @@ function GooglePlayIcon() {
 function StoreButton({ label, store, icon, className }: { label: string; store: string; icon: "apple" | "play"; className?: string }) {
   return (
     <button
-      className={`group flex items-center gap-3.5 px-4 py-3.5 sm:px-5 sm:py-[14px] rounded-2xl transition-all duration-300 cursor-pointer hover:-translate-y-[2px]${className ? ` ${className}` : ""}`}
+      className={`group flex items-center gap-3 px-4 py-3 sm:px-4 sm:py-3 rounded-2xl transition-all duration-300 cursor-pointer hover:-translate-y-[2px]${className ? ` ${className}` : ""}`}
       style={{
         background: "linear-gradient(150deg, #1a1a2e 0%, #0f1117 100%)",
         border: "1px solid rgba(255,255,255,0.1)",
@@ -40,7 +40,7 @@ function StoreButton({ label, store, icon, className }: { label: string; store: 
       {icon === "apple" ? <AppleIcon /> : <GooglePlayIcon />}
       <div className="text-left">
         <p className="text-[9px] text-white/45 font-medium leading-none tracking-[0.1em] uppercase">{label}</p>
-        <p className="text-[15px] font-bold text-white leading-tight mt-[3px]">{store}</p>
+        <p className="text-[13px] font-bold text-white leading-tight mt-[2px]">{store}</p>
       </div>
     </button>
   );
@@ -117,7 +117,7 @@ export default function Hero() {
             {/* Headline */}
             <motion.h1
               variants={fadeInUp}
-              className="text-[56px] sm:text-[72px] lg:text-[84px] leading-[1.0] tracking-[-0.03em] text-[#0f1117] mb-7"
+              className="text-[40px] sm:text-[56px] lg:text-[68px] leading-[1.0] tracking-[-0.03em] text-[#0f1117] mb-7"
               style={{ fontFamily: "var(--font-dm-serif), serif" }}
             >
               {h.h1Line1}
@@ -195,16 +195,16 @@ export default function Hero() {
           >
             <div className="relative">
               <div
-                className="absolute inset-0 rounded-[48px] blur-3xl opacity-20 scale-95"
+                className="absolute inset-0 rounded-[38px] blur-3xl opacity-20 scale-95"
                 style={{ background: "linear-gradient(135deg, #025bff, #4d8fff)" }}
               />
               <div
-                className="float-card relative w-[280px] sm:w-[300px] h-[560px] sm:h-[600px] rounded-[44px] bg-white overflow-hidden"
+                className="float-card relative w-[248px] sm:w-[265px] h-[498px] sm:h-[530px] rounded-[38px] bg-white overflow-hidden"
                 style={{
                   boxShadow: "0 0 0 10px #1c1c2e, 0 0 0 12px #2a2a40, 0 40px 80px rgba(0,0,0,0.28), 0 8px 24px rgba(0,0,0,0.12)",
                 }}
               >
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[110px] h-7 bg-[#1c1c2e] rounded-b-[20px] z-20" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90px] h-6 bg-[#1c1c2e] rounded-b-[18px] z-20" />
                 <div className="flex justify-between items-center px-7 pt-10 pb-2">
                   <span className="text-[11px] font-semibold text-[#0f1117]">9:41</span>
                   <div className="flex items-center gap-1">
@@ -229,7 +229,7 @@ export default function Hero() {
                     </div>
                   </div>
                 </div>
-                <div className="mx-4 rounded-2xl overflow-hidden h-[200px] sm:h-[220px] relative bg-[#e8f0ff]">
+                <div className="mx-4 rounded-2xl overflow-hidden h-[165px] sm:h-[180px] relative bg-[#e8f0ff]">
                   <div className="absolute inset-0">
                     <div className="absolute top-1/3 left-0 right-0 h-px bg-[#c5d8ff] opacity-80" />
                     <div className="absolute top-2/3 left-0 right-0 h-px bg-[#c5d8ff] opacity-60" />
