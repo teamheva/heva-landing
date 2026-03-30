@@ -17,7 +17,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const [hevaDropdownOpen, setHevaDropdownOpen] = useState(false);
+  const [mobileHevaOpen, setMobileHevaOpen] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
+  const hevaDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 16);
@@ -35,6 +38,9 @@ export default function Navbar() {
     const handler = (e: MouseEvent) => {
       if (langDropdownRef.current && !langDropdownRef.current.contains(e.target as Node)) {
         setLangDropdownOpen(false);
+      }
+      if (hevaDropdownRef.current && !hevaDropdownRef.current.contains(e.target as Node)) {
+        setHevaDropdownOpen(false);
       }
     };
     document.addEventListener("mousedown", handler);
@@ -99,6 +105,44 @@ export default function Navbar() {
                 {link.label}
               </button>
             ))}
+
+            {/* Heva dropdown */}
+            <div ref={hevaDropdownRef} className="relative">
+              <button
+                onClick={() => setHevaDropdownOpen(!hevaDropdownOpen)}
+                className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-full hover:bg-[#f7f8fc] hover:text-[#0f1117] transition-colors duration-150 cursor-pointer whitespace-nowrap ${hevaDropdownOpen ? "bg-[#f7f8fc] text-[#0f1117]" : "text-[#374151]"}`}
+              >
+                {t.nav.hevaDropdown.label}
+                <ChevronDown size={13} className={`text-[#9ca3af] transition-transform duration-200 ${hevaDropdownOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              <AnimatePresence>
+                {hevaDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                    transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                    className="absolute left-0 top-full mt-2 bg-white rounded-2xl overflow-hidden z-50 min-w-[160px]"
+                    style={{
+                      boxShadow: "0 4px 24px rgba(0,0,0,0.1), 0 1px 4px rgba(0,0,0,0.06)",
+                      border: "1px solid rgba(0,0,0,0.06)",
+                    }}
+                  >
+                    {t.nav.hevaDropdown.links.map((item) => (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        onClick={() => setHevaDropdownOpen(false)}
+                        className="block px-4 py-2.5 text-sm text-[#374151] hover:bg-[#f7f8fc] hover:text-[#025bff] transition-colors cursor-pointer"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </nav>
 
           {/* Desktop Right */}
@@ -209,11 +253,48 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 + i * 0.04, duration: 0.24, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                   onClick={() => handleNavClick(link.href)}
-                  className="w-full text-left py-4 text-[1.5rem] font-bold text-[#0f1117] hover:text-[#025bff] transition-colors duration-150 cursor-pointer border-b border-[#f0f0f4] last:border-0"
+                  className="w-full text-left py-4 text-[1.5rem] font-bold text-[#0f1117] hover:text-[#025bff] transition-colors duration-150 cursor-pointer border-b border-[#f0f0f4]"
                 >
                   {link.label}
                 </motion.button>
               ))}
+
+              {/* Heva expandable section */}
+              <motion.div
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.05 + t.nav.links.length * 0.04, duration: 0.24, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+              >
+                <button
+                  onClick={() => setMobileHevaOpen(!mobileHevaOpen)}
+                  className="w-full flex items-center justify-between py-4 text-[1.5rem] font-bold text-[#0f1117] hover:text-[#025bff] transition-colors duration-150 cursor-pointer border-b border-[#f0f0f4]"
+                >
+                  {t.nav.hevaDropdown.label}
+                  <ChevronDown size={20} className={`text-[#9ca3af] transition-transform duration-200 ${mobileHevaOpen ? "rotate-180 text-[#025bff]" : ""}`} />
+                </button>
+                <AnimatePresence>
+                  {mobileHevaOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                      className="overflow-hidden border-b border-[#f0f0f4]"
+                    >
+                      {t.nav.hevaDropdown.links.map((item) => (
+                        <a
+                          key={item.label}
+                          href={item.href}
+                          onClick={() => setMobileOpen(false)}
+                          className="block py-3 pl-4 text-[1.1rem] font-medium text-[#6b7280] hover:text-[#025bff] transition-colors duration-150"
+                        >
+                          {item.label}
+                        </a>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             </div>
 
             {/* Bottom actions */}
