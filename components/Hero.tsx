@@ -127,9 +127,9 @@ export default function Hero() {
               {h.h1Line3}
             </motion.h1>
 
-            {/* CTAs + Store — single row on desktop */}
-            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-0 mb-7 w-full sm:w-auto">
-              {/* Primary action buttons */}
+            {/* CTAs */}
+            <motion.div variants={fadeInUp} className="flex flex-col gap-3 mb-7 w-full sm:w-auto">
+              {/* Row 1: action buttons */}
               <div className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
                 <button
                   className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-[10px] text-[13.5px] font-bold text-white rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
@@ -154,11 +154,8 @@ export default function Hero() {
                 </button>
               </div>
 
-              {/* Divider — desktop only */}
-              <div className="hidden sm:block w-px h-7 bg-[#d1d5db] mx-3.5 flex-shrink-0" />
-
-              {/* Store buttons */}
-              <div className="flex gap-2.5">
+              {/* Row 2: store buttons */}
+              <div className="flex items-center gap-2">
                 <StoreButton label={h.downloadOn} store="App Store" icon="apple" className="flex-1 sm:flex-none" />
                 <StoreButton label={h.availableOn} store="Google Play" icon="play" className="flex-1 sm:flex-none" />
               </div>
