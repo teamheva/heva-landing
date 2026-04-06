@@ -4,7 +4,7 @@ import { useLanguage } from "@/lib/LanguageContext";
 
 type Section = {
   title: string;
-  body: string[];
+  body: (string | string[])[];
 };
 
 type LegalContent = {
@@ -43,11 +43,24 @@ export default function LegalPage({
               <h2 className="text-[15px] font-semibold text-[#0f1117]">
                 {s.title}
               </h2>
-              {s.body.map((p, i) => (
-                <p key={i} className="text-[13.5px] text-[#6b7280] leading-relaxed">
-                  {p}
-                </p>
-              ))}
+              {s.body.map((item, i) =>
+                Array.isArray(item) ? (
+                  <ul key={i} className="flex flex-col gap-1.5 pl-4">
+                    {item.map((li, j) => (
+                      <li
+                        key={j}
+                        className="text-[13.5px] text-[#6b7280] leading-relaxed list-disc"
+                      >
+                        {li}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p key={i} className="text-[13.5px] text-[#6b7280] leading-relaxed">
+                    {item}
+                  </p>
+                ),
+              )}
             </div>
           ))}
         </div>

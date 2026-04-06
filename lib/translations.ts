@@ -213,7 +213,7 @@ export const translations = {
       emailLabel: "E-post",
       email: "tugi@heva.me",
       phoneLabel: "Telefon",
-      phone: "+372 5000 0000",
+      phone: "+372 510 0017",
       quickTitle: "Kiired lingid",
       quickLinks: [
         { label: "Kuidas töötab?", href: "#how-it-works" },
@@ -482,7 +482,7 @@ export const translations = {
       emailLabel: "Email",
       email: "support@heva.me",
       phoneLabel: "Phone",
-      phone: "+372 5000 0000",
+      phone: "+372 510 0017",
       quickTitle: "Quick links",
       quickLinks: [
         { label: "How it works?", href: "#how-it-works" },

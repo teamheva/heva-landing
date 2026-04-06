@@ -6,6 +6,7 @@ import { LanguageProvider } from "@/lib/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
+import ChatWidget from "@/components/ChatWidget";
 import type { Lang } from "@/lib/translations";
 import "./globals.css";
 
@@ -91,6 +92,7 @@ export default async function RootLayout({
           {children}
           <Footer />
           <CookieBanner />
+          <ChatWidget />
         </LanguageProvider>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
