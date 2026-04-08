@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Mail, Phone, Search, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
+import { localePath } from "@/lib/translations";
 import { supportContent } from "@/lib/supportData";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -131,8 +132,8 @@ export default function SupportPage() {
                     transition={{ duration: 0.35, delay: i * 0.04, ease }}
                   >
                     <Link
-                      href={`/support/${cat.slug}`}
-                      className="group flex items-start gap-4 p-5 bg-white rounded-2xl transition-all duration-200 cursor-pointer text-left block"
+                      href={`${localePath("/support", lang)}/${cat.slug}`}
+                      className="group flex items-start gap-4 p-5 h-full bg-white rounded-2xl transition-all duration-200 cursor-pointer text-left block"
                       style={{
                         border: "1.5px solid #e5e7eb",
                         boxShadow: "0 1px 4px rgba(0,0,0,0.04)",

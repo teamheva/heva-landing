@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Cookie } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
+import { localePath } from "@/lib/translations";
 
 export default function CookieBanner() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const c = t.cookie;
   const [visible, setVisible] = useState(false);
 
@@ -60,7 +61,7 @@ export default function CookieBanner() {
                 <p className="text-sm font-semibold text-white mb-1">{c.title}</p>
                 <p className="text-xs text-gray-400 leading-relaxed mb-4">
                   {c.desc}{" "}
-                  <a href="#" className="text-[#60a5fa] hover:underline">
+                  <a href={localePath("/cookies", lang)} className="text-[#60a5fa] hover:underline">
                     {c.readMore}
                   </a>
                 </p>

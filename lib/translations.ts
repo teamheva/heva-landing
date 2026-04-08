@@ -246,9 +246,9 @@ export const translations = {
       location: "Tallinn, Eesti",
       rights: "Kõik õigused kaitstud.",
       legalLinks: [
-        { label: "Privaatsuspoliitika", href: "/privacy" },
-        { label: "Kasutustingimused", href: "/terms" },
-        { label: "Küpsised", href: "/cookies" },
+        { label: "Privaatsuspoliitika", href: "/privaatsus" },
+        { label: "Kasutustingimused", href: "/tingimused" },
+        { label: "Küpsised", href: "/kupsised" },
       ],
     },
     cookie: {
@@ -540,3 +540,21 @@ export const translations = {
 
 export type Lang = "et" | "en";
 export type Translations = typeof translations.et;
+
+const routeMap: Record<string, string> = {
+  "/support": "/tugi",
+  "/privacy": "/privaatsus",
+  "/terms": "/tingimused",
+  "/cookies": "/kupsised",
+};
+
+/** Map English route paths to localized equivalents */
+export function localePath(path: string, lang: Lang): string {
+  if (lang === "en") return path;
+  for (const [en, et] of Object.entries(routeMap)) {
+    if (path === en || path.startsWith(en + "/")) {
+      return path.replace(en, et);
+    }
+  }
+  return path;
+}

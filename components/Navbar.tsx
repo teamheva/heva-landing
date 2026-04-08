@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/lib/LanguageContext";
+import { localePath } from "@/lib/translations";
 
 const LANG_OPTIONS = [
   { code: "et" as const, flag: "🇪🇪", label: "Eesti" },
@@ -68,6 +69,7 @@ export default function Navbar() {
 
   const currentLang = LANG_OPTIONS.find(l => l.code === lang)!;
   const supportLabel = lang === "et" ? "Klienditugi" : "Support";
+  const supportHref = localePath("/support", lang);
 
   return (
     <>
@@ -155,7 +157,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center justify-end gap-2">
             {/* Support button */}
             <Link
-              href="/support"
+              href={supportHref}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-[#f7f8fc] transition-colors duration-150 text-[#374151] hover:text-[#0f1117]"
               aria-label={supportLabel}
             >
@@ -219,7 +221,7 @@ export default function Navbar() {
           {/* Mobile: support + hamburger */}
           <div className="md:hidden flex items-center justify-end gap-1 col-start-3">
             <Link
-              href="/support"
+              href={supportHref}
               className="p-2 rounded-xl transition-colors text-[#0f1117] hover:bg-[#f7f8fc]"
               aria-label={supportLabel}
             >

@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ChevronDown, Mail, Phone } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
+import { localePath } from "@/lib/translations";
 import { supportContent, SLUGS } from "@/lib/supportData";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -18,13 +19,14 @@ export default function SupportCategoryPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const category = c.categories.find((cat) => cat.slug === slug);
+  const supportBase = localePath("/support", lang);
 
   if (!category) {
     return (
       <main className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <p className="text-[18px] font-bold text-[#0f1117] mb-4">404</p>
-          <Link href="/support" className="text-[14px] text-[#025bff] hover:underline">
+          <Link href={supportBase} className="text-[14px] text-[#025bff] hover:underline">
             {c.backToSupport}
           </Link>
         </div>
@@ -46,7 +48,7 @@ export default function SupportCategoryPage() {
             transition={{ duration: 0.5, ease }}
           >
             <Link
-              href="/support"
+              href={supportBase}
               className="inline-flex items-center gap-1.5 text-[13px] text-[#9ca3af] hover:text-[#025bff] transition-colors duration-150 mb-6"
             >
               <ArrowLeft size={14} />
@@ -147,7 +149,7 @@ export default function SupportCategoryPage() {
         </section>
 
         <div className="pb-14">
-          <Link href="/support" className="text-[13px] text-[#9ca3af] hover:text-[#025bff] transition-colors duration-150">
+          <Link href={supportBase} className="text-[13px] text-[#9ca3af] hover:text-[#025bff] transition-colors duration-150">
             {c.backToSupport}
           </Link>
         </div>
