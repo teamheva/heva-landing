@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     model: google("gemini-2.5-flash"),
     system: getChatSystemPrompt(lang),
     messages: await convertToModelMessages(trimmed),
-    maxOutputTokens: 500,
+    maxOutputTokens: 1024,
   });
 
   return result.toUIMessageStreamResponse();
