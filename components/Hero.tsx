@@ -121,9 +121,8 @@ export default function Hero() {
             animate="visible"
             className="flex flex-col items-start"
           >
-            {/* Headline */}
-            <motion.h1
-              variants={fadeInUp}
+            {/* Headline - plain h1 to keep it as instant LCP (no opacity-0 hydration delay) */}
+            <h1
               className="text-[40px] sm:text-[56px] lg:text-[68px] leading-[1.0] tracking-[-0.03em] text-[#0f1117] mb-7"
               style={{ fontFamily: "var(--font-dm-serif), serif" }}
             >
@@ -132,7 +131,7 @@ export default function Hero() {
               <span className="text-[#025bff]">{h.h1Highlight}</span> {h.h1Line2}
               <br />
               {h.h1Line3}
-            </motion.h1>
+            </h1>
 
             {/* CTAs */}
             <motion.div variants={fadeInUp} className="flex flex-col gap-3 mb-7 w-full sm:w-auto">
