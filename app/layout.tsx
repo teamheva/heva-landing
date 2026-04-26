@@ -86,28 +86,38 @@ export default function RootLayout({
         className="min-h-full flex flex-col antialiased"
         style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
       >
-        <Script id="ld-org" type="application/ld+json" strategy="beforeInteractive">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "Heva",
-          legalName: "Heva OÜ",
-          url: "https://heva.me",
-          logo: "https://heva.me/logo-blue.png",
-          email: "info@heva.me",
-          telephone: "+372 510 0017",
-          areaServed: "EE",
-          sameAs: [
-            "https://apps.apple.com/ee/app/heva-client/id6762511309",
-            "https://play.google.com/store/apps/details?id=me.heva.customer",
-          ],
-        })}</Script>
-        <Script id="ld-website" type="application/ld+json" strategy="beforeInteractive">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: "Heva",
-          url: "https://heva.me",
-          inLanguage: ["et-EE", "en"],
-        })}</Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Heva",
+              legalName: "Heva OÜ",
+              url: "https://heva.me",
+              logo: "https://heva.me/logo-blue.png",
+              email: "info@heva.me",
+              telephone: "+372 510 0017",
+              areaServed: "EE",
+              sameAs: [
+                "https://apps.apple.com/ee/app/heva-client/id6762511309",
+                "https://play.google.com/store/apps/details?id=me.heva.customer",
+              ],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Heva",
+              url: "https://heva.me",
+              inLanguage: ["et-EE", "en"],
+            }),
+          }}
+        />
         <LanguageProvider initialLang="et">
           <Navbar />
           {children}
