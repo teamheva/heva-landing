@@ -268,6 +268,7 @@ export const forCouriers: Bundle = {
     formTitle: "Hakka Heva kulleriks",
     formSub: "Jäta kontakt - saadame onboardingu juhised tunni jooksul.",
     formMessagePlaceholder: "Milline on sinu sõiduk ja eelistatud piirkond?",
+    appType: "driver",
   },
   en: {
     eyebrow: "For couriers",
@@ -290,6 +291,7 @@ export const forCouriers: Bundle = {
     formTitle: "Become a Heva courier",
     formSub: "Leave your contact - we'll send onboarding details within the hour.",
     formMessagePlaceholder: "What's your vehicle and preferred region?",
+    appType: "driver",
   },
 };
 
@@ -315,6 +317,7 @@ export const forSenders: Bundle = {
     formTopic: "Hakka kliendiks",
     formTitle: "Hakka Heva kliendiks",
     formSub: "Jäta kontakt - teeme sulle tutvumispakkumise.",
+    appType: "customer",
   },
   en: {
     eyebrow: "For senders",
@@ -336,6 +339,7 @@ export const forSenders: Bundle = {
     formTopic: "Become a client",
     formTitle: "Become a Heva client",
     formSub: "Leave your contact - we'll prepare a trial offer.",
+    appType: "customer",
   },
 };
 

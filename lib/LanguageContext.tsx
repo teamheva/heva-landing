@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
+import { LazyMotion, domAnimation } from "framer-motion";
 import { translations, type Lang, type Translations } from "./translations";
 
 type LanguageContextValue = {
@@ -24,15 +25,18 @@ export function LanguageProvider({
 }) {
   const [lang, setLangState] = useState<Lang>(initialLang);
 
-  // On mount: restore saved language preference from localStorage
+  // On mount: restore saved language preference, or fall back to browser language
   useEffect(() => {
     const saved = localStorage.getItem("heva-lang") as Lang | null;
     if (saved === "et" || saved === "en") {
       setLangState(saved);
       document.documentElement.lang = saved;
-    } else {
-      document.documentElement.lang = initialLang;
+      return;
     }
+    const browser = navigator.language.toLowerCase();
+    const detected: Lang = browser.startsWith("et") ? "et" : "en";
+    setLangState(detected);
+    document.documentElement.lang = detected;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -44,7 +48,9 @@ export function LanguageProvider({
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t: translations[lang] as Translations }}>
-      {children}
+      <LazyMotion features={domAnimation} strict>
+        {children}
+      </LazyMotion>
     </LanguageContext.Provider>
   );
 }

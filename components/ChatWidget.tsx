@@ -4,7 +4,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, ArrowUp } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
 import { getChatTranslations } from "@/lib/chatTranslations";

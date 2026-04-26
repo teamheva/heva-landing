@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, Check, ArrowRight, Headphones, Truck, Building2, Warehouse } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

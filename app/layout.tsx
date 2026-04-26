@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { DM_Sans, DM_Serif_Display } from "next/font/google";
-import { headers } from "next/headers";
 import Script from "next/script";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import ChatWidget from "@/components/ChatWidget";
-import type { Lang } from "@/lib/translations";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -22,6 +20,7 @@ const dmSerifDisplay = DM_Serif_Display({
   subsets: ["latin"],
   weight: "400",
   display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -69,25 +68,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const hdrs = await headers();
-  const country = hdrs.get("x-vercel-ip-country") ?? "";
-  const initialLang: Lang = country === "EE" ? "et" : "en";
-
   return (
     <html
-      lang={initialLang}
+      lang="et"
       className={`${dmSans.variable} ${dmSerifDisplay.variable}`}
     >
       <body
         className="min-h-full flex flex-col antialiased"
         style={{ fontFamily: "var(--font-dm-sans), sans-serif" }}
       >
-        <LanguageProvider initialLang={initialLang}>
+        <LanguageProvider initialLang="et">
           <Navbar />
           {children}
           <Footer />
@@ -98,9 +93,9 @@ export default async function RootLayout({
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
-            <Script id="ga-init" strategy="afterInteractive">{`
+            <Script id="ga-init" strategy="lazyOnload">{`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());

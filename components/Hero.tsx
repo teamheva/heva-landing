@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { ArrowRight, MapPin, Truck, Star } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
@@ -340,7 +340,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-          className="mt-14 sm:mt-16 rounded-2xl overflow-hidden"
+          className="mt-14 sm:mt-16 rounded-2xl overflow-hidden min-h-[180px] sm:min-h-[88px]"
           style={{
             background: "rgba(255,255,255,0.75)",
             backdropFilter: "blur(20px)",

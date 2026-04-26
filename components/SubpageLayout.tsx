@@ -1,13 +1,77 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ChevronRight, Check } from "lucide-react";
+import { m as motion } from "framer-motion";
+import { ChevronRight, Check, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageContext";
 import { localePath } from "@/lib/translations";
 import ContactForm from "./ContactForm";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
+
+const APP_LINKS = {
+  customer: {
+    apple: "https://apps.apple.com/ee/app/heva-client/id6762511309",
+    google: "https://play.google.com/store/apps/details?id=me.heva.customer&pcampaignid=web_share",
+  },
+  driver: {
+    apple: "https://apps.apple.com/ee/app/heva-driver/id6762511457",
+    google: "https://play.google.com/store/apps/details?id=me.heva.driver&pcampaignid=web_share",
+  },
+} as const;
+
+function AppleIcon() {
+  return (
+    <svg className="w-7 h-7" viewBox="0 0 384 512" fill="white" aria-hidden="true">
+      <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+    </svg>
+  );
+}
+
+function GooglePlayIcon() {
+  return (
+    <svg className="w-7 h-7" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="#00d4ff" d="M3.6 2.4c-.4.4-.6.9-.6 1.5v16.2c0 .6.2 1.1.6 1.5l9.4-9.6L3.6 2.4z" />
+      <path fill="#ffce00" d="M16.8 8.5l-3.8 3.5 3.8 3.5 4.5-2.5c1.2-.7 1.2-2.4 0-3.1l-4.5-1.4z" />
+      <path fill="#ff3a44" d="M3.6 2.4l9.4 9.6 3.8-3.5L4.7 2.1c-.4-.2-.8-.1-1.1.3z" />
+      <path fill="#00f176" d="M13 12l-9.4 9.6c.3.4.7.5 1.1.3l12.1-6.4-3.8-3.5z" />
+    </svg>
+  );
+}
+
+function StoreButtons({ appType, lang }: { appType: "customer" | "driver"; lang: "et" | "en" }) {
+  const links = APP_LINKS[appType];
+  const downloadOn = lang === "et" ? "Lae alla" : "Download on the";
+  const availableOn = lang === "et" ? "Saadaval" : "Get it on";
+
+  const Btn = ({ href, label, store, Icon }: { href: string; label: string; store: string; Icon: () => React.JSX.Element }) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl transition-all duration-300 hover:-translate-y-[2px]"
+      style={{
+        background: "linear-gradient(150deg, #1a1a2e 0%, #0f1117 100%)",
+        border: "1px solid rgba(255,255,255,0.1)",
+        boxShadow: "0 2px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07)",
+      }}
+      aria-label={store}
+    >
+      <Icon />
+      <div className="text-left">
+        <p className="text-[8.5px] text-white/50 font-medium leading-none tracking-[0.1em] uppercase">{label}</p>
+        <p className="text-[13px] font-bold text-white leading-tight mt-[2px]">{store}</p>
+      </div>
+    </a>
+  );
+
+  return (
+    <div className="flex flex-wrap gap-2.5">
+      <Btn href={links.apple} label={downloadOn} store="App Store" Icon={AppleIcon} />
+      <Btn href={links.google} label={availableOn} store="Google Play" Icon={GooglePlayIcon} />
+    </div>
+  );
+}
 
 type Stat = { value: string; label: string };
 type Point = { title: string; body: string };
@@ -40,6 +104,12 @@ export type SubpageConfig = {
   formEyebrow?: string;
   formTitle?: string;
   formSub?: string;
+  /** Primary CTA label shown in the hero (e.g. "Telli vedu"). */
+  ctaLabel?: string;
+  /** Where the primary CTA links to (defaults to "#contact" anchor). */
+  ctaHref?: string;
+  /** When set, renders App Store + Google Play buttons in the hero with the matching app's links. */
+  appType?: "customer" | "driver";
 };
 
 export default function SubpageLayout({ config }: { config: SubpageConfig }) {
@@ -102,6 +172,31 @@ export default function SubpageLayout({ config }: { config: SubpageConfig }) {
             >
               {config.lead}
             </motion.p>
+          )}
+
+          {/* CTA + store buttons */}
+          {(config.ctaLabel || config.appType) && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.22, ease }}
+              className="mt-7 flex flex-wrap items-center gap-3"
+            >
+              {config.ctaLabel && (
+                <a
+                  href={config.ctaHref ?? "#contact"}
+                  className="inline-flex items-center gap-2 px-5 py-[11px] text-[14px] font-bold text-white rounded-full transition-all duration-300 hover:-translate-y-0.5"
+                  style={{
+                    background: "linear-gradient(135deg, #025bff 0%, #1a71ff 100%)",
+                    boxShadow: "0 4px 14px rgba(2,91,255,0.32), inset 0 1px 0 rgba(255,255,255,0.18)",
+                  }}
+                >
+                  {config.ctaLabel}
+                  <ArrowRight size={15} />
+                </a>
+              )}
+              {config.appType && <StoreButtons appType={config.appType} lang={lang} />}
+            </motion.div>
           )}
 
           {/* Stats row */}
@@ -212,7 +307,7 @@ export default function SubpageLayout({ config }: { config: SubpageConfig }) {
         )}
 
         {/* Contact form */}
-        <section className="pb-20 border-t border-[#e5e8ee] pt-12 sm:pt-16">
+        <section id="contact" className="pb-20 border-t border-[#e5e8ee] pt-12 sm:pt-16 scroll-mt-24">
           <div className="grid lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16 items-start">
             <div>
               <p className="text-[11px] font-bold text-[#025bff] uppercase tracking-[0.14em] mb-3">
