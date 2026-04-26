@@ -2,10 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Check, ArrowRight, Truck, Headphones } from "lucide-react";
+import { Menu, X, ChevronDown, Check, ArrowRight, Headphones, Truck, Building2, Warehouse } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useLanguage } from "@/lib/LanguageContext";
 import { localePath } from "@/lib/translations";
 
@@ -14,16 +13,20 @@ const LANG_OPTIONS = [
   { code: "en" as const, flag: "🇬🇧", label: "English" },
 ];
 
+const REGISTER_ICONS = [Truck, Building2, Warehouse];
+
 export default function Navbar() {
   const { lang, setLang, t } = useLanguage();
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [hevaDropdownOpen, setHevaDropdownOpen] = useState(false);
+  const [registerDropdownOpen, setRegisterDropdownOpen] = useState(false);
   const [mobileHevaOpen, setMobileHevaOpen] = useState(false);
+  const [mobileRegisterOpen, setMobileRegisterOpen] = useState(false);
   const langDropdownRef = useRef<HTMLDivElement>(null);
   const hevaDropdownRef = useRef<HTMLDivElement>(null);
+  const registerDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 16);
@@ -39,12 +42,9 @@ export default function Navbar() {
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (langDropdownRef.current && !langDropdownRef.current.contains(e.target as Node)) {
-        setLangDropdownOpen(false);
-      }
-      if (hevaDropdownRef.current && !hevaDropdownRef.current.contains(e.target as Node)) {
-        setHevaDropdownOpen(false);
-      }
+      if (langDropdownRef.current && !langDropdownRef.current.contains(e.target as Node)) setLangDropdownOpen(false);
+      if (hevaDropdownRef.current && !hevaDropdownRef.current.contains(e.target as Node)) setHevaDropdownOpen(false);
+      if (registerDropdownRef.current && !registerDropdownRef.current.contains(e.target as Node)) setRegisterDropdownOpen(false);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -55,21 +55,10 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  const handleNavClick = (href: string) => {
-    setMobileOpen(false);
-    if (pathname !== "/") {
-      window.location.href = "/" + href;
-      return;
-    }
-    setTimeout(() => {
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }, 260);
-  };
-
   const currentLang = LANG_OPTIONS.find(l => l.code === lang)!;
   const supportLabel = lang === "et" ? "Klienditugi" : "Support";
   const supportHref = localePath("/support", lang);
+  const registerItems = t.nav.registerDropdown.items;
 
   return (
     <>
@@ -89,29 +78,23 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-5 sm:px-8 w-full grid grid-cols-[1fr_auto_1fr] items-center" style={{ height: "68px" }}>
           {/* Logo */}
           <div className="flex items-center">
-            <a href="/" className="flex items-center flex-shrink-0" aria-label={t.nav.ariaHome}>
+            <Link href="/" className="flex items-center flex-shrink-0" aria-label={t.nav.ariaHome}>
               <div className="relative w-[114px] h-[36px] sm:w-[164px] sm:h-[54px] sm:-ml-[2px]">
-                <Image
-                  src="/logo-blue.png"
-                  alt="Heva logo"
-                  fill
-                  className="object-contain object-left"
-                  priority
-                />
+                <Image src="/logo-blue.png" alt="Heva logo" fill className="object-contain object-left" priority />
               </div>
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-1" aria-label={t.nav.ariaMain}>
             {t.nav.links.map((link) => (
-              <button
+              <Link
                 key={link.href}
-                onClick={() => handleNavClick(link.href)}
+                href={link.href}
                 className="px-4 py-2 text-sm font-medium text-[#374151] rounded-full hover:bg-[#f7f8fc] hover:text-[#0f1117] transition-colors duration-150 cursor-pointer whitespace-nowrap"
               >
                 {link.label}
-              </button>
+              </Link>
             ))}
 
             {/* Heva dropdown */}
@@ -131,21 +114,21 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -8, scale: 0.96 }}
                     transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-                    className="absolute left-0 top-full mt-2 bg-white rounded-2xl overflow-hidden z-50 min-w-[160px]"
+                    className="absolute left-0 top-full mt-2 bg-white rounded-2xl overflow-hidden z-50 min-w-[180px]"
                     style={{
                       boxShadow: "0 4px 24px rgba(0,0,0,0.1), 0 1px 4px rgba(0,0,0,0.06)",
                       border: "1px solid rgba(0,0,0,0.06)",
                     }}
                   >
                     {t.nav.hevaDropdown.links.map((item) => (
-                      <a
+                      <Link
                         key={item.label}
                         href={item.href}
                         onClick={() => setHevaDropdownOpen(false)}
                         className="block px-4 py-2.5 text-sm text-[#374151] hover:bg-[#f7f8fc] hover:text-[#025bff] transition-colors cursor-pointer"
                       >
                         {item.label}
-                      </a>
+                      </Link>
                     ))}
                   </motion.div>
                 )}
@@ -174,10 +157,7 @@ export default function Navbar() {
               >
                 <span className="text-base leading-none">{currentLang.flag}</span>
                 <span className="text-[12px] font-semibold text-[#374151]">{currentLang.code.toUpperCase()}</span>
-                <ChevronDown
-                  size={12}
-                  className={`text-[#9ca3af] transition-transform duration-200 ${langDropdownOpen ? "rotate-180" : ""}`}
-                />
+                <ChevronDown size={12} className={`text-[#9ca3af] transition-transform duration-200 ${langDropdownOpen ? "rotate-180" : ""}`} />
               </button>
 
               <AnimatePresence>
@@ -213,9 +193,57 @@ export default function Navbar() {
 
             <div className="w-px h-4 bg-[#e5e7eb]" />
 
-            <button className="btn-primary px-5 py-2 text-sm font-semibold text-white rounded-full cursor-pointer whitespace-nowrap">
-              {t.nav.start}
-            </button>
+            {/* Register dropdown */}
+            <div ref={registerDropdownRef} className="relative">
+              <button
+                onClick={() => setRegisterDropdownOpen(!registerDropdownOpen)}
+                className="btn-primary flex items-center gap-1 px-5 py-2 text-sm font-semibold text-white rounded-full cursor-pointer whitespace-nowrap"
+                aria-label={t.nav.registerDropdown.label}
+                aria-expanded={registerDropdownOpen}
+              >
+                {t.nav.registerDropdown.label}
+                <ChevronDown size={13} className={`transition-transform duration-200 ${registerDropdownOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              <AnimatePresence>
+                {registerDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                    transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                    className="absolute right-0 top-full mt-2 bg-white rounded-2xl overflow-hidden z-50 w-[320px]"
+                    style={{
+                      boxShadow: "0 12px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)",
+                      border: "1px solid rgba(0,0,0,0.06)",
+                    }}
+                  >
+                    <div className="p-2">
+                      {registerItems.map((item, i) => {
+                        const Icon = REGISTER_ICONS[i] ?? Truck;
+                        return (
+                          <Link
+                            key={item.label}
+                            href={item.href}
+                            onClick={() => setRegisterDropdownOpen(false)}
+                            className="flex items-start gap-3 px-3 py-3 rounded-xl hover:bg-[#f7f8fc] transition-colors cursor-pointer group"
+                          >
+                            <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-[#e8f0ff] flex items-center justify-center group-hover:bg-[#025bff] transition-colors">
+                              <Icon size={16} className="text-[#025bff] group-hover:text-white transition-colors" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-[13px] font-semibold text-[#0f1117] group-hover:text-[#025bff] transition-colors">{item.label}</p>
+                              <p className="text-[11.5px] text-[#6b7280] mt-0.5 leading-relaxed">{item.sub}</p>
+                            </div>
+                            <ArrowRight size={14} className="flex-shrink-0 text-[#9ca3af] group-hover:text-[#025bff] group-hover:translate-x-0.5 transition-all mt-2" />
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Mobile: support + hamburger */}
@@ -255,16 +283,20 @@ export default function Navbar() {
             {/* Nav links */}
             <div className="flex-1 flex flex-col px-6 pt-6">
               {t.nav.links.map((link, i) => (
-                <motion.button
+                <motion.div
                   key={link.href}
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 + i * 0.04, duration: 0.24, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-                  onClick={() => handleNavClick(link.href)}
-                  className="w-full text-left py-4 text-[1.5rem] font-bold text-[#0f1117] hover:text-[#025bff] transition-colors duration-150 cursor-pointer border-b border-[#f0f0f4]"
                 >
-                  {link.label}
-                </motion.button>
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="block w-full text-left py-4 text-[1.5rem] font-bold text-[#0f1117] hover:text-[#025bff] transition-colors duration-150 cursor-pointer border-b border-[#f0f0f4]"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
 
               {/* Heva expandable section */}
@@ -290,15 +322,61 @@ export default function Navbar() {
                       className="overflow-hidden border-b border-[#f0f0f4]"
                     >
                       {t.nav.hevaDropdown.links.map((item) => (
-                        <a
+                        <Link
                           key={item.label}
                           href={item.href}
                           onClick={() => setMobileOpen(false)}
                           className="block py-3 pl-4 text-[1.1rem] font-medium text-[#6b7280] hover:text-[#025bff] transition-colors duration-150"
                         >
                           {item.label}
-                        </a>
+                        </Link>
                       ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+
+              {/* Register expandable section */}
+              <motion.div
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.05 + (t.nav.links.length + 1) * 0.04, duration: 0.24, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+              >
+                <button
+                  onClick={() => setMobileRegisterOpen(!mobileRegisterOpen)}
+                  className="w-full flex items-center justify-between py-4 text-[1.5rem] font-bold text-[#025bff] transition-colors duration-150 cursor-pointer border-b border-[#f0f0f4]"
+                >
+                  {t.nav.registerDropdown.label}
+                  <ChevronDown size={20} className={`text-[#025bff] transition-transform duration-200 ${mobileRegisterOpen ? "rotate-180" : ""}`} />
+                </button>
+                <AnimatePresence>
+                  {mobileRegisterOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+                      className="overflow-hidden border-b border-[#f0f0f4]"
+                    >
+                      {registerItems.map((item, i) => {
+                        const Icon = REGISTER_ICONS[i] ?? Truck;
+                        return (
+                          <Link
+                            key={item.label}
+                            href={item.href}
+                            onClick={() => setMobileOpen(false)}
+                            className="flex items-start gap-3 py-3 pl-4"
+                          >
+                            <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-[#e8f0ff] flex items-center justify-center">
+                              <Icon size={16} className="text-[#025bff]" />
+                            </div>
+                            <div>
+                              <p className="text-[1rem] font-semibold text-[#0f1117]">{item.label}</p>
+                              <p className="text-[12px] text-[#6b7280] mt-0.5">{item.sub}</p>
+                            </div>
+                          </Link>
+                        );
+                      })}
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -312,68 +390,8 @@ export default function Navbar() {
               transition={{ delay: 0.18, duration: 0.28, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
               className="px-6 pb-10 pt-6 flex flex-col gap-3"
             >
-              <button
-                className="w-full flex items-center justify-center gap-2 py-4 text-[15px] font-bold text-white rounded-full cursor-pointer transition-all duration-200 hover:-translate-y-0.5"
-                style={{
-                  background: "linear-gradient(135deg, #025bff 0%, #1a71ff 100%)",
-                  boxShadow: "0 4px 20px rgba(2,91,255,0.35)",
-                }}
-              >
-                {t.hero.ctaOrder}
-                <ArrowRight size={18} />
-              </button>
-
-              <button
-                className="w-full flex items-center justify-center gap-2 py-4 text-[15px] font-bold text-[#0f1117] rounded-full border border-[#c5cad4] cursor-pointer transition-all duration-200 hover:border-[#025bff] hover:text-[#025bff] hover:-translate-y-0.5 bg-white"
-                style={{ boxShadow: "0 1px 6px rgba(0,0,0,0.09)" }}
-              >
-                <Truck size={17} />
-                {t.howItWorks.ctaDriver}
-              </button>
-
-              {/* App store buttons */}
-              <div className="flex gap-2.5">
-                <button
-                  className="flex-1 flex items-center gap-3 px-4 py-3.5 rounded-2xl cursor-pointer transition-all duration-200 hover:-translate-y-[2px]"
-                  style={{
-                    background: "linear-gradient(150deg, #1a1a2e 0%, #0f1117 100%)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    boxShadow: "0 2px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07)",
-                  }}
-                  aria-label="App Store"
-                >
-                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 flex-shrink-0 text-white">
-                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                  </svg>
-                  <div className="text-left">
-                    <p className="text-[9px] text-white/45 font-medium leading-none tracking-[0.1em] uppercase">{t.hero.downloadOn}</p>
-                    <p className="text-[13px] font-bold text-white leading-tight mt-[2px]">App Store</p>
-                  </div>
-                </button>
-                <button
-                  className="flex-1 flex items-center gap-3 px-4 py-3.5 rounded-2xl cursor-pointer transition-all duration-200 hover:-translate-y-[2px]"
-                  style={{
-                    background: "linear-gradient(150deg, #1a1a2e 0%, #0f1117 100%)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    boxShadow: "0 2px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07)",
-                  }}
-                  aria-label="Google Play"
-                >
-                  <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0" fill="none">
-                    <path d="M3.18 1.03C2.47 1.42 2 2.17 2 3.06v17.88c0 .89.47 1.64 1.18 2.03l.1.06 10.02-10.02v-.23L3.28.97l-.1.06z" fill="#4FC3F7" />
-                    <path d="M16.64 16.36l-3.34-3.34v-.24l3.34-3.34.07.04 3.96 2.25c1.13.64 1.13 1.69 0 2.34l-3.96 2.25-.07.04z" fill="#FFD54F" />
-                    <path d="M16.71 16.32L13.3 12.9 3.18 23.01c.37.4.94.44 1.59.08l11.94-6.77" fill="#F48FB1" />
-                    <path d="M16.71 7.68L4.77.91C4.12.55 3.55.59 3.18.99l10.12 10.11 3.41-3.42z" fill="#69F0AE" />
-                  </svg>
-                  <div className="text-left">
-                    <p className="text-[9px] text-white/45 font-medium leading-none tracking-[0.1em] uppercase">{t.hero.availableOn}</p>
-                    <p className="text-[13px] font-bold text-white leading-tight mt-[2px]">Google Play</p>
-                  </div>
-                </button>
-              </div>
-
               {/* Language selector */}
-              <div className="flex items-center justify-center pt-1">
+              <div className="flex items-center justify-center">
                 <div className="flex items-center gap-1 bg-[#f7f8fc] rounded-full p-1">
                   {LANG_OPTIONS.map((option) => (
                     <button

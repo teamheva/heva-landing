@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Package, MapPin } from "lucide-react";
+import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const fadeInUp = {
@@ -27,7 +28,7 @@ export default function ForSenders() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          {/* Left – Text */}
+          {/* Left - Text */}
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -63,7 +64,8 @@ export default function ForSenders() {
             </motion.ul>
 
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-3">
-              <button
+              <Link
+                href="/klientidele"
                 className="flex items-center gap-2 px-7 py-4 text-[15px] font-bold text-white rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
                 style={{
                   background: "linear-gradient(135deg, #025bff 0%, #1a71ff 100%)",
@@ -72,11 +74,11 @@ export default function ForSenders() {
               >
                 {s.cta}
                 <ArrowRight size={17} />
-              </button>
+              </Link>
             </motion.div>
           </motion.div>
 
-          {/* Right – UI Mockup */}
+          {/* Right - UI Mockup */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -125,7 +127,7 @@ export default function ForSenders() {
                 </div>
               </div>
 
-              {/* Details grid — 2 columns (no time) */}
+              {/* Details grid - 2 columns (no time) */}
               <div className="grid grid-cols-2 gap-3 mb-5">
                 {[
                   { icon: Package, label: s.mockupCargo, value: s.mockupCargoValue },

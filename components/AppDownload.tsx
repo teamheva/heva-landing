@@ -33,9 +33,15 @@ function GooglePlayIcon() {
   );
 }
 
+const APP_STORE_URL = "https://apps.apple.com/ee/app/heva-client/id6762511309";
+const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=me.heva.customer&pcampaignid=web_share";
+
 function StoreButton({ label, store, icon, className }: { label: string; store: string; icon: "apple" | "play"; className?: string }) {
   return (
-    <button
+    <a
+      href={icon === "apple" ? APP_STORE_URL : GOOGLE_PLAY_URL}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`flex items-center gap-3.5 px-5 py-[14px] rounded-2xl transition-all duration-300 cursor-pointer hover:-translate-y-[2px]${className ? ` ${className}` : ""}`}
       style={{
         background: "linear-gradient(150deg, #1a1a2e 0%, #0f1117 100%)",
@@ -51,7 +57,7 @@ function StoreButton({ label, store, icon, className }: { label: string; store: 
         <p className="text-[9px] text-white/45 font-medium leading-none tracking-[0.1em] uppercase">{label}</p>
         <p className="text-[15px] font-bold text-white leading-tight mt-[3px]">{store}</p>
       </div>
-    </button>
+    </a>
   );
 }
 
@@ -131,8 +137,8 @@ export default function AppDownload() {
                   </div>
                 </div>
                 {[
-                  { from: "Tallinn", to: "Tartu", status: a.mockupStatusEnRoute, color: "#025bff" },
-                  { from: "Pärnu", to: "Tallinn", status: a.mockupStatusDone, color: "#10b981" },
+                  { from: a.mockupLeftOrder1From, to: a.mockupLeftOrder1To, status: a.mockupStatusEnRoute, color: "#025bff" },
+                  { from: a.mockupLeftOrder2From, to: a.mockupLeftOrder2To, status: a.mockupStatusDone, color: "#10b981" },
                 ].map((order, i) => (
                   <div key={i} className="mb-3 bg-[#f7f8fc] rounded-xl p-3">
                     <div className="flex justify-between items-start">
@@ -191,27 +197,27 @@ export default function AppDownload() {
                       <MapPin size={14} className="text-[#025bff] flex-shrink-0" />
                       <div>
                         <p className="text-[9px] text-[#6b7280] font-medium">{a.mockupPickup}</p>
-                        <p className="text-xs font-semibold text-[#0f1117]">Ülemiste City, Tallinn</p>
+                        <p className="text-xs font-semibold text-[#0f1117]">{a.mockupCenterFrom}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2.5 p-3 bg-[#f7f8fc] rounded-xl">
                       <MapPin size={14} className="text-[#ef4444] flex-shrink-0" />
                       <div>
                         <p className="text-[9px] text-[#6b7280] font-medium">{a.mockupDropoff}</p>
-                        <p className="text-xs font-semibold text-[#0f1117]">Tartu, Emajõe 5</p>
+                        <p className="text-xs font-semibold text-[#0f1117]">{a.mockupCenterTo}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2.5 p-3 bg-[#f7f8fc] rounded-xl">
                       <Package size={14} className="text-[#6b7280] flex-shrink-0" />
                       <div>
                         <p className="text-[9px] text-[#6b7280] font-medium">{a.mockupCargo}</p>
-                        <p className="text-xs font-semibold text-[#0f1117]">8 pallet · 1,200 kg</p>
+                        <p className="text-xs font-semibold text-[#0f1117]">{a.mockupCenterCargo}</p>
                       </div>
                     </div>
                     {/* Price box */}
                     <div className="bg-[#e8f0ff] rounded-xl p-3 flex justify-between items-center">
                       <span className="text-xs text-[#6b7280] font-medium">{a.mockupPrice}</span>
-                      <span className="text-lg font-bold text-[#025bff]">€ 187.50</span>
+                      <span className="text-lg font-bold text-[#025bff]">{a.mockupCenterPrice}</span>
                     </div>
                     {/* CTA button */}
                     <div className="bg-[#025bff] rounded-2xl p-3.5 text-center">
@@ -272,9 +278,9 @@ export default function AppDownload() {
                 <div className="bg-[#f7f8fc] rounded-xl p-3 mb-3">
                   <div className="flex justify-between items-start mb-2">
                     <p className="text-[10px] font-bold text-[#0f1117]">{a.mockupNewOrder}</p>
-                    <span className="text-[9px] font-bold text-[#025bff] bg-[#e8f0ff] px-2 py-0.5 rounded-full">€ 195</span>
+                    <span className="text-[9px] font-bold text-[#025bff] bg-[#e8f0ff] px-2 py-0.5 rounded-full">{a.mockupRightOrderPrice}</span>
                   </div>
-                  <p className="text-[9px] text-[#6b7280]">Tallinn → Pärnu · 126 km</p>
+                  <p className="text-[9px] text-[#6b7280]">{a.mockupRightOrderRoute}</p>
                   <div className="flex gap-1.5 mt-2">
                     <div className="flex-1 py-1.5 bg-[#025bff] rounded-lg text-center text-[9px] font-bold text-white">{a.mockupAccept}</div>
                     <div className="flex-1 py-1.5 bg-[#f0f0f0] rounded-lg text-center text-[9px] font-bold text-[#6b7280]">{a.mockupDecline}</div>

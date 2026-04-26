@@ -15,14 +15,14 @@ const et = {
     {
       title: "2. Milliseid küpsiseid me kasutame?",
       body: [
-        "Hädavajalikud küpsised — tagavad veebilehe põhifunktsionaalsuse (nt keeleeelistuse meeldejätmine). Neid ei saa keelata.",
-        "Analüütilised küpsised — mõõdavad veebilehe kasutust anonüümselt (nt külastuste arv, kõige külastatumad lehed). Kasutame Google Analytics teenust.",
+        "Hädavajalikud küpsised - tagavad veebilehe põhifunktsionaalsuse (nt keeleeelistuse meeldejätmine). Neid ei saa keelata.",
+        "Analüütilised küpsised - mõõdavad veebilehe kasutust anonüümselt (nt külastuste arv, kõige külastatumad lehed). Kasutame Google Analytics teenust.",
       ],
     },
     {
       title: "3. Kuidas küpsiseid hallata?",
       body: [
-        "Saad küpsiste kasutusega nõustuda või sellest keelduda meie küpsiste teates. Analüütilised küpsised on valikulised — keeldumisel ei mõjuta see veebilehe kasutamist.",
+        "Saad küpsiste kasutusega nõustuda või sellest keelduda meie küpsiste teates. Analüütilised küpsised on valikulised - keeldumisel ei mõjuta see veebilehe kasutamist.",
         "Küpsiseid saab keelata ka brauseri seadetes, kuid see võib mõjutada veebilehe funktsionaalsust.",
       ],
     },
@@ -50,14 +50,14 @@ const en = {
     {
       title: "2. Which cookies do we use?",
       body: [
-        "Essential cookies — ensure the basic functionality of the website (e.g. remembering language preference). These cannot be disabled.",
-        "Analytics cookies — measure website usage anonymously (e.g. number of visits, most visited pages). We use Google Analytics.",
+        "Essential cookies - ensure the basic functionality of the website (e.g. remembering language preference). These cannot be disabled.",
+        "Analytics cookies - measure website usage anonymously (e.g. number of visits, most visited pages). We use Google Analytics.",
       ],
     },
     {
       title: "3. How to manage cookies?",
       body: [
-        "You can accept or decline cookie use in our cookie notice. Analytics cookies are optional — declining them does not affect your use of the website.",
+        "You can accept or decline cookie use in our cookie notice. Analytics cookies are optional - declining them does not affect your use of the website.",
         "Cookies can also be disabled in your browser settings, though this may affect website functionality.",
       ],
     },

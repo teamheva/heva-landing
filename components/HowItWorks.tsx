@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, Truck, Package, CheckCircle } from "lucide-react";
+import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -123,7 +124,8 @@ export default function HowItWorks() {
           transition={{ duration: 0.5, ease, delay: 0.65 }}
           className="flex flex-col sm:flex-row gap-3"
         >
-          <button
+          <Link
+            href="/klientidele"
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-4 text-[15px] font-bold text-white rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
             style={{
               background: "linear-gradient(135deg, #025bff 0%, #1a71ff 100%)",
@@ -132,8 +134,9 @@ export default function HowItWorks() {
           >
             {s.ctaOrder}
             <ArrowRight size={17} />
-          </button>
-          <button
+          </Link>
+          <Link
+            href="/kulleritele"
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-4 text-[15px] font-bold text-[#0f1117] rounded-full border border-[#d1d5db] hover:border-[#025bff] hover:text-[#025bff] hover:-translate-y-0.5 transition-all duration-200 cursor-pointer bg-white"
             style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.05)" }}
             onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 4px 16px rgba(2,91,255,0.18), 0 1px 4px rgba(0,0,0,0.05)")}
@@ -141,7 +144,7 @@ export default function HowItWorks() {
           >
             <Truck size={17} />
             {s.ctaDriver}
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>

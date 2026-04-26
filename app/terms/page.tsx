@@ -98,16 +98,9 @@ const et = {
       ],
     },
     {
-      title: "6. Kindlustus ja vastutus",
+      title: "6. Vastutus",
       body: [
-        "Kõik platvormi kaudu tehtud veod on kaetud kindlustusega (kulleri pealelaadimisest kinnitatud kohaletoimetamiseni).",
-        "Kindlustus kehtib tingimusel, et:",
-        [
-          "Kaup on nõuetekohaselt kirjeldatud ja pakendatud",
-          "Kaup ei sisalda keelatud esemeid",
-          "Kuller käsitleb kaupa hoolsusega",
-          "Nõue esitatakse kiiresti platvormi kaudu",
-        ],
+        "Operaator pakub platvormiteenust, mis vahendab tellimusi kulleri ja kliendi vahel. Vedude eest vastutab kuller vastavalt Eesti seadustele.",
         "Operaator ei vastuta:",
         [
           "Liiklusest, ilmast või välistest teguritest põhjustatud viivituste eest",
@@ -329,16 +322,9 @@ const en = {
       ],
     },
     {
-      title: "6. Insurance and liability",
+      title: "6. Liability",
       body: [
-        "All deliveries are covered by insurance (from Courier pickup to confirmed delivery).",
-        "Insurance applies provided:",
-        [
-          "Cargo is properly described and packaged",
-          "Cargo does not contain prohibited items",
-          "Courier handles Cargo with care",
-          "Claims are submitted promptly through the Platform",
-        ],
+        "The Operator provides a platform that connects Couriers and Customers. Responsibility for the actual carriage rests with the Courier in accordance with Estonian law.",
         "The Operator is not liable for:",
         [
           "Delays caused by traffic, weather or external factors",

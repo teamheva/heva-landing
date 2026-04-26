@@ -2,7 +2,7 @@
 
 - E-post / Email: info@heva.me
 - Telefon / Phone: +372 510 0017
-- Tööaeg / Hours: tööpäeviti 9–18 / weekdays 9–18 (EET)
+- Tööaeg / Hours: tööpäeviti 9-18 / weekdays 9-18 (EET)
 - Veebileht / Website: https://heva.me
 - Tugi / Support: https://heva.me/support
 

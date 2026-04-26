@@ -264,7 +264,7 @@ export default function ChatWidget() {
                 </div>
               </motion.div>
 
-              {/* Suggestion chips — show only before any user messages */}
+              {/* Suggestion chips - show only before any user messages */}
               {!hasMessages && (
                 <motion.div
                   initial={{ opacity: 0, y: 6 }}

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin, Truck, Star } from "lucide-react";
+import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
 import { useEffect, useState } from "react";
 
@@ -24,9 +25,15 @@ function GooglePlayIcon() {
   );
 }
 
+const APP_STORE_URL = "https://apps.apple.com/ee/app/heva-client/id6762511309";
+const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=me.heva.customer&pcampaignid=web_share";
+
 function StoreButton({ label, store, icon, className }: { label: string; store: string; icon: "apple" | "play"; className?: string }) {
   return (
-    <button
+    <a
+      href={icon === "apple" ? APP_STORE_URL : GOOGLE_PLAY_URL}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`group flex items-center gap-2.5 px-3.5 py-[9px] rounded-xl transition-all duration-300 cursor-pointer hover:-translate-y-[2px]${className ? ` ${className}` : ""}`}
       style={{
         background: "linear-gradient(150deg, #1a1a2e 0%, #0f1117 100%)",
@@ -42,7 +49,7 @@ function StoreButton({ label, store, icon, className }: { label: string; store: 
         <p className="text-[8px] text-white/45 font-medium leading-none tracking-[0.1em] uppercase">{label}</p>
         <p className="text-[12px] font-bold text-white leading-tight mt-[2px]">{store}</p>
       </div>
-    </button>
+    </a>
   );
 }
 
@@ -107,7 +114,7 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-16 sm:py-24 w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
-          {/* Left – Text */}
+          {/* Left - Text */}
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -131,7 +138,8 @@ export default function Hero() {
             <motion.div variants={fadeInUp} className="flex flex-col gap-3 mb-7 w-full sm:w-auto">
               {/* Row 1: action buttons */}
               <div className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
-                <button
+                <Link
+                  href="/klientidele"
                   className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-[10px] text-[13.5px] font-bold text-white rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
                   style={{
                     background: "linear-gradient(135deg, #025bff 0%, #1a71ff 100%)",
@@ -141,8 +149,9 @@ export default function Hero() {
                 >
                   {h.ctaOrder}
                   <ArrowRight size={15} />
-                </button>
-                <button
+                </Link>
+                <Link
+                  href="/kulleritele"
                   className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-[10px] text-[13.5px] font-bold text-[#0f1117] rounded-full border border-[#d1d5db] hover:border-[#025bff] hover:text-[#025bff] transition-all duration-200 cursor-pointer bg-white/80 hover:-translate-y-0.5"
                   style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}
                   aria-label={h.ctaDriver}
@@ -151,7 +160,7 @@ export default function Hero() {
                 >
                   <Truck size={15} />
                   {h.ctaDriver}
-                </button>
+                </Link>
               </div>
 
               {/* Row 2: store buttons */}
@@ -188,7 +197,7 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right – App mockup */}
+          {/* Right - App mockup */}
           <motion.div
             initial={{ opacity: 0, x: 40, scale: 0.96 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -272,11 +281,11 @@ export default function Hero() {
                 <div className="mx-4 mt-3 grid grid-cols-2 gap-2">
                   <div className="bg-[#f7f8fc] rounded-xl p-3">
                     <p className="text-[9px] text-[#6b7280] font-medium">{h.mockupPickup}</p>
-                    <p className="text-xs font-bold text-[#0f1117] mt-0.5 truncate">Tallinn, Ülemiste</p>
+                    <p className="text-xs font-bold text-[#0f1117] mt-0.5 truncate">{h.mockupPickupValue}</p>
                   </div>
                   <div className="bg-[#f7f8fc] rounded-xl p-3">
                     <p className="text-[9px] text-[#6b7280] font-medium">{h.mockupDropoff}</p>
-                    <p className="text-xs font-bold text-[#0f1117] mt-0.5 truncate">Tartu, Annelinn</p>
+                    <p className="text-xs font-bold text-[#0f1117] mt-0.5 truncate">{h.mockupDropoffValue}</p>
                   </div>
                 </div>
                 <div className="mx-4 mt-3">
@@ -318,7 +327,7 @@ export default function Hero() {
                   </div>
                   <div>
                     <p className="text-[10px] font-medium text-[#6b7280]">{h.mockupDelivered}</p>
-                    <p className="text-sm font-bold text-[#0f1117]">14:32 · Tartu</p>
+                    <p className="text-sm font-bold text-[#0f1117]">{h.mockupDeliveredValue}</p>
                   </div>
                 </div>
               </motion.div>
@@ -340,7 +349,7 @@ export default function Hero() {
           }}
         >
           <div className="grid grid-cols-2 sm:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#e5e7eb]/70">
-            {/* Drivers – live */}
+            {/* Drivers - live */}
             <div className="flex flex-col items-center sm:items-start px-4 py-4 sm:px-6 sm:py-5">
               <div className="flex items-end gap-2 sm:gap-2.5 mb-1.5">
                 <span className="text-[1.45rem] sm:text-[1.9rem] font-bold text-[#0f1117] tabular-nums leading-none">{stats.drivers}</span>
@@ -357,7 +366,7 @@ export default function Hero() {
               <span className="text-[1.45rem] sm:text-[1.9rem] font-bold text-[#0f1117] leading-none mb-1.5">{h.statsResponseValue}</span>
               <p className="text-[10px] sm:text-[11px] text-[#9ca3af] font-semibold uppercase tracking-wider">{h.statsResponseLabel}</p>
             </div>
-            {/* Trips – live */}
+            {/* Trips - live */}
             <div className="flex flex-col items-center sm:items-start px-4 py-4 sm:px-6 sm:py-5">
               <div className="flex items-end gap-2 sm:gap-2.5 mb-1.5">
                 <span className="text-[1.45rem] sm:text-[1.9rem] font-bold text-[#0f1117] tabular-nums leading-none">{stats.trips.toLocaleString("et-EE")}</span>

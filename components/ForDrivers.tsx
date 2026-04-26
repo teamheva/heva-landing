@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check, ArrowRight, TrendingUp, Euro, Map } from "lucide-react";
+import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const fadeInUp = {
@@ -46,7 +47,7 @@ export default function ForDrivers() {
       <div className="relative max-w-7xl mx-auto px-5 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          {/* Left – Earnings mockup */}
+          {/* Left - Earnings mockup */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -131,11 +132,11 @@ export default function ForDrivers() {
                     <Map size={14} className="text-[#60a5fa]" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-white">Tallinn → Pärnu</p>
-                    <p className="text-[10px] text-gray-500">126 km · 8 pallet</p>
+                    <p className="text-xs font-semibold text-white">Tallinn → Keila</p>
+                    <p className="text-[10px] text-gray-500">26 km · 1 alus</p>
                   </div>
                 </div>
-                <span className="text-sm font-bold text-[#60a5fa]">€ 195</span>
+                <span className="text-sm font-bold text-[#60a5fa]">€ 26</span>
               </div>
             </div>
 
@@ -160,7 +161,7 @@ export default function ForDrivers() {
             </motion.div>
           </motion.div>
 
-          {/* Right – Text */}
+          {/* Right - Text */}
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -202,9 +203,10 @@ export default function ForDrivers() {
               ))}
             </motion.ul>
 
-            {/* CTA button — prominent */}
+            {/* CTA button - prominent */}
             <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4">
-              <button
+              <Link
+                href="/kulleritele"
                 className="flex items-center gap-2.5 px-8 py-4 text-[15px] font-bold text-white rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
                 style={{
                   background: "linear-gradient(135deg, #025bff 0%, #1a71ff 100%)",
@@ -216,7 +218,7 @@ export default function ForDrivers() {
               >
                 {d.cta}
                 <ArrowRight size={18} />
-              </button>
+              </Link>
               <p className="text-[12.5px] text-gray-500">{d.ctaSub}</p>
             </motion.div>
           </motion.div>

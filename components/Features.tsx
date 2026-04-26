@@ -49,7 +49,7 @@ export default function Features() {
           </motion.h2>
         </motion.div>
 
-        {/* Card grid — same style as stats bar */}
+        {/* Card grid - same style as stats bar */}
         <motion.div
           variants={stagger}
           initial="hidden"

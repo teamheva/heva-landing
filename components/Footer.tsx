@@ -40,13 +40,12 @@ const SOCIAL = [
 ];
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const f = t.footer;
   const year = new Date().getFullYear();
 
   return (
     <footer className="bg-[#0a0a0f] text-white relative overflow-hidden" role="contentinfo">
-
       {/* Glow */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] pointer-events-none"
@@ -55,58 +54,83 @@ export default function Footer() {
       <div className="absolute inset-0 dot-pattern opacity-[0.04]" />
 
       <div className="relative max-w-7xl mx-auto px-5 sm:px-8">
-
-        {/* ── Tagline + Nav ── */}
+        {/* ── Tagline block ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-          className="pt-14 sm:pt-20 pb-12 sm:pb-14 flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-20"
+          className="pt-14 sm:pt-20 pb-10 sm:pb-14"
         >
-          {/* Tagline */}
-          <div className="flex-1">
-            <h2
-              className="text-[1.9rem] sm:text-[2.5rem] lg:text-[3rem] font-bold leading-[1.06] tracking-tight"
-              style={{ fontFamily: "var(--font-dm-serif), serif" }}
-            >
-              <span className="text-white">{f.tagline.split(".")[0]}.</span>
-              <br />
-              <span className="text-white">{f.tagline.split(".").slice(1).join(".").trim()}</span>
-            </h2>
-          </div>
+          <h2
+            className="text-[1.9rem] sm:text-[2.5rem] lg:text-[2.8rem] font-bold leading-[1.08] tracking-tight max-w-3xl"
+            style={{ fontFamily: "var(--font-dm-serif), serif" }}
+          >
+            {f.tagline.split(".")[0]}.
+            <br />
+            <span className="text-white/70">{f.tagline.split(".").slice(1).join(".").trim()}</span>
+          </h2>
+        </motion.div>
 
-          {/* Nav columns — always visible */}
-          <div className="flex gap-10 sm:gap-14">
-            {f.columns.map((col) => (
-              <div key={col.title}>
-                <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.14em] mb-4">
+        {/* ── Columns ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+          className="py-10 sm:py-14 grid grid-cols-2 sm:grid-cols-3 md:flex md:justify-between gap-x-6 gap-y-10 sm:gap-x-10 sm:gap-y-10"
+        >
+          {f.columns.map((col, i) => {
+            const isLast = i === f.columns.length - 1;
+            return (
+              <div key={col.title} className={isLast ? "md:text-right" : ""}>
+                <p className="text-[10.5px] font-bold text-white uppercase tracking-[0.16em] mb-4">
                   {col.title}
                 </p>
                 <ul className="space-y-3">
                   {col.links.map((link) => (
                     <li key={link.label}>
-                      <a
+                      <Link
                         href={link.href}
-                        className="text-[14px] text-white/75 hover:text-white transition-colors duration-150"
+                        className="text-[13.5px] text-white/65 hover:text-white transition-colors duration-150 leading-relaxed"
                       >
                         {link.label}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </motion.div>
 
-        {/* ── Bottom bar ── */}
-        <div className="py-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+        {/* ── Address + social ── */}
+        <div className="py-8 flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+          <div className="flex flex-col gap-3">
             <div className="relative w-[90px] h-[28px]">
               <Image src="/logo-footer.png" alt="Heva" fill className="object-contain object-left" />
             </div>
-            <div className="flex items-center gap-0.5 -ml-2">
+            <p className="text-[12.5px] text-white/55 leading-relaxed max-w-xs">
+              HeVa Technology OÜ
+              <br />
+              Pärnu mnt 158/1, 11317 Tallinn, Eesti
+              <br />
+              {lang === "et" ? "Reg. kood" : "Reg. code"}: 17448087
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-3 md:items-end md:text-right">
+            <p className="text-[10.5px] font-bold text-white/60 uppercase tracking-[0.16em]">
+              {lang === "et" ? "Võta ühendust" : "Get in touch"}
+            </p>
+            <div className="flex flex-col gap-1 text-[13px] md:items-end">
+              <a href="mailto:info@heva.me" className="text-white/75 hover:text-white transition-colors">info@heva.me</a>
+              <a href="tel:+37251000017" className="text-white/75 hover:text-white transition-colors">+372 510 0017</a>
+              <span className="text-white/45 text-[12px]">
+                {lang === "et" ? "E-R 9-18" : "Mon-Fri 9-18"}
+              </span>
+            </div>
+            <div className="flex items-center gap-0.5 -ml-2 md:ml-0 md:-mr-2 mt-2">
               {SOCIAL.map(({ Icon, href, label }) => (
                 <a
                   key={label}
@@ -119,9 +143,14 @@ export default function Footer() {
               ))}
             </div>
           </div>
+        </div>
 
-          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-1.5 sm:gap-x-3 sm:gap-y-1">
-            <p className="text-[11px] text-white/40">© {year} HeVa Technology OÜ.</p>
+        {/* ── Bottom bar ── */}
+        <div className="py-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
+          <p className="text-[11px] text-white/40">
+            © {year} HeVa Technology OÜ. {f.rights}
+          </p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
             {f.legalLinks.map((item) => (
               <Link
                 key={item.href}
@@ -133,7 +162,6 @@ export default function Footer() {
             ))}
           </div>
         </div>
-
       </div>
     </footer>
   );
