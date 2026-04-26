@@ -34,7 +34,7 @@ function StoreButton({ label, store, icon, className }: { label: string; store: 
       href={icon === "apple" ? APP_STORE_URL : GOOGLE_PLAY_URL}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group flex items-center gap-2.5 px-3.5 py-[9px] rounded-xl transition-all duration-300 cursor-pointer hover:-translate-y-[2px]${className ? ` ${className}` : ""}`}
+      className={`group flex items-center gap-2.5 px-3.5 py-[12px] min-h-[48px] rounded-xl transition-all duration-300 cursor-pointer hover:-translate-y-[2px]${className ? ` ${className}` : ""}`}
       style={{
         background: "linear-gradient(150deg, #1a1a2e 0%, #0f1117 100%)",
         border: "1px solid rgba(255,255,255,0.1)",
@@ -139,7 +139,7 @@ export default function Hero() {
               <div className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
                 <Link
                   href="/klientidele"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-[10px] text-[13.5px] font-bold text-white rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-[12px] min-h-[48px] text-[13.5px] font-bold text-white rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
                   style={{
                     background: "linear-gradient(135deg, #025bff 0%, #1a71ff 100%)",
                     boxShadow: "0 4px 20px rgba(2,91,255,0.38), 0 1px 3px rgba(0,0,0,0.12)",
@@ -151,7 +151,7 @@ export default function Hero() {
                 </Link>
                 <Link
                   href="/kulleritele"
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-[10px] text-[13.5px] font-bold text-[#0f1117] rounded-full border border-[#d1d5db] hover:border-[#025bff] hover:text-[#025bff] transition-all duration-200 cursor-pointer bg-white/80 hover:-translate-y-0.5"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-[12px] min-h-[48px] text-[13.5px] font-bold text-[#0f1117] rounded-full border border-[#d1d5db] hover:border-[#025bff] hover:text-[#025bff] transition-all duration-200 cursor-pointer bg-white/80 hover:-translate-y-0.5"
                   style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.06)" }}
                   aria-label={h.ctaDriver}
                   onMouseEnter={e => (e.currentTarget.style.boxShadow = "0 4px 16px rgba(2,91,255,0.18), 0 1px 4px rgba(0,0,0,0.06)")}

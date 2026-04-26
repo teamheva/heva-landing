@@ -130,13 +130,13 @@ export default function Footer() {
                 {lang === "et" ? "E-R 9-18" : "Mon-Fri 9-18"}
               </span>
             </div>
-            <div className="flex items-center gap-0.5 -ml-2 md:ml-0 md:-mr-2 mt-2">
+            <div className="flex items-center gap-1 -ml-3 md:ml-0 md:-mr-3 mt-2">
               {SOCIAL.map(({ Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:bg-white/[0.08] transition-all duration-200"
+                  className="w-12 h-12 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:bg-white/[0.08] transition-all duration-200"
                 >
                   <Icon />
                 </a>

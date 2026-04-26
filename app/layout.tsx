@@ -27,14 +27,14 @@ export const metadata: Metadata = {
     default: "Heva - Kaup kohale. Lihtsalt ja kiiresti.",
     template: "%s | Heva",
   },
-  description: "Heva ühendab sind lähima vaba vedajaga minutitega.",
+  description: "Heva on Eesti kaubavedude platvorm - telli vedu hetkega, näe hinda enne kinnitamist, jälgi kaupa reaalajas. Kullerid kohal minutitega.",
   keywords: ["kaubavedude platvorm", "vedu", "kaubavedajad", "logistika Eesti", "heva", "freight", "delivery Estonia"],
   authors: [{ name: "Heva OÜ" }],
   creator: "Heva OÜ",
   metadataBase: new URL("https://heva.me"),
   openGraph: {
     title: "Heva - Kaup kohale. Lihtsalt ja kiiresti.",
-    description: "Heva ühendab sind lähima vaba vedajaga minutitega.",
+    description: "Heva on Eesti kaubavedude platvorm - telli vedu hetkega, näe hinda enne kinnitamist, jälgi kaupa reaalajas. Kullerid kohal minutitega.",
     url: "https://heva.me",
     siteName: "Heva",
     locale: "et_EE",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Heva - Kaup kohale. Lihtsalt ja kiiresti.",
-    description: "Heva ühendab sind lähima vaba vedajaga minutitega.",
+    description: "Heva on Eesti kaubavedude platvorm - telli vedu hetkega, näe hinda enne kinnitamist, jälgi kaupa reaalajas. Kullerid kohal minutitega.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -64,6 +64,11 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://heva.me",
+    languages: {
+      "et-EE": "https://heva.me",
+      en: "https://heva.me",
+      "x-default": "https://heva.me",
+    },
   },
 };
 
