@@ -108,10 +108,26 @@ body {
 
 .float-card {
   animation: float 7s ease-in-out infinite;
+  will-change: transform;
 }
 
 .float-card-slow {
   animation: floatSlow 9s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-card,
+  .float-card-slow {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .float-card,
+  .float-card-slow {
+    animation: none;
+  }
 }
 
 /* Glass card effect */

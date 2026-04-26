@@ -4,8 +4,7 @@ import Script from "next/script";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CookieBanner from "@/components/CookieBanner";
-import ChatWidget from "@/components/ChatWidget";
+import DeferredOverlays from "@/components/DeferredOverlays";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -86,8 +85,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
-          <CookieBanner />
-          <ChatWidget />
+          <DeferredOverlays />
         </LanguageProvider>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
