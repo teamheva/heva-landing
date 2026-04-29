@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { DM_Sans, DM_Serif_Display } from "next/font/google";
 import Script from "next/script";
+import { headers } from "next/headers";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import DeferredOverlays from "@/components/DeferredOverlays";
+import type { Lang } from "@/lib/translations";
 import "./globals.css";
+
+const ET_COUNTRIES = new Set(["EE"]);
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -72,14 +76,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const h = await headers();
+  const country = (h.get("x-vercel-ip-country") || h.get("cf-ipcountry") || "").toUpperCase();
+  const initialLang: Lang = !country || ET_COUNTRIES.has(country) ? "et" : "en";
+
   return (
     <html
-      lang="et"
+      lang={initialLang}
       className={`${dmSans.variable} ${dmSerifDisplay.variable}`}
     >
       <body
@@ -118,7 +126,7 @@ export default function RootLayout({
             }),
           }}
         />
-        <LanguageProvider initialLang="et">
+        <LanguageProvider initialLang={initialLang}>
           <Navbar />
           {children}
           <Footer />

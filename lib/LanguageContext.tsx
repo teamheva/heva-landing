@@ -25,18 +25,15 @@ export function LanguageProvider({
 }) {
   const [lang, setLangState] = useState<Lang>(initialLang);
 
-  // On mount: restore saved language preference, or fall back to browser language
+  // On mount: only restore an explicit saved preference. Otherwise keep the
+  // server-rendered initialLang (IP/geo-based) so visitors from Estonia see
+  // Estonian regardless of their browser language setting.
   useEffect(() => {
     const saved = localStorage.getItem("heva-lang") as Lang | null;
     if (saved === "et" || saved === "en") {
       setLangState(saved);
       document.documentElement.lang = saved;
-      return;
     }
-    const browser = navigator.language.toLowerCase();
-    const detected: Lang = browser.startsWith("et") ? "et" : "en";
-    setLangState(detected);
-    document.documentElement.lang = detected;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
